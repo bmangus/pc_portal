@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', 'ExtendedCare@index');
+Route::redirect('/', '/public/extendedcare');
+
+Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');

@@ -22,6 +22,8 @@
             </div>
         </div>
         <div class="max-w-5xl rounded overflow-hidden shadow-md bg-white mx-auto p-8 px-6 mt-8">
+            <p class="text-secondary mb-4 float-right">Fields marked with an asterisk (*) are REQUIRED.</p>
+
             <form class="w-full" method="POST" action="/ExtendedCareRegistration">
                 @csrf
                 <p class="text-primary">Student and Enrollment Information</p>
@@ -29,24 +31,28 @@
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="ChildFullName">
-                            Student's Full Name
+                            Student's Full Name *
                         </label>
-                        <input name="ChildFullName" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Full Name">
+                        <input name="ChildFullName" class="block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Full Name" value="{{old('ChildFullName')}}">
+                        @if($errors->has('ChildFullName'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('ChildFullName')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PreferredName">
                             Student's Preferred Name
                         </label>
-                        <input name="PreferredName" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Preferred Name">
+                        <input name="PreferredName" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-password" type="text" placeholder="Preferred Name" value="{{old('PreferredName')}}">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-6">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Gender">
-                            Gender
+                            Gender *
                         </label>
                         <div class="relative">
                             <select name="Gender" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray500" id="Gender">
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
                                 <option>Male</option>
                                 <option>Female</option>
                             </select>
@@ -54,30 +60,47 @@
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                             </div>
                         </div>
+                        @if($errors->has('Gender'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Gender')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="DateofBirth">
-                            Date Of Birth
+                            Date Of Birth *
                         </label>
-                        <input name="DateofBirth" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="date">
+                        <input name="DateofBirth" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="date" value="{{old('DateofBirth')}}">
+                        @if($errors->has('DateofBirth'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('DateofBirth')}}</p>
+                        @endif
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <div class="flex flex-wrap -mx-3 mb-6">
+                    <div class="w-full md:w-1/3 px-3 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="School">
-                            School/Site
-                        </label>
-                        <select name="School" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="School">
-                            <option>School 1</option>
-                            <option>School 2</option>
-                        </select>
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Grade">
-                            Grade
+                            School/Site *
                         </label>
                         <div class="relative">
-                            <select name="Grade" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <select name="School" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="School" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
+                                @foreach($sites as $site)
+                                    <option>{{$site['SiteName']}}</option>
+                                @endforeach
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                        @if($errors->has('School'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('School')}}</p>
+                        @endif
+                    </div>
+                    <div class="w-full md:w-1/3 px-3 mb-6">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Grade">
+                            Grade *
+                        </label>
+                        <div class="relative">
+                            <select name="Grade" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
                                 <option>Pre-K</option>
                                 <option>K</option>
                                 <option>1</option>
@@ -90,13 +113,17 @@
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                             </div>
                         </div>
+                        @if($errors->has('Grade'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Grade')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/3 px-3 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Plan">
-                            Plan
+                            Enrollment *
                         </label>
                         <div class="relative">
-                            <select name="Plan" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <select name="Plan" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
                                 <option>AM Only</option>
                                 <option>PM Only</option>
                                 <option>AM & PM</option>
@@ -107,12 +134,16 @@
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                             </div>
                         </div>
+                        @if($errors->has('Plan'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Plan')}}</p>
+                        @endif
                     </div>
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Allergies">
                             Allergies
                         </label>
                         <textarea name="Allergies" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 mb-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            {{old('Allergies')}}
                         </textarea>
                     </div>
                     <div class="w-full px-3">
@@ -120,6 +151,7 @@
                             Medical Conditions
                         </label>
                         <textarea name="Medical_Conditions" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 mb-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            {{old('Medical_Conditions')}}
                         </textarea>
                     </div>
                 </div>
@@ -128,24 +160,30 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full px-3">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Street">
-                            Street Address
+                            Street Address *
                         </label>
-                        <input name="Street" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="Street" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('Street')}}">
+                        @if($errors->has('Street'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Street')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="City">
-                            City
+                            City *
                         </label>
-                       <input name="City" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                       <input name="City" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('City')}}">
+                        @if($errors->has('City'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('City')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="State">
-                            State
+                            State *
                         </label>
                         <div class="relative">
-                            <select name="State" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
+                            <select name="State" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state" >
                                 <option value="AL">Alabama</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AZ">Arizona</option>
@@ -202,12 +240,18 @@
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
                             </div>
                         </div>
+                        @if($errors->has('State'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('State')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Zip">
-                            Zipcode
+                            Zipcode *
                         </label>
-                        <input name="Zip" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="Zip" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('Zip')}}">
+                        @if($errors->has('Zip'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Zip')}}</p>
+                        @endif
                     </div>
                 </div>
                 <p class="text-primary mt-4">Primary Caregiver Information</p>
@@ -215,43 +259,61 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactFullName1">
-                            Primary Caregiver Full Name
+                            Primary Caregiver Full Name *
                         </label>
-                        <input name="PrimaryContactFullName1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PrimaryContactFullName1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactFullName1')}}">
+                        @if($errors->has('PrimaryContactFullName1'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PrimaryContactFullName1')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactType1">
-                            Relationship
+                            Relationship *
                         </label>
-                        <input name="PrimaryContactType1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PrimaryContactType1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactType1')}}">
+                        @if($errors->has('PrimaryContactType1'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PrimaryContactType1')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC1Email">
-                            Email Address
+                            Email Address *
                         </label>
-                        <input name="PC1Email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="email">
+                        <input name="PC1Email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="email" value="{{old('PC1Email')}}">
+                        @if($errors->has('PC1Email'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PC1Email')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC1Phone">
-                            Phone Number
+                            Phone Number *
                         </label>
-                        <input name="PC1Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="PC1Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('PC1Phone')}}">
+                        @if($errors->has('PC1Phone'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PC1Phone')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC1Employee">
-                            Employer
+                            Employer *
                         </label>
-                        <input name="PC1Employee" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PC1Employee" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PC1Employee')}}">
+                        @if($errors->has('PC1Employee'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PC1Employee')}}</p>
+                        @endif
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC1WorkPhone">
-                            Work Phone Number
+                            Work Phone Number *
                         </label>
-                        <input name="PC1WorkPhone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="PC1WorkPhone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('PC1WorkPhone')}}">
+                        @if($errors->has('PC1WorkPhone'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('PC1WorkPhone')}}</p>
+                        @endif
                     </div>
                 </div>
                 <p class="text-primary mt-4">Secondary Caregiver Information</p>
@@ -261,13 +323,13 @@
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactFullName2">
                             Secondary Caregiver Full Name
                         </label>
-                        <input name="PrimaryContactFullName2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PrimaryContactFullName2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactFullName2')}}">
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactType2">
                             Relationship
                         </label>
-                        <input name="PrimaryContactType2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PrimaryContactType2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactType2')}}">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
@@ -275,13 +337,13 @@
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC2Email">
                             Email Address
                         </label>
-                        <input name="PC2Email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="email">
+                        <input name="PC2Email" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="email" value="{{old('PC2Email')}}">
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC2Phone">
                             Phone Number
                         </label>
-                        <input name="PC2Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="PC2Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('PC2Phone')}}">
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
@@ -289,143 +351,177 @@
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC2Employee">
                             Employer
                         </label>
-                        <input name="PC2Employee" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="PC2Employee" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PC2Employee')}}">
                     </div>
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PC2WorkPhone">
                             Work Phone Number
                         </label>
-                        <input name="PC2WorkPhone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="PC2WorkPhone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('PC2WorkPhone')}}">
                     </div>
                 </div>
                 <p class="text-primary mt-4">Emergency Contacts</p>
                 <hr/>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC1">
-                            First - Full Name
+                            First - Full Name *
                         </label>
-                        <input name="EC1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC1')}}">
+                        @if($errors->has('EC1'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC1')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC1_Phone">
-                            Phone
+                            Phone *
                         </label>
-                        <input name="EC1_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="EC1_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('EC1_Phone')}}">
+                        @if($errors->has('EC1_Phone'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC1_Phone')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC1_Relationship">
-                            Relationship
+                            Relationship *
                         </label>
-                        <input name="EC1_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC1_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC1_Relationship')}}">
+                        @if($errors->has('EC1_Relationship'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC1_Relationship')}}</p>
+                        @endif
+                    </div>
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="School">
+                            Authorized To Pickup? *
+                        </label>
+                        <div class="relative">
+                            <select name="EC1Checkbox" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="School" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
+                                <option value="Yes">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                        @if($errors->has('EC1Checkbox'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC1Checkbox')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC2">
-                            Second - Full Name
+                            Second - Full Name *
                         </label>
-                        <input name="EC2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC2')}}">
+                        @if($errors->has('EC2'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC2')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC2_Phone">
-                            Phone
+                            Phone *
                         </label>
-                        <input name="EC2_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="EC2_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('EC2_Phone')}}">
+                        @if($errors->has('EC2_Phone'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC2_Phone')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC1_Relationship">
-                            Relationship
+                            Relationship *
                         </label>
-                        <input name="EC2_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC2_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC2_Relationship')}}">
+                        @if($errors->has('EC2_Relationship'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC2_Relationship')}}</p>
+                        @endif
+                    </div>
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="School">
+                            Authorized To Pickup? *
+                        </label>
+                        <div class="relative">
+                            <select name="EC2Checkbox" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="School" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
+                                <option value="Yes">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                        @if($errors->has('EC2Checkbox'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('EC2Checkbox')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC3">
                             Third - Full Name
                         </label>
-                        <input name="EC3" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC3" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC3')}}">
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC3_Phone">
                             Phone
                         </label>
-                        <input name="EC3_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel">
+                        <input name="EC3_Phone" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="tel" value="{{old('EC3_Phone')}}">
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC3_Relationship">
                             Relationship
                         </label>
-                        <input name="EC3_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="EC3_Relationship" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC3_Relationship')}}">
+                    </div>
+                    <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="School">
+                            Authorized To Pickup?
+                        </label>
+                        <div class="relative">
+                            <select name="EC3Checkbox" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-grey-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="School" >
+                                <option class="text-gray-700" disabled selected value> -- select an option -- </option>
+                                <option value="Yes">Yes</option>
+                                <option value="0">No</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <p class="text-primary mt-4">Pickup Information</p>
                 <hr/>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_Pickup1">
-                            Authorized Pickup Full Name
+                            Authorized Pickup Full Name *
                         </label>
-                        <input name="Authorized_Pickup1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="Authorized_Pickup1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('Authorized_Pickup1')}}">
+                        @if($errors->has('Authorized_Pickup1'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Authorized_Pickup1')}}</p>
+                        @endif
                     </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_PickupAll1">
-                            Authorized to Pickup All Children?
-                        </label>
-                        <div class="relative">
-                            <select name="Authorized_PickupAll1" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray500" id="APA1">
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_PickupName1">
-                            Authorized to Pickup
-                        </label>
-                        <input name="Authorized_PickupName1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-2">
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_Pickup2">
-                            Authorized Pickup Full Name 2
+                            Authorized Pickup Full Name 2 *
                         </label>
-                        <input name="Authorized_Pickup2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_PickupAll2">
-                            Authorized to Pickup All Children?
-                        </label>
-                        <div class="relative">
-                            <select name="Authorized_PickupAll2" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray500" id="APA1">
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="Authorized_PickupName2">
-                            Authorized to Pickup
-                        </label>
-                        <input name="Authorized_PickupName2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text">
+                        <input name="Authorized_Pickup2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('Authorized_Pickup2')}}">
+                        @if($errors->has('Authorized_Pickup2'))
+                            <p class="text-red-500 text-xs italic">{{$errors->first('Authorized_Pickup2')}}</p>
+                        @endif
                     </div>
                 </div>
                 <div class="flex flex-wrap -mx-3 mb-2">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="CustodyIssues">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 mx-3" for="CustodyIssues">
                         Custodial Issues?
                     </label>
-                    <textarea name="CustodyIssues" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 mb-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                    <textarea name="CustodyIssues" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-2 px-4 pr-8 mx-3 mb-2 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                        {{old('CustodyIssues')}}
                         </textarea>
                 </div>
-                <button type="submit" action="submit">Submit Application</button>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right" type="submit" action="submit">Submit Application</button>
             </form>
         </div>
     </div>
