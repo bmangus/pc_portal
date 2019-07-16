@@ -31,7 +31,9 @@ class ExtendedCare extends Controller
         $data = $request->validated();
         unset($data['_token']);
         $data['DateofBirth'] = \Carbon\Carbon::parse($data['DateofBirth'])->format('m/d/Y');
-        $this->fm->create('Web_Roster', $data);
-        return redirect()->to('https://www.putnamcityschools.org/schools/extended-care/payment');
+        $res = $this->fm->create('Web_Roster', $data);
+
+        $account = $this->fm->record('Web_Roster', $res)->get()[$res]['AccountNo'];
+        return response()->view('extendedCare.payment', compact('account'));
     }
 }
