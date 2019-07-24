@@ -14,11 +14,11 @@
     </head>
     <body class="bg-blue-100">
     <div class="mx-auto">
-        <div class="max-w-5xl rounded flex p-8 mx-auto bg-white align-content-center content-between shadow-md">
-            <img src="{{asset('img/pc_logo.png')}}" alt="PC Logo"/>
+        <div class="flex-col max-w-5xl rounded flex p-8 mx-auto bg-white align-content-center content-between shadow-md">
+            <img class="mx-auto md:content-start md:ml-1" src="{{asset('img/pc_logo.png')}}" alt="PC Logo"/>
             <div class="mt-2 ml-3">
-                <p class="text-3xl mx-auto p-2">Putnam City Schools</p>
-                <p class="text-2xl mx-auto p-2 text-gray-600">Extended Care Registration Form</p>
+                <p class="text-center md:text-left text-3xl mx-auto p-2">Putnam City Schools</p>
+                <p class="text-center md:text-left text-2xl mx-auto p-2 text-gray-600">Extended Care Registration Form</p>
             </div>
         </div>
         <div class="max-w-5xl rounded overflow-hidden shadow-md bg-white mx-auto p-8 px-6 mt-8">
