@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <Title>PC Portal - Extended Care</Title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:200,600" rel="stylesheet">
