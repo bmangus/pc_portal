@@ -22,7 +22,8 @@ class ExtendedCare extends Controller
 
     public function index()
     {
-        $sites = $this->fm->records('web_sites')->sortAsc('SiteName')->get();
+        $sites = collect($this->fm->find('web_sites')->where('Enabled', 'Yes')->get());
+        $sites = $sites->sort();
         return response()->view('extendedCare.index', compact('sites'));
     }
 
