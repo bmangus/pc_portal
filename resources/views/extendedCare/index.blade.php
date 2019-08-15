@@ -259,7 +259,7 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactFullName1">
-                            Primary Caregiver Full Name *
+                            First and Last Name *
                         </label>
                         <input name="PrimaryContactFullName1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactFullName1')}}">
                         @if($errors->has('PrimaryContactFullName1'))
@@ -321,7 +321,7 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="PrimaryContactFullName2">
-                            Secondary Caregiver Full Name
+                            First and Last Name
                         </label>
                         <input name="PrimaryContactFullName2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('PrimaryContactFullName2')}}">
                     </div>
@@ -365,7 +365,7 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC1">
-                            First - Full Name *
+                            First and Last Name * *
                         </label>
                         <input name="EC1" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC1')}}">
                         @if($errors->has('EC1'))
@@ -412,7 +412,7 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC2">
-                            Second - Full Name *
+                            First and Last Name *
                         </label>
                         <input name="EC2" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC2')}}">
                         @if($errors->has('EC2'))
@@ -459,7 +459,7 @@
                 <div class="flex flex-wrap -mx-3 mb-2">
                     <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="EC3">
-                            Third - Full Name
+                            First and Last Name
                         </label>
                         <input name="EC3" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" value="{{old('EC3')}}">
                     </div>

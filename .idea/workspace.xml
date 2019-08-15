@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="Added ability to disable sites from FileMaker.">
+    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/extendedCare/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/extendedCare/index.blade.php" afterDir="false" />
     </list>
@@ -190,7 +190,7 @@
       <workItem from="1564783692564" duration="16000" />
       <workItem from="1564783730198" duration="160000" />
       <workItem from="1564784108202" duration="553000" />
-      <workItem from="1565834844210" duration="74000" />
+      <workItem from="1565834844210" duration="608000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -213,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564450702178</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Updated field name from Students Full Name to First and Last Name per Cory.">
+      <created>1565834944920</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1565834944920</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -236,6 +243,7 @@
     <MESSAGE value="fixed image stretching issue." />
     <MESSAGE value="Updated site title." />
     <MESSAGE value="Added ability to disable sites from FileMaker." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ability to disable sites from FileMaker." />
+    <MESSAGE value="Updated field name from Students Full Name to First and Last Name per Cory." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated field name from Students Full Name to First and Last Name per Cory." />
   </component>
 </project>
