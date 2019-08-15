@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/extendedCare/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/extendedCare/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -190,7 +189,7 @@
       <workItem from="1564783692564" duration="16000" />
       <workItem from="1564783730198" duration="160000" />
       <workItem from="1564784108202" duration="553000" />
-      <workItem from="1565834844210" duration="608000" />
+      <workItem from="1565834844210" duration="673000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -220,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565834944920</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Updated remaining field names to First and Last Name per Cory.">
+      <created>1565835475592</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1565835475592</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +250,7 @@
     <MESSAGE value="Updated site title." />
     <MESSAGE value="Added ability to disable sites from FileMaker." />
     <MESSAGE value="Updated field name from Students Full Name to First and Last Name per Cory." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated field name from Students Full Name to First and Last Name per Cory." />
+    <MESSAGE value="Updated remaining field names to First and Last Name per Cory." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated remaining field names to First and Last Name per Cory." />
   </component>
 </project>
