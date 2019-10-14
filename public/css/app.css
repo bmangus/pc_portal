@@ -16754,8 +16754,15 @@ video {
   box-shadow: none;
 }
 
-.fill-current{
-  fill: currentColor;
+.fill-gray-main{
+  fill: #2d3748;
+}
+
+.fill-gray-hover{
+  fill: #a0aec0;
+}
+
+.fill-gray-pressed{
 }
 
 .stroke-current{
@@ -23719,8 +23726,15 @@ video {
     box-shadow: none;
   }
 
-  .sm\:fill-current{
-    fill: currentColor;
+  .sm\:fill-gray-main{
+    fill: #2d3748;
+  }
+
+  .sm\:fill-gray-hover{
+    fill: #a0aec0;
+  }
+
+  .sm\:fill-gray-pressed{
   }
 
   .sm\:stroke-current{
@@ -30685,8 +30699,15 @@ video {
     box-shadow: none;
   }
 
-  .md\:fill-current{
-    fill: currentColor;
+  .md\:fill-gray-main{
+    fill: #2d3748;
+  }
+
+  .md\:fill-gray-hover{
+    fill: #a0aec0;
+  }
+
+  .md\:fill-gray-pressed{
   }
 
   .md\:stroke-current{
@@ -37651,8 +37672,15 @@ video {
     box-shadow: none;
   }
 
-  .lg\:fill-current{
-    fill: currentColor;
+  .lg\:fill-gray-main{
+    fill: #2d3748;
+  }
+
+  .lg\:fill-gray-hover{
+    fill: #a0aec0;
+  }
+
+  .lg\:fill-gray-pressed{
   }
 
   .lg\:stroke-current{
@@ -44617,8 +44645,15 @@ video {
     box-shadow: none;
   }
 
-  .xl\:fill-current{
-    fill: currentColor;
+  .xl\:fill-gray-main{
+    fill: #2d3748;
+  }
+
+  .xl\:fill-gray-hover{
+    fill: #a0aec0;
+  }
+
+  .xl\:fill-gray-pressed{
   }
 
   .xl\:stroke-current{
