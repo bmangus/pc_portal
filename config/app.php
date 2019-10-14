@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Chicago',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +166,9 @@ return [
          * Package Service Providers...
          */
 
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */
@@ -173,6 +176,7 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\HorizonServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],
@@ -190,6 +194,7 @@ return [
 
     'aliases' => [
 
+        'Adldap' => Adldap\Laravel\Facades\Adldap::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
