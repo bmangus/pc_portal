@@ -253,9 +253,7 @@
                 this.selectedStatus = "My Requisitions";
                 axios.get('/staff/workflowBackend/budgetTracker')
                     .then(response => {
-                        if (response.data.length > 0){
-                            this.requisitions = response.data;
-                        }
+                        this.requisitions = response.data;
                         this.loading = false;
                     })
                     .catch(error => {
@@ -268,9 +266,8 @@
 
                 axios.get('/staff/workflowBackend/budgetTracker/Completed')
                     .then(response => {
-                        if (response.data.length){
-                            this.requisitions = response.data;
-                        }
+                        this.requisitions = response.data;
+
                         this.loading = false;
                     })
                     .catch(error => {
@@ -283,9 +280,7 @@
 
                 axios.get('/staff/workflowBackend/budgetTracker/Rejected')
                     .then(response => {
-                        if (response.data.length){
-                            this.requisitions = response.data;
-                        }
+                        this.requisitions = response.data;
                         this.loading = false;
                     })
                     .catch(error => {
@@ -294,6 +289,7 @@
                     });
             },
             impersonate(){
+                this.$refs.acting.hide();
                 axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor)
                     .then(response => {
                         if (response.data.length){

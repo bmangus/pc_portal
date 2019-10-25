@@ -2221,10 +2221,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedStatus = "My Requisitions";
       axios.get('/staff/workflowBackend/budgetTracker').then(function (response) {
-        if (response.data.length > 0) {
-          _this.requisitions = response.data;
-        }
-
+        _this.requisitions = response.data;
         _this.loading = false;
       })["catch"](function (error) {
         console.log(error);
@@ -2236,10 +2233,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedStatus = "Completed";
       axios.get('/staff/workflowBackend/budgetTracker/Completed').then(function (response) {
-        if (response.data.length) {
-          _this2.requisitions = response.data;
-        }
-
+        _this2.requisitions = response.data;
         _this2.loading = false;
       })["catch"](function (error) {
         console.log(error);
@@ -2251,10 +2245,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedStatus = "Rejected";
       axios.get('/staff/workflowBackend/budgetTracker/Rejected').then(function (response) {
-        if (response.data.length) {
-          _this3.requisitions = response.data;
-        }
-
+        _this3.requisitions = response.data;
         _this3.loading = false;
       })["catch"](function (error) {
         console.log(error);
@@ -2264,6 +2255,7 @@ __webpack_require__.r(__webpack_exports__);
     impersonate: function impersonate() {
       var _this4 = this;
 
+      this.$refs.acting.hide();
       axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor).then(function (response) {
         if (response.data.length) {
           _this4.requisitions = response.data;
