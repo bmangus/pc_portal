@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\BTApprovers;
 use App\BTRequisition;
+use App\Jobs\SyncBudgetTrackerJob;
 use Illuminate\Http\Request;
 
 class WorkflowController extends Controller
@@ -21,21 +22,61 @@ class WorkflowController extends Controller
         return view('workflow.index', compact('user'));
     }
 
+    public function manualSync($app)
+    {
+        $this->canAccess();
+        $this->dispatchNow(new SyncBudgetTrackerJob());
+        return response()->json(['success']);
+    }
+
     public function requisitionsByApprover($app, $username = null)
     {
         $this->canAccess();
-        $username = ($username === null) ?? auth()->user()->username;
+        $username = $username ?? auth()->user()->uid;
+
         if($app === 'budgetTracker'){
             $activeRequisitions =  BTRequisition::whereNotIn('Status', ['Completed', 'Rejected'])
-                ->with('approvers')
+                ->with('approvers', 'requisitionItems')
                 ->get();
         } else {
             $activeRequisitions = null; //@todo: build logic for AT here....
         }
 
+         //dd($activeRequisitions);
         $requisitionsForThisApprover = $this->filterRequisitionsByApprover($activeRequisitions, $username);
 
-        return response()->json($activeRequisitions);
+        return response()->json($requisitionsForThisApprover);
+    }
+
+    public function requisitionsByStatus($app, $status)
+    {
+        $this->canAccess();
+
+        if($app === 'budgetTracker'){
+            $requisitions = BTRequisition::where('Status', $status)
+                ->with('approvers', 'requisitionItems')
+                ->get();
+        } else {
+            $requisitions = null; //@todo: build logic for AT here....
+        }
+
+        return response()->json($requisitions);
+    }
+
+    public function requisitionAction($app, $id, $status, $username = null)
+    {
+        $this->canAccess();
+        if($app === 'budgetTracker'){
+            $requisition = BTRequisition::findOrFail($id);
+
+            $username = $username ?? auth()->user()->uid;
+
+            if($this->currentPositionMatchesUser($requisition, $username)){
+                $this->setRequisitionStatus($requisition, $status, $username);
+            }
+
+        }
+        return response()->json(['success']);
     }
 
     public function update($app, $id)
@@ -46,31 +87,86 @@ class WorkflowController extends Controller
     private function filterRequisitionsByApprover($requisitions, $username)
     {
         return $requisitions->filter(function ($requisition) use ($username) {
-            if( $this->checkApprover1($requisition, $username) ||
+            return $this->checkApprover1($requisition, $username) ||
                 $this->checkApprover2($requisition, $username) ||
                 $this->checkApprover3($requisition, $username) ||
                 $this->checkApprover4($requisition, $username) ||
                 $this->checkApprover5($requisition, $username) ||
                 $this->checkTEApprover($requisition, $username) ||
-                $this->checkFinalApprover($requisition, $username)) {
-                return true;
-            }
-            return false;
+                $this->checkFinalApprover($requisition, $username);
         });
     }
 
     private function currentPositionMatchesUser($requisition, $username)
     {
+
+       return  $this->checkApprover1($requisition, $username) ||
+                $this->checkApprover2($requisition, $username) ||
+                $this->checkApprover3($requisition, $username) ||
+                $this->checkApprover4($requisition, $username) ||
+                $this->checkApprover5($requisition, $username) ||
+                $this->checkTEApprover($requisition, $username) ||
+                $this->checkFinalApprover($requisition, $username);
+
+    }
+
+    private function setRequisitionStatus($requisition, $status, $username)
+    {
         $approversRecord = BTApprovers::where('ProjectCode', $requisition->Project)
-            ->where('SiteNo', $requisition->Site)
             ->first();
-        dd($approversRecord);
+
+        if($requisition->ApprovedBy1 === "" && $approversRecord->Approver1 === $username) {
+            $requisition->ApprovedBy1 = $username;
+            $requisition->ApprovedStatus1 = $status;
+            $requisition->ApprovedDate1 = now();
+        }
+
+        if($requisition->ApprovedBy2 === "" && $approversRecord->Approver2 === $username) {
+            $requisition->ApprovedBy2 = $username;
+            $requisition->ApprovedStatus2 = $status;
+            $requisition->ApprovedDate2 = now();
+        }
+
+        if($requisition->ApprovedBy3 === "" && $approversRecord->Approver3 === $username) {
+            $requisition->ApprovedBy3 = $username;
+            $requisition->ApprovedStatus3 = $status;
+            $requisition->ApprovedDate3 = now();
+        }
+
+        if($requisition->ApprovedBy4 === "" && $approversRecord->Approver4 === $username) {
+            $requisition->ApprovedBy4 = $username;
+            $requisition->ApprovedStatus4 = $status;
+            $requisition->ApprovedDate4 = now();
+        }
+
+        if($requisition->ApprovedBy5 === "" && $approversRecord->Approver5 === $username) {
+            $requisition->ApprovedBy5 = $username;
+            $requisition->ApprovedStatus5 = $status;
+            $requisition->ApprovedDate5 = now();
+        }
+
+        if($requisition->ApprovedByTE === "" && $approversRecord->ApproverTE === $username && $requisition->Technology === 'TE') {
+            $requisition->ApprovedByTE = $username;
+            $requisition->ApprovedStatusTE = $status;
+            $requisition->ApprovedDateTE = now();
+        }
+
+        if($requisition->FinalApprovedBy === "" && $approversRecord->ApproverFinal=== $username) {
+            $requisition->FinalApprovedBy = $username;
+            $requisition->FinalApprovedStatus = $status;
+            $requisition->FinalApprovedDate = now();
+            $requisition->Status = ($status === 'Approved') ? 'Completed' : 'Rejected';
+        }
+
+        $status === 'Rejected' ? $requisition->Status = $status : null;
+
+        return $requisition->save();
     }
 
     private function checkApprover1($requisition, $username)
     {
         return  $requisition->ApprovedBy1 === "" &&
-                $requisition->Approved1Status === "" &&
+                $requisition->ApprovedStatus1 === "" &&
                 $requisition->approvers->Approver1 === $username;
 
     }
@@ -78,7 +174,7 @@ class WorkflowController extends Controller
     private function checkApprover2($requisition, $username)
     {
         return  $requisition->ApprovedBy2 === "" &&
-            $requisition->Approved2Status === "" &&
+            $requisition->ApprovedStatus2 === "" &&
             $requisition->approvers->Approver2 === $username;
 
     }
@@ -86,7 +182,7 @@ class WorkflowController extends Controller
     private function checkApprover3($requisition, $username)
     {
         return  $requisition->ApprovedBy3 === "" &&
-            $requisition->Approved3Status === "" &&
+            $requisition->ApprovedStatus3 === "" &&
             $requisition->approvers->Approver3 === $username;
 
     }
@@ -94,7 +190,7 @@ class WorkflowController extends Controller
     private function checkApprover4($requisition, $username)
     {
         return  $requisition->ApprovedBy4 === "" &&
-            $requisition->Approved4Status === "" &&
+            $requisition->ApprovedStatus4 === "" &&
             $requisition->approvers->Approver4 === $username;
 
     }
@@ -102,7 +198,7 @@ class WorkflowController extends Controller
     private function checkApprover5($requisition, $username)
     {
         return  $requisition->ApprovedBy5 === "" &&
-            $requisition->Approved5Status === "" &&
+            $requisition->ApprovedStatus5 === "" &&
             $requisition->approvers->Approver5 === $username;
 
     }
@@ -111,7 +207,7 @@ class WorkflowController extends Controller
     {
         return  $requisition->Technology === "TE" &&
                 $requisition->ApprovedByTE === "" &&
-                $requisition->ApprovedTEStatus === "" &&
+                $requisition->ApprovedStatusTE === "" &&
                 $this->getUserFromEmail($requisition->approvers->ApproverTEEmail) === $username;
     }
 
