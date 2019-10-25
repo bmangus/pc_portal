@@ -2163,27 +2163,154 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'workflow-table',
   data: function data() {
     return {
       requisitions: [],
-      loading: true
+      loading: true,
+      modalWidth: "768",
+      selectedStatus: "My Requisitions",
+      actor: ""
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.loadActive();
+  },
+  methods: {
+    openModal: function openModal(id) {
+      this.$refs['modal' + id].show();
+    },
+    loadActive: function loadActive() {
+      var _this = this;
 
-    axios.get('/staff/workflowBackend/budgetTracker').then(function (response) {
-      if (response.data.length > 0) {
-        _this.requisitions = response.data;
-      }
+      this.selectedStatus = "My Requisitions";
+      axios.get('/staff/workflowBackend/budgetTracker').then(function (response) {
+        if (response.data.length > 0) {
+          _this.requisitions = response.data;
+        }
 
-      _this.loading = false;
-    })["catch"](function (error) {
-      console.log(error);
-      _this.loading = false;
-    });
+        _this.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+        _this.loading = false;
+      });
+    },
+    loadCompleted: function loadCompleted() {
+      var _this2 = this;
+
+      this.selectedStatus = "Completed";
+      axios.get('/staff/workflowBackend/budgetTracker/Completed').then(function (response) {
+        if (response.data.length) {
+          _this2.requisitions = response.data;
+        }
+
+        _this2.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+        _this2.loading = false;
+      });
+    },
+    loadRejected: function loadRejected() {
+      var _this3 = this;
+
+      this.selectedStatus = "Rejected";
+      axios.get('/staff/workflowBackend/budgetTracker/Rejected').then(function (response) {
+        if (response.data.length) {
+          _this3.requisitions = response.data;
+        }
+
+        _this3.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+        _this3.loading = false;
+      });
+    },
+    impersonate: function impersonate() {
+      var _this4 = this;
+
+      axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor).then(function (response) {
+        if (response.data.length) {
+          _this4.requisitions = response.data;
+        }
+
+        _this4.loading = false;
+      })["catch"](function (error) {
+        console.log(error);
+        _this4.loading = false;
+      });
+    },
+    manualSync: function manualSync() {
+      axios.get('/staff/workflowBackend/budgetTracker/sync').then(function (res) {
+        return console.log(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    },
+    approveReq: function approveReq(id) {
+      var _this5 = this;
+
+      var actorString = this.actor !== "" ? '/' + actor : "";
+      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString).then(function (res) {
+        _this5.$refs['modal' + mid].hide();
+
+        _this5.loadActive();
+      })["catch"](function (err) {
+        return _this5.loadActive();
+      });
+    },
+    rejectReq: function rejectReq(id, mid) {
+      var _this6 = this;
+
+      var actorString = this.actor !== "" ? '/' + actor : "";
+      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString).then(function (res) {
+        _this6.$refs['modal' + mid].hide();
+
+        _this6.loadActive();
+      })["catch"](function (err) {
+        return _this6.loadActive();
+      });
+    }
+  },
+  computed: {
+    width: function width() {
+      return window.innerWidth * .85;
+    }
   }
 });
 
@@ -38286,717 +38413,1168 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "w-full m-3" }, [
-    _vm.loading
-      ? _c("div", { staticClass: "flex inset-auto" }, [
-          _c("div", { staticClass: "loader" }, [_vm._v("Loading...")])
-        ])
-      : _c(
-          "div",
-          [
-            _c("t-table", {
-              attrs: {
-                headers: [
-                  "PO Number",
-                  "Vendor",
-                  "Site",
-                  "Project",
-                  "Cost",
-                  "Actions"
-                ],
-                data: _vm.requisitions,
-                responsive: true,
-                "responsive-breakpoint": 768
-              },
-              scopedSlots: _vm._u([
-                {
-                  key: "row",
-                  fn: function(props) {
-                    return [
-                      _c(
-                        "tr",
-                        {
-                          class: [
-                            props.trClass,
-                            props.rowIndex % 2 === 0 ? "bg-gray-100" : ""
-                          ]
-                        },
-                        [
-                          _c("td", { class: props.tdClass }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(props.row.PONumber) +
-                                "\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { class: props.tdClass }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(props.row.Vendor) +
-                                "\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { class: props.tdClass }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(props.row.ShippingCompany) +
-                                "\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { class: props.tdClass }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(props.row.Project) +
-                                "\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { class: props.tdClass }, [
-                            _vm._v(
-                              "\n                        $" +
-                                _vm._s(
-                                  parseFloat(props.row.GrandTotal).toFixed(2)
-                                ) +
-                                "\n                    "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "td",
-                            { class: props.tdClass },
-                            [
-                              _c(
-                                "t-button",
-                                {
-                                  attrs: { size: "sm", variant: "primary" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$refs.modal.show()
-                                    }
-                                  }
-                                },
-                                [_vm._v("Open")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "t-button",
-                                { attrs: { size: "sm", variant: "secondary" } },
-                                [_vm._v("Forward")]
-                              )
-                            ],
-                            1
-                          )
-                        ]
-                      )
-                    ]
-                  }
-                }
-              ])
-            }),
-            _vm._v(" "),
-            _c("t-modal", { ref: "modal" }, [
-              _c("div", { staticClass: "requisitions" }, [
-                _c("div", { staticClass: "header" }, [
-                  _c("img", {
-                    staticClass: "print_logo",
-                    attrs: {
-                      src:
-                        "https://staff.putnamcityschools.org/.pc/site/assets/img/pc_main_logo.png"
-                    }
-                  }),
-                  _vm._v(" "),
+  return _c(
+    "div",
+    { staticClass: "w-full m-3" },
+    [
+      _c(
+        "div",
+        { staticClass: "flex" },
+        [
+          _c(
+            "t-dropdown",
+            { staticClass: "pb-2", attrs: { text: _vm.selectedStatus } },
+            [
+              _c("ul", [
+                _c("li", [
                   _c(
-                    "p",
+                    "a",
                     {
-                      staticClass: "float_left",
-                      staticStyle: { "font-weight": "bold" }
+                      staticClass: "block no-underline px-4 py-2 hover",
+                      on: { click: _vm.loadActive }
                     },
-                    [_vm._v("PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col_left float_left" }, [
-                    _c("p", [
-                      _vm._v("5401 NW 40th  - Oklahoma City, OK 73122")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("Phone:(405) 495-5200  Fax (405) 495-8648")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col_right float_right" }, [
-                    _c("p", [
-                      _c("strong", [_vm._v("Requisition Date:")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "req_date req_data" }, [
-                        _vm._v("06/21/2019")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _c("strong", [_vm._v("Purchase No.:")]),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          staticClass: "ponum req_data",
-                          staticStyle: { "text-align": "right", width: "105px" }
-                        },
-                        [_vm._v("0-00177-096")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _c(
-                        "span",
-                        { staticClass: "created_by req_data float_right" },
-                        [_vm._v(" operations")]
-                      ),
-                      _c("strong", [_vm._v("Created By:")])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "header_final" }, [
-                    _vm._v("FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "clear_all" })
+                    [_vm._v("My Requisitions")]
+                  )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "mid_header" }, [
-                  _c("div", { staticClass: "billing" }, [
-                    _c("span", { staticClass: "bill_to_label" }, [
-                      _vm._v("Bill To:")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "BillToInfo req_data" }, [
-                      _vm._v("CINDY SMITH"),
-                      _c("br"),
-                      _vm._v("Putnam City Operations"),
-                      _c("br"),
-                      _vm._v("5401 NW 40th St"),
-                      _c("br"),
-                      _vm._v("Oklahoma City, Ok 73122"),
-                      _c("br")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "clear_all" }),
-                    _vm._v(" "),
-                    _c("br"),
-                    _c("br"),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("1st")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatus1 req_data" }, [
-                        _vm._v("Approved")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedBy1 req_data" }, [
-                        _vm._v("Cecil Bowles")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDate1 req_data" }, [
-                        _vm._v("06/21/2019")
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("2nd")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatus2 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedBy2 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDate2 req_data" })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("3rd")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatus3 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedBy3 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDate3 req_data" })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("4th")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatus4 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedBy4 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDate4 req_data" })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("5th")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatus5 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedBy5 req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDate5 req_data" })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [_vm._v("TE")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedStatusTE req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedByTE req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ApprovedDateTE req_data" })
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "signature" }, [
-                      _c("span", { staticClass: "sig_label" }, [
-                        _vm._v("Final")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", {
-                        staticClass: "FinalApprovedStatus req_data"
-                      }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "FinalApprovedBy req_data" }),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "FinalApprovedDate req_data" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "vendor_info" }, [
-                    _c(
-                      "p",
-                      {
-                        staticClass: "float_left",
-                        staticStyle: { "font-size": "14px" }
-                      },
-                      [_vm._v("Vendor Information:")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "float_right",
-                        staticStyle: { "font-size": "14px" }
-                      },
-                      [
-                        _vm._v("Vendor #: "),
-                        _c("span", { staticClass: "ven_num req_data" }, [
-                          _vm._v("34752")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "vendor_info req_data" }, [
-                      _vm._v("AT&T MOBILITY"),
-                      _c("br"),
-                      _vm._v("PO BOX 6463"),
-                      _c("br"),
-                      _vm._v("CAROL STREAM, IL 60197")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "float_right",
-                        staticStyle: {
-                          width: "25px",
-                          "margin-top": "20px",
-                          "font-size": "13px"
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "block no-underline px-4 py-2 hover",
+                      on: { click: _vm.loadCompleted }
+                    },
+                    [_vm._v("Completed")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "block no-underline px-4 py-2 hover",
+                      on: { click: _vm.loadRejected }
+                    },
+                    [_vm._v("Rejected")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "block no-underline px-4 py-2 hover",
+                      on: {
+                        click: function($event) {
+                          return _vm.$refs.acting.show()
                         }
-                      },
-                      [
-                        _c("span", [_vm._v("W9")]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("input", {
-                          attrs: { type: "checkbox", disabled: "" }
-                        }),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("FD")]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("input", {
-                          attrs: { type: "checkbox", disabled: "" }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "clear_all" }),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "comm" }, [
-                      _c("label", [_vm._v("Phone")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ven_phone req_data" }, [
-                        _vm._v("800-331-0500")
-                      ]),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("label", [_vm._v("Fax")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ven_fax req_data" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "shipping_info" }, [
-                    _c("p", { staticClass: "black" }, [_vm._v("Ship To:")]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "shippingInfo req_data" }, [
-                      _vm._v("CINDY SMITH"),
-                      _c("br"),
-                      _vm._v("Putnam City Operations"),
-                      _c("br"),
-                      _vm._v("5401 NW 40th St"),
-                      _c("br"),
-                      _vm._v("Oklahoma City, Ok 73122"),
-                      _c("br")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "clear_all" }),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "comm" }, [
-                      _c("label", [_vm._v("Phone")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ship_phone req_data" }, [
-                        _vm._v("405-495-5200")
-                      ]),
-                      _vm._v(" "),
-                      _c("label", [_vm._v("Fax")]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: "ship_fax req_data" })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "clear_all" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "instructions" }, [
-                    _vm._v("Instructions")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "instructions" }, [
-                    _c("span", { staticClass: "instructions_print" })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "small_details" }, [
-                    _c("table", [
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", [_vm._v("FY")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Fund")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Project")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Function")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Program")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Subject")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Ship Site")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Site")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Encumbrance No.")])
-                        ]),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td", { staticClass: "fy" }, [_vm._v("0")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "fund" }, [_vm._v("11")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "project" }, [_vm._v("096")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "function" }, [
-                            _vm._v("2660")
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "program" }, [_vm._v("000")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "subject" }, [
-                            _vm._v("0000")
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "job" }, [_vm._v("096")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "site" }, [_vm._v("096")]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "encumbrance" }, [
-                            _vm._v("0-00177-096")
-                          ])
-                        ])
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "lineitems" }, [
-                    _c("table", [
-                      _c("tbody", [
-                        _c("tr", [
-                          _c("td", [_vm._v("Qty")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Fixed Asset")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Item No.")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Item Description")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Object Code")]),
-                          _vm._v(" "),
-                          _c("td", [_vm._v("Unit price")]),
-                          _vm._v(" "),
-                          _c("td", { staticStyle: { "text-align": "right" } }, [
-                            _vm._v("Total")
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td", [_vm._v("1")]),
-                            _c("td"),
-                            _c("td"),
-                            _c("td", [
-                              _vm._v(
-                                "CELL SERVICE FOR THE CHIEF OPERATIONS OFFICER"
-                              )
-                            ]),
-                            _c("td", [_vm._v("530")]),
-                            _c("td", [_vm._v("$1,000.00")]),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "right" } },
-                              [_vm._v("$1,000.00")]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td", [_vm._v("1")]),
-                            _c("td"),
-                            _c("td"),
-                            _c("td", [_vm._v("FOR 2019-2020 SCHOOL YEAR")]),
-                            _c("td"),
-                            _c("td", {
-                              staticStyle: { "text-align": "right" }
-                            }),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "right" } },
-                              [_vm._v("$0.00")]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td"),
-                            _c("td")
-                          ]
-                        ),
-                        _c(
-                          "tr",
-                          {
-                            staticClass: "grand_t",
-                            staticStyle: { "font-size": "14px", height: "20px" }
-                          },
-                          [
-                            _c("td", { staticClass: "no_border_right" }),
-                            _c("td", {
-                              staticClass: "no_border_left no_border_right"
-                            }),
-                            _c("td", {
-                              staticClass: "no_border_left no_border_right"
-                            }),
-                            _c("td", {
-                              staticClass: "no_border_left no_border_right"
-                            }),
-                            _c("td", {
-                              staticClass: "no_border_left no_border_right"
-                            }),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "right" } },
-                              [
-                                _c("span", { staticClass: "total_label" }, [
-                                  _vm._v("Total")
-                                ])
-                              ]
-                            ),
-                            _c(
-                              "td",
-                              { staticStyle: { "text-align": "right" } },
-                              [
-                                _c(
-                                  "span",
-                                  { staticClass: "grandtotal req_data" },
-                                  [_vm._v("$1,000.00")]
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "foot",
-                        staticStyle: { "font-size": "14px" }
-                      },
-                      [_vm._v("Charge To: 096/2019-20 /  / 096")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "textdisplay" }),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      staticClass: "req_note",
-                      attrs: { name: "req_note" }
-                    }),
-                    _vm._v(" "),
-                    _c("button", { staticClass: "send_comment" }, [
-                      _vm._v("Save Comment")
-                    ])
-                  ])
+                      }
+                    },
+                    [_vm._v("Act As")]
+                  )
                 ])
               ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "btn-primary mb-2 p-3 mr-2 ml-auto",
+              on: { click: _vm.manualSync }
+            },
+            [_vm._v("Sync")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.loading
+        ? _c("div", { staticClass: "flex inset-auto" }, [
+            _c("div", { staticClass: "loader" }, [_vm._v("Loading...")])
+          ])
+        : _c(
+            "div",
+            [
+              _c("t-table", {
+                attrs: {
+                  headers: [
+                    "PO Number",
+                    "Vendor",
+                    "Site",
+                    "Project",
+                    "Cost",
+                    "Actions"
+                  ],
+                  data: _vm.requisitions,
+                  responsive: true,
+                  "responsive-breakpoint": 768
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "row",
+                    fn: function(props) {
+                      return [
+                        _c(
+                          "tr",
+                          {
+                            class: [
+                              props.trClass,
+                              props.rowIndex % 2 === 0 ? "bg-gray-100" : ""
+                            ]
+                          },
+                          [
+                            _c("td", { class: props.tdClass }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.PONumber) +
+                                  "\n                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { class: props.tdClass }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.Vendor) +
+                                  "\n                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { class: props.tdClass }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.ShippingCompany) +
+                                  "\n                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { class: props.tdClass }, [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(props.row.Project) +
+                                  "\n                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { class: props.tdClass }, [
+                              _vm._v(
+                                "\n                            $" +
+                                  _vm._s(
+                                    parseFloat(props.row.GrandTotal).toFixed(2)
+                                  ) +
+                                  "\n                        "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              { class: props.tdClass },
+                              [
+                                _c(
+                                  "t-button",
+                                  {
+                                    attrs: { size: "sm", variant: "primary" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.openModal(props.rowIndex)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Open")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "t-button",
+                                  {
+                                    attrs: { size: "sm", variant: "secondary" }
+                                  },
+                                  [_vm._v("Forward")]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "t-modal",
+                              {
+                                ref: "modal" + props.rowIndex,
+                                attrs: { width: _vm.width }
+                              },
+                              [
+                                _c("div", { staticClass: "requisitions" }, [
+                                  _c("div", { staticClass: "header" }, [
+                                    _c("img", {
+                                      staticClass: "print_logo",
+                                      attrs: {
+                                        src:
+                                          "https://staff.putnamcityschools.org/.pc/site/assets/img/pc_main_logo.png"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass: "float_left",
+                                        staticStyle: { "font-weight": "bold" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE"
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col_left float_left" },
+                                      [
+                                        _c("p", [
+                                          _vm._v(
+                                            "5401 NW 40th  - Oklahoma City, OK 73122"
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _vm._v(
+                                            "Phone:(405) 495-5200  Fax (405) 495-8648"
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "col_right float_right" },
+                                      [
+                                        _c("p", [
+                                          _c("strong", [
+                                            _vm._v("Requisition Date:")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "req_date req_data"
+                                            },
+                                            [_vm._v(_vm._s(props.row.Date))]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _c("strong", [
+                                            _vm._v("Purchase No.:")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "ponum req_data",
+                                              staticStyle: {
+                                                "text-align": "right",
+                                                width: "105px"
+                                              }
+                                            },
+                                            [_vm._v(_vm._s(props.row.PONumber))]
+                                          )
+                                        ]),
+                                        _vm._v(" "),
+                                        _c("p", [
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "created_by req_data float_right"
+                                            },
+                                            [_vm._v(" operations")]
+                                          ),
+                                          _c("strong", [_vm._v("Created By:")])
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "header_final" }, [
+                                      _vm._v(
+                                        "FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE"
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "clear_all" })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "mid_header" }, [
+                                    _c("div", { staticClass: "billing" }, [
+                                      _c(
+                                        "span",
+                                        { staticClass: "bill_to_label" },
+                                        [_vm._v("Bill To:")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "BillToInfo req_data" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(props.row.BillToAttention)
+                                          ),
+                                          _c("br"),
+                                          _vm._v(_vm._s(props.row.BillToName)),
+                                          _c("br"),
+                                          _vm._v(
+                                            _vm._s(props.row.BillToAddress)
+                                          ),
+                                          _c("br"),
+                                          _vm._v(
+                                            _vm._s(props.row.BillToCity) +
+                                              ", " +
+                                              _vm._s(props.row.BillToState) +
+                                              " " +
+                                              _vm._s(props.row.BillToZip)
+                                          ),
+                                          _c("br")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "clear_all" }),
+                                      _vm._v(" "),
+                                      _c("br"),
+                                      _c("br"),
+                                      _c("br"),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("1st")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatus1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatus1)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedBy1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedBy1)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDate1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDate1)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("2nd")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatus1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatus2)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedBy1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedBy2)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDate1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDate2)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("3rd")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatus1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatus3)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedBy1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedBy3)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDate1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDate3)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("4th")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatus1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatus4)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedBy1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedBy4)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDate1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDate4)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("5th")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatus1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatus5)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedBy1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedBy5)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDate1 req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDate5)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("TE")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedStatusTE req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedStatusTE)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "ApprovedByTE req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedByTE)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "ApprovedDateTE req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ApprovedDateTE)
+                                            )
+                                          ]
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "signature" }, [
+                                        _c(
+                                          "span",
+                                          { staticClass: "sig_label" },
+                                          [_vm._v("Final")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "FinalApprovedStatus req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                props.row.FinalApprovedStatus
+                                              )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "FinalApprovedBy req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.FinalApprovedBy)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "FinalApprovedDate req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                props.row.FinalApprovedDate
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "vendor_info" }, [
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "float_left",
+                                          staticStyle: { "font-size": "14px" }
+                                        },
+                                        [_vm._v("Vendor Information:")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "float_right",
+                                          staticStyle: { "font-size": "14px" }
+                                        },
+                                        [
+                                          _vm._v("Vendor #: "),
+                                          _c(
+                                            "span",
+                                            { staticClass: "ven_num req_data" },
+                                            [_vm._v(_vm._s(props.row.VendorID))]
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "vendor_info req_data" },
+                                        [
+                                          _vm._v(_vm._s(props.row.Vendor)),
+                                          _c("br"),
+                                          _vm._v(
+                                            _vm._s(props.row.VendorAddress)
+                                          ),
+                                          _c("br"),
+                                          _vm._v(
+                                            _vm._s(props.row.VendorCity) +
+                                              ", " +
+                                              _vm._s(props.row.VendorState) +
+                                              " " +
+                                              _vm._s(props.row.VendorZip)
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "float_right",
+                                          staticStyle: {
+                                            width: "25px",
+                                            "margin-top": "20px",
+                                            "font-size": "13px"
+                                          }
+                                        },
+                                        [
+                                          _c("span", [_vm._v("W9")]),
+                                          _vm._v(" "),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            attrs: {
+                                              type: "checkbox",
+                                              disabled: ""
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("span", [_vm._v("FD")]),
+                                          _vm._v(" "),
+                                          _c("br"),
+                                          _vm._v(" "),
+                                          _c("input", {
+                                            attrs: {
+                                              type: "checkbox",
+                                              disabled: ""
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "clear_all" }),
+                                      _vm._v(" "),
+                                      _c("p", { staticClass: "comm" }, [
+                                        _c("label", [_vm._v("Phone")]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "ven_phone req_data" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.VendorPhone)
+                                            )
+                                          ]
+                                        ),
+                                        _c("br"),
+                                        _vm._v(" "),
+                                        _c("label", [_vm._v("Fax")]),
+                                        _vm._v(" "),
+                                        _c("span", {
+                                          staticClass: "ven_fax req_data"
+                                        })
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "shipping_info" },
+                                      [
+                                        _c("p", { staticClass: "black" }, [
+                                          _vm._v("Ship To:")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "shippingInfo req_data"
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(props.row.ShippingInfo)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("p", { staticClass: "clear_all" }),
+                                        _vm._v(" "),
+                                        _c("p", { staticClass: "comm" }, [
+                                          _c("label", [_vm._v("Phone")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "ship_phone req_data"
+                                            },
+                                            [
+                                              _vm._v(
+                                                _vm._s(props.row.ShipToPhone)
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c("label", [_vm._v("Fax")]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass: "ship_fax req_data"
+                                            },
+                                            [_vm._v(_vm._s(props.row.ShipFax))]
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "clear_all" }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "span",
+                                      { staticClass: "instructions" },
+                                      [_vm._v("Instructions")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "instructions" }, [
+                                      _c(
+                                        "span",
+                                        { staticClass: "instructions_print" },
+                                        [_vm._v(_vm._s(props.row.Instructions))]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "small_details" },
+                                      [
+                                        _c("table", [
+                                          _c("tbody", [
+                                            _c("tr", [
+                                              _c("td", [_vm._v("FY")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Fund")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Project")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Function")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Program")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Subject")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Ship Site")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Site")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v("Encumbrance No.")
+                                              ])
+                                            ]),
+                                            _vm._v(" "),
+                                            _c("tr", [
+                                              _c("td", { staticClass: "fy" }, [
+                                                _vm._v(
+                                                  _vm._s(props.row.FiscalYear)
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "fund" },
+                                                [_vm._v(_vm._s(props.row.Fund))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "project" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.Project)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "function" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.Function)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "program" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.Program)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "subject" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.Subject)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("td", { staticClass: "job" }, [
+                                                _vm._v(
+                                                  _vm._s(props.row.JobClass)
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "site" },
+                                                [_vm._v(_vm._s(props.row.Site))]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                { staticClass: "encumbrance" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.row.PONumber)
+                                                  )
+                                                ]
+                                              )
+                                            ])
+                                          ])
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "lineitems" }, [
+                                      _c("table", [
+                                        _c(
+                                          "tbody",
+                                          [
+                                            _c("tr", [
+                                              _c("td", [_vm._v("Qty")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Fixed Asset")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Item No.")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _vm._v("Item Description")
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Object Code")]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("Unit price")]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "td",
+                                                {
+                                                  staticStyle: {
+                                                    "text-align": "right"
+                                                  }
+                                                },
+                                                [_vm._v("Total")]
+                                              )
+                                            ]),
+                                            _vm._v(" "),
+                                            _vm._l(
+                                              props.row.requisition_items,
+                                              function(item) {
+                                                return _c(
+                                                  "tr",
+                                                  {
+                                                    staticStyle: {
+                                                      "font-size": "14px",
+                                                      height: "20px"
+                                                    }
+                                                  },
+                                                  [
+                                                    _c("td", [
+                                                      _vm._v(_vm._s(item.Qty))
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(item.FixedAsset)
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(item.ItemCount)
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(item.Description)
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(item.Object)
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c("td", [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          parseFloat(
+                                                            item.UnitPrice
+                                                          ).toFixed(2)
+                                                        )
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "td",
+                                                      {
+                                                        staticStyle: {
+                                                          "text-align": "right"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            parseFloat(
+                                                              item.Qty *
+                                                                item.UnitPrice
+                                                            ).toFixed(2)
+                                                          )
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              }
+                                            )
+                                          ],
+                                          2
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "p",
+                                        {
+                                          staticClass: "foot",
+                                          staticStyle: { "font-size": "14px" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "Charge To: " +
+                                              _vm._s(props.row.ChargeTo)
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("p", [
+                                        _vm._v("Comments Go Here.....")
+                                      ]),
+                                      _vm._v(" "),
+                                      _c("div", { staticClass: "flex" }, [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "btn-success p-3 ml-auto mr-2",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.approveReq(
+                                                  props.row.pk,
+                                                  props.rowIndex
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Approve")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "btn-danger p-3 mr-2",
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.rejectReq(
+                                                  props.row.pk,
+                                                  props.rowIndex
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Reject")]
+                                        )
+                                      ])
+                                    ])
+                                  ])
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            1
+          ),
+      _vm._v(" "),
+      _c(
+        "t-modal",
+        { ref: "acting", staticClass: "align-middle object-center" },
+        [
+          _c("div", { staticClass: "flex mb-4" }, [
+            _c("p", { staticClass: "mx-auto text-2xl text-center" }, [
+              _vm._v("Impersonation:")
             ])
-          ],
-          1
-        )
-  ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex mb-4" }, [
+            _c("span", { staticClass: "w-1/3 text-right" }, [
+              _vm._v("Username:")
+            ]),
+            _c(
+              "div",
+              { staticClass: "w-2/3" },
+              [
+                _c("t-input", {
+                  staticClass: "ml-2",
+                  attrs: { name: "my-input" },
+                  model: {
+                    value: _vm.actor,
+                    callback: function($$v) {
+                      _vm.actor = $$v
+                    },
+                    expression: "actor"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex mb-4" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn-primary mt-2 mx-auto p-2",
+                on: { click: _vm.impersonate }
+              },
+              [_vm._v("Act As This User")]
+            )
+          ])
+        ]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

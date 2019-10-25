@@ -35,4 +35,10 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
 
     Route::get('/workflow', 'WorkflowController@index');
     Route::get('/workflowBackend/{app}', 'WorkflowController@requisitionsByApprover');
+    Route::get('/workflowBackend/{app}/{status}', 'WorkflowController@requisitionsByStatus');
+    Route::get('/workflowBackend/{app}/user/{username}', 'WorkflowController@requisitionsByStatus');
+    Route::get('/workflowBackend/{app}/sync', 'WorkflowController@manualSync');
+    Route::get('/workflowBackend/{app}/{id}/{status}', 'WorkflowController@requisitionAction');
+    Route::get('/workflowBackend/{app}/{id}/{status}/{username}', 'WorkflowController@requisitionAction');
+
 });
