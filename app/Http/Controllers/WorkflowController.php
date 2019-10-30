@@ -22,10 +22,10 @@ class WorkflowController extends Controller
         return view('workflow.index', compact('user'));
     }
 
-    public function manualSync($app)
+    public function manualSync()
     {
         $this->canAccess();
-        $this->dispatchNow(new SyncBudgetTrackerJob());
+        SyncBudgetTrackerJob::dispatchNow();
         return response()->json(['success']);
     }
 

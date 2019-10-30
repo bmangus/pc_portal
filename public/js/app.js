@@ -2268,7 +2268,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     manualSync: function manualSync() {
-      axios.get('/staff/workflowBackend/budgetTracker/sync').then(function (res) {
+      axios.get('/staff/workflowBackendSync').then(function (res) {
         return console.log(res);
       })["catch"](function (err) {
         return console.log(err);
