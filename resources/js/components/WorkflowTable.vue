@@ -303,7 +303,7 @@
                     });
             },
             manualSync(){
-                axios.get('/staff/workflowBackend/budgetTracker/sync')
+                axios.get('/staff/workflowBackendSync')
                     .then(res=>console.log(res))
                     .catch(err=>console.log(err))
             },
