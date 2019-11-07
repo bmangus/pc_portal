@@ -2194,12 +2194,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'workflow-requisition-modal',
-  props: ['row'],
+  props: ['row', 'rowIndex', 'actor'],
   methods: {
     approveReq: function approveReq(id) {
       var _this = this;
 
-      var actorString = this.actor !== "" ? '/' + actor : "";
+      var actorString = this.actor !== "" ? '/' + this.actor : "";
       axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString).then(function (res) {
         _this.$refs['modal' + mid].hide();
 
@@ -2211,7 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
     rejectReq: function rejectReq(id, mid) {
       var _this2 = this;
 
-      var actorString = this.actor !== "" ? '/' + actor : "";
+      var actorString = this.actor !== "" ? '/' + this.actor : "";
       axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString).then(function (res) {
         _this2.$refs['modal' + mid].hide();
 
@@ -39315,7 +39315,11 @@ var render = function() {
                               },
                               [
                                 _c("workflow-requisition-modal", {
-                                  attrs: { row: props.row },
+                                  attrs: {
+                                    row: props.row,
+                                    rowIndex: props.rowIndex,
+                                    actor: _vm.actor
+                                  },
                                   on: { load: _vm.loadActive }
                                 })
                               ],

@@ -227,10 +227,10 @@
 <script>
     export default {
         name: 'workflow-requisition-modal',
-        props: ['row'],
+        props: ['row', 'rowIndex', 'actor'],
         methods: {
             approveReq(id){
-                let actorString = (this.actor !== "") ? '/' + actor : "";
+                let actorString = (this.actor !== "") ? '/' + this.actor : "";
                 axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString)
                     .then(res=>{
                         this.$refs['modal'+mid].hide();
@@ -239,7 +239,7 @@
                     .catch(err=>this.$emit('load', true))
             },
             rejectReq(id, mid){
-                let actorString = (this.actor !== "") ? '/' + actor : "";
+                let actorString = (this.actor !== "") ? '/' + this.actor : "";
                 axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString)
                     .then(res=>{
                         this.$refs['modal'+mid].hide();

@@ -50,7 +50,7 @@
                                 <t-button size="sm" variant="secondary" >Forward</t-button>
                             </td>
                             <t-modal :ref="'modal'+ props.rowIndex" :width="width">
-                               <workflow-requisition-modal :row="props.row" v-on:load="loadActive"/>
+                               <workflow-requisition-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
                             </t-modal>
                         </tr>
                     </template>
