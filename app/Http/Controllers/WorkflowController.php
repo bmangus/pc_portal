@@ -209,7 +209,7 @@ class WorkflowController extends Controller
 
         $status === 'Rejected' ? $requisition->Status = $status : null;
 
-        return true;//$requisition->save();
+        return $requisition->save();
     }
 
     private function checkApprover1($requisition, $username)
