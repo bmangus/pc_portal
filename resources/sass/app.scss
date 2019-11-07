@@ -9,6 +9,14 @@
 
 @tailwind base;
 
+.border-2 {
+    border-width: 1px !important;
+}
+
+.border-top-table{
+    border-top-width: 1px !important;
+}
+
 @tailwind components;
 
 @tailwind utilities;

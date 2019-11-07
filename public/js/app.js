@@ -1957,10 +1957,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowTable.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkflowTable.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2192,6 +2192,123 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'workflow-requisition-modal',
+  props: ['row'],
+  methods: {
+    approveReq: function approveReq(id) {
+      var _this = this;
+
+      var actorString = this.actor !== "" ? '/' + actor : "";
+      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString).then(function (res) {
+        _this.$refs['modal' + mid].hide();
+
+        _this.$emit('load', true);
+      })["catch"](function (err) {
+        return _this.$emit('load', true);
+      });
+    },
+    rejectReq: function rejectReq(id, mid) {
+      var _this2 = this;
+
+      var actorString = this.actor !== "" ? '/' + actor : "";
+      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString).then(function (res) {
+        _this2.$refs['modal' + mid].hide();
+
+        _this2.$emit('load', true);
+      })["catch"](function (err) {
+        return _this2.$emit('load', true);
+      });
+    },
+    caseString: function caseString(str) {
+      if (typeof str !== "string") return str;
+      var array1 = str.toLowerCase().split(' ');
+      var newarray1 = [];
+
+      for (var x = 0; x < array1.length; x++) {
+        if (array1[x].length < 3) {
+          newarray1.push(array1[x].toUpperCase());
+        } else {
+          newarray1.push(array1[x].charAt(0).toUpperCase() + array1[x].slice(1));
+        }
+      }
+
+      return newarray1.join(' ');
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowTable.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkflowTable.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2272,30 +2389,6 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(res);
       })["catch"](function (err) {
         return console.log(err);
-      });
-    },
-    approveReq: function approveReq(id) {
-      var _this5 = this;
-
-      var actorString = this.actor !== "" ? '/' + actor : "";
-      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString).then(function (res) {
-        _this5.$refs['modal' + mid].hide();
-
-        _this5.loadActive();
-      })["catch"](function (err) {
-        return _this5.loadActive();
-      });
-    },
-    rejectReq: function rejectReq(id, mid) {
-      var _this6 = this;
-
-      var actorString = this.actor !== "" ? '/' + actor : "";
-      axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString).then(function (res) {
-        _this6.$refs['modal' + mid].hide();
-
-        _this6.loadActive();
-      })["catch"](function (err) {
-        return _this6.loadActive();
       });
     }
   },
@@ -38390,6 +38483,634 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "font-sans" }, [
+    _c("div", { staticClass: "flex w-full mb-3" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-5/6 ml-4" }, [
+        _c("p", { staticClass: "font-extrabold" }, [
+          _vm._v("PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row ml-0" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-1/2" }, [
+            _c("p", [
+              _c("strong", [_vm._v("Requisition Date:")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "req_date req_data" }, [
+                _vm._v(_vm._s(_vm.row.Date))
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", [
+              _c("strong", [_vm._v("Purchase No.:")]),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "ponum req_data",
+                  staticStyle: { "text-align": "right", width: "105px" }
+                },
+                [_vm._v(_vm._s(_vm.row.PONumber))]
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(2)
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex w-full" }, [
+      _c("div", { staticClass: "w-2/5 col" }, [
+        _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
+          _c("div", { staticClass: "flex w-full mb-3" }, [
+            _c("p", { staticClass: "object-left" }, [
+              _vm._v("Vendor Information:")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "mr-2 ml-auto" }, [
+              _vm._v("Vendor #: "),
+              _c("span", { staticClass: "ven_num req_data" }, [
+                _vm._v(_vm._s(_vm.row.VendorID))
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex w-full" }, [
+            _c("span", { staticClass: "vendor_info req_data" }, [
+              _vm._v(_vm._s(_vm.caseString(_vm.row.Vendor))),
+              _c("br"),
+              _vm._v(_vm._s(_vm.caseString(_vm.row.VendorAddress))),
+              _c("br"),
+              _vm._v(
+                _vm._s(_vm.caseString(_vm.row.VendorCity)) +
+                  ", " +
+                  _vm._s(_vm.caseString(_vm.row.VendorState)) +
+                  " " +
+                  _vm._s(_vm.row.VendorZip)
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(3)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex w-full" }, [
+            _c("p", [
+              _c("label", [_vm._v("Phone")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "ven_phone req_data" }, [
+                _vm._v(_vm._s(_vm.row.VendorPhone))
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("label", [_vm._v("Fax")]),
+              _vm._v(" "),
+              _c("span", { staticClass: "ven_fax req_data" })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " m-2 p-2 border-2 border-black" }, [
+          _c("p", { staticClass: "bg-black text-white p-1 mb-3" }, [
+            _vm._v("Ship To:")
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "vendor_info req_data" }, [
+            _vm._v(_vm._s(_vm.caseString(_vm.row.Attn))),
+            _c("br"),
+            _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingCompany))),
+            _c("br"),
+            _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingAddress))),
+            _c("br"),
+            _vm._v(
+              _vm._s(_vm.caseString(_vm.row.ShippingCity)) +
+                ", " +
+                _vm._s(_vm.caseString(_vm.row.ShippingState)) +
+                " " +
+                _vm._s(_vm.caseString(_vm.row.ShippingZip))
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "clear_all" }),
+          _vm._v(" "),
+          _c("p", { staticClass: "comm" }, [
+            _c("label", [_vm._v("Phone")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ship_phone req_data" }, [
+              _vm._v(_vm._s(_vm.row.ShipToPhone))
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _c("label", [_vm._v("Fax")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "ship_fax req_data" }, [
+              _vm._v(_vm._s(_vm.row.ShipFax))
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-3/5 m-2 p-2 border-2 border-black" }, [
+        _c("div", { staticClass: "flex w-full mb-4" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6" }, [
+            _c("span", { staticClass: "text-left" }, [
+              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAttention))),
+              _c("br"),
+              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToName))),
+              _c("br"),
+              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAddress))),
+              _c("br"),
+              _vm._v(
+                _vm._s(_vm.caseString(_vm.row.BillToCity)) +
+                  ", " +
+                  _vm._s(_vm.caseString(_vm.row.BillToState)) +
+                  " " +
+                  _vm._s(_vm.row.BillToZip)
+              ),
+              _c("br")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("1st")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatus1))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedBy1))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDate1))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("2nd")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatus2))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedBy2))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDate2))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("3rd")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatus3))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedBy3))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDate3))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("4th")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatus4))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedBy4))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDate4))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("5th")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatus5))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedBy5))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDate5))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("TE")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedStatusTE))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedByTE))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.ApprovedDateTE))
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full mb-2" }, [
+          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("Final")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 border-b" }, [
+            _c("div", { staticClass: "flex w-full" }, [
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.FinalApprovedStatus))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.FinalApprovedBy))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/3" }, [
+                _vm._v(_vm._s(_vm.row.FinalApprovedDate))
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(5),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex w-full" }, [
+      _c("div", { staticClass: "w-full col" }, [
+        _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
+          _vm._v(
+            "\n                " +
+              _vm._s(
+                _vm.row.Instructions.length < 1
+                  ? "No instructions available."
+                  : _vm.row.Instructions
+              ) +
+              "\n            "
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex w-full" }, [
+      _c("div", { staticClass: "w-full col" }, [
+        _c("div", { staticClass: "m-2" }, [
+          _c(
+            "table",
+            {
+              staticClass: "table-fixed border-2 border-top-table border-black"
+            },
+            [
+              _c("tbody", [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.FiscalYear))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Fund))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Project))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Function))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Program))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Subject))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.JobClass))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.Site))
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "border-2 border-black" }, [
+                    _vm._v(_vm._s(_vm.row.PONumber))
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex w-full" }, [
+      _c("div", { staticClass: "w-full col" }, [
+        _c("div", { staticClass: "m-2" }, [
+          _c(
+            "table",
+            {
+              staticClass: "table-fixed border-2 border-top-table border-black"
+            },
+            [
+              _c(
+                "tbody",
+                [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _vm._l(_vm.row.requisition_items, function(item) {
+                    return _c("tr", [
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(item.Qty))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(item.FixedAsset))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(item.ItemCount))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(item.Description))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(item.Object))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(parseFloat(item.UnitPrice).toFixed(2)))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(
+                          _vm._s(
+                            parseFloat(item.Qty * item.UnitPrice).toFixed(2)
+                          )
+                        )
+                      ])
+                    ])
+                  })
+                ],
+                2
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("p", { staticClass: "foot", staticStyle: { "font-size": "14px" } }, [
+      _vm._v("Charge To: " + _vm._s(_vm.row.ChargeTo))
+    ]),
+    _vm._v(" "),
+    _c("p", [_vm._v("Comments Go Here.....")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "flex" }, [
+      _c(
+        "span",
+        {
+          staticClass: "btn-success p-3 ml-auto mr-2",
+          on: {
+            click: function($event) {
+              return _vm.approveReq(_vm.row.pk, _vm.rowIndex)
+            }
+          }
+        },
+        [_vm._v("Approve")]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          staticClass: "btn-danger p-3 mr-2",
+          on: {
+            click: function($event) {
+              return _vm.rejectReq(_vm.row.pk, _vm.rowIndex)
+            }
+          }
+        },
+        [_vm._v("Reject")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-1/6 border-black" }, [
+      _c("img", {
+        staticClass: "mx-auto object-scale-down h-24",
+        attrs: {
+          src:
+            "https://staff.putnamcityschools.org/.pc/site/assets/img/pc_main_logo.png"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-1/2" }, [
+      _c("p", [_vm._v("5401 NW 40th  - Oklahoma City, OK 73122")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Phone:(405) 495-5200  Fax (405) 495-8648")]),
+      _vm._v(" "),
+      _c("p", {}, [_vm._v("FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [_c("strong", [_vm._v("Created By:")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mr-2 ml-auto" }, [
+      _c("span", [_vm._v("W9")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "checkbox", disabled: "" } }),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("span", [_vm._v("FD")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("input", { attrs: { type: "checkbox", disabled: "" } })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-1/6 text-center" }, [
+      _c("span", { staticClass: "mx-auto" }, [_vm._v("Bill To:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex w-full mx-2 px-2" }, [
+      _c("span", [_vm._v("Instructions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "w-1/6 border-2 border-black" }, [_vm._v("FY")]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Fund")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Project")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Function")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Program")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Subject")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Ship Site")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Site")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/3 border-2 border-black" }, [
+        _vm._v("Encumbrance No.")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Qty")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Fixed Asset")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Item No.")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-2/5 border-2 border-black" }, [
+        _vm._v("Item Description")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Object Code")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/12 border-2 border-black" }, [
+        _vm._v("Unit price")
+      ]),
+      _vm._v(" "),
+      _c("td", { staticClass: "w-1/6 border-2 border-black" }, [
+        _vm._v("Total")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowTable.vue?vue&type=template&id=0ea74f74&":
 /*!****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkflowTable.vue?vue&type=template&id=0ea74f74& ***!
@@ -38593,918 +39314,12 @@ var render = function() {
                                 attrs: { width: _vm.width }
                               },
                               [
-                                _c("div", { staticClass: "requisitions" }, [
-                                  _c("div", { staticClass: "header" }, [
-                                    _c("img", {
-                                      staticClass: "print_logo",
-                                      attrs: {
-                                        src:
-                                          "https://staff.putnamcityschools.org/.pc/site/assets/img/pc_main_logo.png"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "p",
-                                      {
-                                        staticClass: "float_left",
-                                        staticStyle: { "font-weight": "bold" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          "PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE"
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col_left float_left" },
-                                      [
-                                        _c("p", [
-                                          _vm._v(
-                                            "5401 NW 40th  - Oklahoma City, OK 73122"
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("p", [
-                                          _vm._v(
-                                            "Phone:(405) 495-5200  Fax (405) 495-8648"
-                                          )
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "col_right float_right" },
-                                      [
-                                        _c("p", [
-                                          _c("strong", [
-                                            _vm._v("Requisition Date:")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass: "req_date req_data"
-                                            },
-                                            [_vm._v(_vm._s(props.row.Date))]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("p", [
-                                          _c("strong", [
-                                            _vm._v("Purchase No.:")
-                                          ]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass: "ponum req_data",
-                                              staticStyle: {
-                                                "text-align": "right",
-                                                width: "105px"
-                                              }
-                                            },
-                                            [_vm._v(_vm._s(props.row.PONumber))]
-                                          )
-                                        ]),
-                                        _vm._v(" "),
-                                        _c("p", [
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass:
-                                                "created_by req_data float_right"
-                                            },
-                                            [_vm._v(" operations")]
-                                          ),
-                                          _c("strong", [_vm._v("Created By:")])
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "header_final" }, [
-                                      _vm._v(
-                                        "FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE"
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "clear_all" })
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "mid_header" }, [
-                                    _c("div", { staticClass: "billing" }, [
-                                      _c(
-                                        "span",
-                                        { staticClass: "bill_to_label" },
-                                        [_vm._v("Bill To:")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "span",
-                                        { staticClass: "BillToInfo req_data" },
-                                        [
-                                          _vm._v(
-                                            _vm._s(props.row.BillToAttention)
-                                          ),
-                                          _c("br"),
-                                          _vm._v(_vm._s(props.row.BillToName)),
-                                          _c("br"),
-                                          _vm._v(
-                                            _vm._s(props.row.BillToAddress)
-                                          ),
-                                          _c("br"),
-                                          _vm._v(
-                                            _vm._s(props.row.BillToCity) +
-                                              ", " +
-                                              _vm._s(props.row.BillToState) +
-                                              " " +
-                                              _vm._s(props.row.BillToZip)
-                                          ),
-                                          _c("br")
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "clear_all" }),
-                                      _vm._v(" "),
-                                      _c("br"),
-                                      _c("br"),
-                                      _c("br"),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("1st")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatus1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatus1)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedBy1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedBy1)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDate1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDate1)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("2nd")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatus1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatus2)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedBy1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedBy2)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDate1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDate2)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("3rd")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatus1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatus3)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedBy1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedBy3)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDate1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDate3)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("4th")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatus1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatus4)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedBy1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedBy4)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDate1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDate4)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("5th")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatus1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatus5)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedBy1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedBy5)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDate1 req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDate5)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("TE")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedStatusTE req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedStatusTE)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "ApprovedByTE req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedByTE)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "ApprovedDateTE req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ApprovedDateTE)
-                                            )
-                                          ]
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "signature" }, [
-                                        _c(
-                                          "span",
-                                          { staticClass: "sig_label" },
-                                          [_vm._v("Final")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "FinalApprovedStatus req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                props.row.FinalApprovedStatus
-                                              )
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "FinalApprovedBy req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.FinalApprovedBy)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "FinalApprovedDate req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(
-                                                props.row.FinalApprovedDate
-                                              )
-                                            )
-                                          ]
-                                        )
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "vendor_info" }, [
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass: "float_left",
-                                          staticStyle: { "font-size": "14px" }
-                                        },
-                                        [_vm._v("Vendor Information:")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass: "float_right",
-                                          staticStyle: { "font-size": "14px" }
-                                        },
-                                        [
-                                          _vm._v("Vendor #: "),
-                                          _c(
-                                            "span",
-                                            { staticClass: "ven_num req_data" },
-                                            [_vm._v(_vm._s(props.row.VendorID))]
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "span",
-                                        { staticClass: "vendor_info req_data" },
-                                        [
-                                          _vm._v(_vm._s(props.row.Vendor)),
-                                          _c("br"),
-                                          _vm._v(
-                                            _vm._s(props.row.VendorAddress)
-                                          ),
-                                          _c("br"),
-                                          _vm._v(
-                                            _vm._s(props.row.VendorCity) +
-                                              ", " +
-                                              _vm._s(props.row.VendorState) +
-                                              " " +
-                                              _vm._s(props.row.VendorZip)
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass: "float_right",
-                                          staticStyle: {
-                                            width: "25px",
-                                            "margin-top": "20px",
-                                            "font-size": "13px"
-                                          }
-                                        },
-                                        [
-                                          _c("span", [_vm._v("W9")]),
-                                          _vm._v(" "),
-                                          _c("br"),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            attrs: {
-                                              type: "checkbox",
-                                              disabled: ""
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("br"),
-                                          _vm._v(" "),
-                                          _c("span", [_vm._v("FD")]),
-                                          _vm._v(" "),
-                                          _c("br"),
-                                          _vm._v(" "),
-                                          _c("input", {
-                                            attrs: {
-                                              type: "checkbox",
-                                              disabled: ""
-                                            }
-                                          })
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "clear_all" }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: "comm" }, [
-                                        _c("label", [_vm._v("Phone")]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          { staticClass: "ven_phone req_data" },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.VendorPhone)
-                                            )
-                                          ]
-                                        ),
-                                        _c("br"),
-                                        _vm._v(" "),
-                                        _c("label", [_vm._v("Fax")]),
-                                        _vm._v(" "),
-                                        _c("span", {
-                                          staticClass: "ven_fax req_data"
-                                        })
-                                      ])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "shipping_info" },
-                                      [
-                                        _c("p", { staticClass: "black" }, [
-                                          _vm._v("Ship To:")
-                                        ]),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "shippingInfo req_data"
-                                          },
-                                          [
-                                            _vm._v(
-                                              _vm._s(props.row.ShippingInfo)
-                                            )
-                                          ]
-                                        ),
-                                        _vm._v(" "),
-                                        _c("p", { staticClass: "clear_all" }),
-                                        _vm._v(" "),
-                                        _c("p", { staticClass: "comm" }, [
-                                          _c("label", [_vm._v("Phone")]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass: "ship_phone req_data"
-                                            },
-                                            [
-                                              _vm._v(
-                                                _vm._s(props.row.ShipToPhone)
-                                              )
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c("label", [_vm._v("Fax")]),
-                                          _vm._v(" "),
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass: "ship_fax req_data"
-                                            },
-                                            [_vm._v(_vm._s(props.row.ShipFax))]
-                                          )
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("p", { staticClass: "clear_all" }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      { staticClass: "instructions" },
-                                      [_vm._v("Instructions")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "instructions" }, [
-                                      _c(
-                                        "span",
-                                        { staticClass: "instructions_print" },
-                                        [_vm._v(_vm._s(props.row.Instructions))]
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      { staticClass: "small_details" },
-                                      [
-                                        _c("table", [
-                                          _c("tbody", [
-                                            _c("tr", [
-                                              _c("td", [_vm._v("FY")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Fund")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Project")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Function")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Program")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Subject")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Ship Site")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Site")]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v("Encumbrance No.")
-                                              ])
-                                            ]),
-                                            _vm._v(" "),
-                                            _c("tr", [
-                                              _c("td", { staticClass: "fy" }, [
-                                                _vm._v(
-                                                  _vm._s(props.row.FiscalYear)
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "fund" },
-                                                [_vm._v(_vm._s(props.row.Fund))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "project" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.row.Project)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "function" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.row.Function)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "program" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.row.Program)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "subject" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.row.Subject)
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c("td", { staticClass: "job" }, [
-                                                _vm._v(
-                                                  _vm._s(props.row.JobClass)
-                                                )
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "site" },
-                                                [_vm._v(_vm._s(props.row.Site))]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                { staticClass: "encumbrance" },
-                                                [
-                                                  _vm._v(
-                                                    _vm._s(props.row.PONumber)
-                                                  )
-                                                ]
-                                              )
-                                            ])
-                                          ])
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("div", { staticClass: "lineitems" }, [
-                                      _c("table", [
-                                        _c(
-                                          "tbody",
-                                          [
-                                            _c("tr", [
-                                              _c("td", [_vm._v("Qty")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Fixed Asset")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Item No.")]),
-                                              _vm._v(" "),
-                                              _c("td", [
-                                                _vm._v("Item Description")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Object Code")]),
-                                              _vm._v(" "),
-                                              _c("td", [_vm._v("Unit price")]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "td",
-                                                {
-                                                  staticStyle: {
-                                                    "text-align": "right"
-                                                  }
-                                                },
-                                                [_vm._v("Total")]
-                                              )
-                                            ]),
-                                            _vm._v(" "),
-                                            _vm._l(
-                                              props.row.requisition_items,
-                                              function(item) {
-                                                return _c(
-                                                  "tr",
-                                                  {
-                                                    staticStyle: {
-                                                      "font-size": "14px",
-                                                      height: "20px"
-                                                    }
-                                                  },
-                                                  [
-                                                    _c("td", [
-                                                      _vm._v(_vm._s(item.Qty))
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("td", [
-                                                      _vm._v(
-                                                        _vm._s(item.FixedAsset)
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("td", [
-                                                      _vm._v(
-                                                        _vm._s(item.ItemCount)
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("td", [
-                                                      _vm._v(
-                                                        _vm._s(item.Description)
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("td", [
-                                                      _vm._v(
-                                                        _vm._s(item.Object)
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c("td", [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          parseFloat(
-                                                            item.UnitPrice
-                                                          ).toFixed(2)
-                                                        )
-                                                      )
-                                                    ]),
-                                                    _vm._v(" "),
-                                                    _c(
-                                                      "td",
-                                                      {
-                                                        staticStyle: {
-                                                          "text-align": "right"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            parseFloat(
-                                                              item.Qty *
-                                                                item.UnitPrice
-                                                            ).toFixed(2)
-                                                          )
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              }
-                                            )
-                                          ],
-                                          2
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        {
-                                          staticClass: "foot",
-                                          staticStyle: { "font-size": "14px" }
-                                        },
-                                        [
-                                          _vm._v(
-                                            "Charge To: " +
-                                              _vm._s(props.row.ChargeTo)
-                                          )
-                                        ]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("p", [
-                                        _vm._v("Comments Go Here.....")
-                                      ]),
-                                      _vm._v(" "),
-                                      _c("div", { staticClass: "flex" }, [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass:
-                                              "btn-success p-3 ml-auto mr-2",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.approveReq(
-                                                  props.row.pk,
-                                                  props.rowIndex
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Approve")]
-                                        ),
-                                        _vm._v(" "),
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "btn-danger p-3 mr-2",
-                                            on: {
-                                              click: function($event) {
-                                                return _vm.rejectReq(
-                                                  props.row.pk,
-                                                  props.rowIndex
-                                                )
-                                              }
-                                            }
-                                          },
-                                          [_vm._v("Reject")]
-                                        )
-                                      ])
-                                    ])
-                                  ])
-                                ])
-                              ]
+                                _c("workflow-requisition-modal", {
+                                  attrs: { row: props.row },
+                                  on: { load: _vm.loadActive }
+                                })
+                              ],
+                              1
                             )
                           ],
                           1
@@ -69332,6 +69147,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_tailwind__WEBPACK_IMPORTED_MO
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('navbar', __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('workflow-table', __webpack_require__(/*! ./components/WorkflowTable.vue */ "./resources/js/components/WorkflowTable.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('workflow-requisition-modal', __webpack_require__(/*! ./components/WorflowRequisitionModal */ "./resources/js/components/WorflowRequisitionModal.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -69535,6 +69351,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_template_id_6dde423b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_template_id_6dde423b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/WorflowRequisitionModal.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/WorflowRequisitionModal.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e& */ "./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e&");
+/* harmony import */ var _WorflowRequisitionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WorflowRequisitionModal.vue?vue&type=script&lang=js& */ "./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WorflowRequisitionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/WorflowRequisitionModal.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./WorflowRequisitionModal.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorflowRequisitionModal.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorflowRequisitionModal.vue?vue&type=template&id=4d137b3e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

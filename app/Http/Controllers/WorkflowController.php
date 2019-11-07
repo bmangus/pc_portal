@@ -29,6 +29,11 @@ class WorkflowController extends Controller
         return response()->json(['success']);
     }
 
+    public function generatePDF($id)
+    {
+
+    }
+
     public function requisitionsByApprover($app, $username = null)
     {
         $this->canAccess();
@@ -82,6 +87,13 @@ class WorkflowController extends Controller
     public function update($app, $id)
     {
 
+    }
+
+    private function requisitionById($id)
+    {
+        return BTRequisition::where('id', $id)
+            ->with('approvers', 'requisitionItems')
+            ->get();
     }
 
     private function filterRequisitionsByApprover($requisitions, $username)

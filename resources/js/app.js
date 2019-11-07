@@ -25,6 +25,7 @@ Vue.use(VueTailwind);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
+Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
 
 
 /**
