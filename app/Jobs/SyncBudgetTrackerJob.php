@@ -25,6 +25,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     protected $updateExclustions;
     protected $recItemExclusions;
     protected $includedApproverFields;
+    protected $approvalFields;
 
     /**
      * Create a new job instance.
@@ -47,6 +48,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
             'submissionLog', 'Web_Status_New'
         ];
 
+        $this->approvalFields = [
+            'ApprovedBy1', 'ApprovedBy2', 'ApprovedBy3', 'ApprovedBy4', 'ApprovedBy5',
+            'ApprovedStatus1', 'ApprovedStatus2', 'ApprovedStatus3', 'ApprovedStatus4', 'ApprovedStatus5',
+            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5',
+            'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
+            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
+            'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedStatus6Rejected',
+        ];
+
         $this->recItemExclusions = [
           'gTotalPages', 'MockPO', 'zd_Constant', 'zd_CreatedBy', 'zd_CreatedDate', 'zd_FoundCount', 'PO', 'TotalChargeTo', 'zd_ModifiedBy',
             'zd_ModifiedDate', 'zd_RecordCount', 'VendorID', 'zd_RecordStatus', 'TableName', 'id'
@@ -67,11 +77,11 @@ class SyncBudgetTrackerJob implements ShouldQueue
     public function handle(BTWorkflowService $bt)
     {
         $this->bt = $bt;
-        //dd($bt);
         $this->syncDt = now()->toDateTimeString();
         $this->findActiveFMRequisitions()
             ->runImport()
-            ->syncApprovers();
+            ->syncApprovers()
+            ->updateApprovals();
     }
 
     private function findActiveFMRequisitions()
@@ -180,6 +190,12 @@ class SyncBudgetTrackerJob implements ShouldQueue
             $localRec->fmId = $recId;
             $localRec->save();
         }
+        return $this;
+    }
+
+    private function updateApprovals()
+    {
+        SendBudgetTrackerApprovalsJob::dispatchNow();
         return $this;
     }
 

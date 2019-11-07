@@ -5,14 +5,32 @@ namespace App\Http\Controllers;
 use App\BTApprovers;
 use App\BTRequisition;
 use App\Jobs\SyncBudgetTrackerJob;
+use App\Services\BTWorkflowService;
 use Illuminate\Http\Request;
 
 class WorkflowController extends Controller
 {
 
-    public function __construct()
-    {
+    protected $approvalFields;
+    protected $approvalDates;
+    protected $bt;
 
+    public function __construct(BTWorkflowService $bt)
+    {
+        $this->bt = $bt;
+
+        $this->approvalFields = [
+            'ApprovedBy1', 'ApprovedBy2', 'ApprovedBy3', 'ApprovedBy4', 'ApprovedBy5',
+            'ApprovedStatus1', 'ApprovedStatus2', 'ApprovedStatus3', 'ApprovedStatus4', 'ApprovedStatus5',
+            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5',
+            'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
+            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
+            'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedComments'
+        ];
+
+        $this->approvalDates = [
+            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5'
+        ];
     }
 
     public function index()
@@ -27,6 +45,11 @@ class WorkflowController extends Controller
         $this->canAccess();
         SyncBudgetTrackerJob::dispatchNow();
         return response()->json(['success']);
+    }
+
+    public function generatePDF($id)
+    {
+
     }
 
     public function requisitionsByApprover($app, $username = null)
@@ -75,6 +98,7 @@ class WorkflowController extends Controller
                 $this->setRequisitionStatus($requisition, $status, $username);
             }
 
+            $this->sendStatusToFM($requisition);
         }
         return response()->json(['success']);
     }
@@ -82,6 +106,31 @@ class WorkflowController extends Controller
     public function update($app, $id)
     {
 
+    }
+
+    private function sendStatusToFM($r)
+    {
+        $re = $r->toArray();
+        $record = [];
+        foreach ($re as $key => $item) {
+            if (in_array($key, $this->approvalFields)) {
+                if(in_array($key, $this->approvalDates)){
+                    //dd($item);
+                    $record[$key] = ($item != null) ? \Carbon\Carbon::parse($item)->format('m/d/Y') : null;
+                } else {
+                    $record[$key] = $item;
+                }
+            }
+        }
+        $id = $r->zg_recid;
+        $this->bt->update('Web_Requisition_Approvals', $record, $id)->exec();
+    }
+
+    private function requisitionById($id)
+    {
+        return BTRequisition::where('id', $id)
+            ->with('approvers', 'requisitionItems')
+            ->get();
     }
 
     private function filterRequisitionsByApprover($requisitions, $username)

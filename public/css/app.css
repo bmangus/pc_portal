@@ -11363,6 +11363,14 @@ video {
   height: auto;
 }
 
+.border-2 {
+  border-width: 1px !important;
+}
+
+.border-top-table {
+  border-top-width: 1px !important;
+}
+
 .container{
   width: 100%;
 }
