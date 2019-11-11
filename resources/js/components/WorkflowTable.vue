@@ -50,7 +50,7 @@
                                 <t-button size="sm" variant="secondary" >Forward</t-button>
                             </td>
                             <t-modal :ref="'modal'+ props.rowIndex" :width="width">
-                               <workflow-requisition-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
+                               <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
                             </t-modal>
                         </tr>
                     </template>
@@ -67,6 +67,7 @@
 <script>
     export default {
         name: 'workflow-table',
+        props: ['imgurl'],
         data() {
             return {
                 requisitions: [],

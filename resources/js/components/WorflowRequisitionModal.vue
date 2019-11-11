@@ -1,8 +1,8 @@
 <template>
-    <div class="font-sans">
+    <div ref='printarea' class="font-sans">
         <div class="flex w-full mb-3">
             <div class="w-1/6 border-black">
-                <img src="https://staff.putnamcityschools.org/.pc/site/assets/img/pc_main_logo.png" class="mx-auto object-scale-down h-24">
+                <img :src="imgurl" class="mx-auto object-scale-down h-24">
             </div>
             <div class="w-5/6 ml-4">
                 <p class="font-extrabold">PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE</p>
@@ -217,17 +217,23 @@
                 <div class="flex">
                     <span class="btn-success p-3 ml-auto mr-2" @click="approveReq(row.pk, rowIndex)">Approve</span>
                     <span class="btn-danger p-3 mr-2" @click="rejectReq(row.pk, rowIndex)">Reject</span>
+                    <span class="btn-danger p-3 mr-2" @click="printTEST"><font-awesome-icon icon="file-pdf"/></span>
                 </div>
             </div>
-        </div>
-    </div>
 
 </template>
 
 <script>
+    import jsPDF from 'jspdf';
+
     export default {
         name: 'workflow-requisition-modal',
-        props: ['row', 'rowIndex', 'actor'],
+        props: ['imgurl', 'row', 'rowIndex', 'actor'],
+        data() {
+            return {
+                doc: ''
+            }
+        },
         methods: {
             approveReq(id){
                 let actorString = (this.actor !== "") ? '/' + this.actor : "";
@@ -247,20 +253,39 @@
                     })
                     .catch(err=>this.$emit('load', true))
             },
-            caseString(str){
-                if(typeof str !== "string") return str;
+            caseString(str) {
+                if (typeof str !== "string") return str;
                 const array1 = str.toLowerCase().split(' ');
                 const newarray1 = [];
 
-                for(let x = 0; x < array1.length; x++){
-                    if(array1[x].length < 3) {
+                for (let x = 0; x < array1.length; x++) {
+                    if (array1[x].length < 3) {
                         newarray1.push(array1[x].toUpperCase());
                     } else {
-                        newarray1.push(array1[x].charAt(0).toUpperCase()+array1[x].slice(1));
+                        newarray1.push(array1[x].charAt(0).toUpperCase() + array1[x].slice(1));
                     }
                 }
                 return newarray1.join(' ');
+            },
+            getDataURL() {
+                return new Promise((resolve) => {
+                    const el = this.$refs.printarea;
+                    const options = {
+                        type: 'dataURL'
+                    }
+                    this.doc = this.$html2canvas(el, options)
+                    return resolve(this.doc);
+                });
+            },
+            printTEST(){
+                this.getDataURL()
+                    .then((response) => {
+                        let doc = new jsPDF();
+                        doc.addImage(response, 'png', 5, -10, 200, 200);
+                        doc.save('test_pdf.pdf')
+                    })
             }
+
         }
     }
 </script>

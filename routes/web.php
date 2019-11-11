@@ -17,10 +17,9 @@ Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');
 
-Route::get('/testEndpoint', function(){
-   return view('workflow.index');
-});
 
+
+Route::get('/workflow/{id}/pdf', 'WorkflowController@generatePDF');
 
 
 Auth::routes([
@@ -40,5 +39,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflowBackendSync', 'WorkflowController@manualSync');
     Route::get('/workflowBackend/{app}/{id}/{status}', 'WorkflowController@requisitionAction');
     Route::get('/workflowBackend/{app}/{id}/{status}/{username}', 'WorkflowController@requisitionAction');
+    Route::post('/pdf/test', 'WorkflowController@testPDF');
+    Route::get('/pdf/show/{id}', 'WorkflowController@showPDF');
 
 });
