@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('content')
-    <workflow-table></workflow-table>
+    <workflow-table imgUrl="{{asset('/img/pc_logo.png')}}"></workflow-table>
 @endsection

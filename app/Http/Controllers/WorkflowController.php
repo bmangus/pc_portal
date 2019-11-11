@@ -7,6 +7,7 @@ use App\BTRequisition;
 use App\Jobs\SyncBudgetTrackerJob;
 use App\Services\BTWorkflowService;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class WorkflowController extends Controller
 {
@@ -49,7 +50,29 @@ class WorkflowController extends Controller
 
     public function generatePDF($id)
     {
+        $po = BTRequisition::where('pk', $id)->with('approvers', 'requisitionItems')->first();
 
+        return view('workflow.pdf', compact('po'));
+    }
+
+    public function showPDF($id)
+    {
+        return response()->streamDownload(function() use ($id){
+           echo Browsershot::url(url("/workflow/{$id}/pdf"))
+               ->waitUntilNetworkIdle()
+               ->windowSize(200,250)
+               ->deviceScaleFactor(.5)
+               ->format('Letter')
+               ->margins(20, 5,20,5)
+               ->pdf();
+        }, 'test.pdf', ['Content-Type'=>'application/pdf']);
+    }
+
+    public function testPDF(Request $request)
+    {
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($request->d);
+        return $pdf->download('purchase_order.pdf');
     }
 
     public function requisitionsByApprover($app, $username = null)

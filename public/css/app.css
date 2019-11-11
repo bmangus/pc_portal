@@ -11363,12 +11363,12 @@ video {
   height: auto;
 }
 
-.border-2 {
-  border-width: 1px !important;
+.border-black {
+  border-color: #000 !important;
 }
 
-.border-top-table {
-  border-top-width: 1px !important;
+.border-2 {
+  border-width: 1px !important;
 }
 
 .container{

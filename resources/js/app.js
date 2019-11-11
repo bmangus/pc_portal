@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+
 require('./bootstrap');
 
 import Vue from 'vue';
@@ -20,8 +21,17 @@ import Vue from 'vue';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 import VueTailwind from 'vue-tailwind';
-Vue.use(VueTailwind);
+import VueHtml2Canvas from "vue-html2canvas/src";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {faFilePdf} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
+library.add(faFilePdf);
+
+Vue.use(VueTailwind);
+Vue.use(VueHtml2Canvas);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
