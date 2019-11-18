@@ -11898,6 +11898,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'workflow-requisition-modal',
@@ -11962,8 +11963,72 @@ __webpack_require__.r(__webpack_exports__);
     printTEST: function printTEST() {
       this.getDataURL().then(function (response) {
         var doc = new jspdf__WEBPACK_IMPORTED_MODULE_0___default.a();
-        doc.addImage(response, 'png', 5, -10, 200, 200);
+        doc.addImage(response, 'png', 5, 5, 200, 200);
         doc.save('test_pdf.pdf');
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'worflow-comment',
+  props: ['requisitionId', 'actor'],
+  data: function data() {
+    return {
+      currentComment: null,
+      comments: []
+    };
+  },
+  mounted: function mounted() {
+    this.getComments();
+  },
+  methods: {
+    getComments: function getComments() {
+      var _this = this;
+
+      axios.get('/staff/workflowApi/getComments/' + this.requisitionId).then(function (res) {
+        return _this.comments = res.data;
+      })["catch"](error = console.log(error));
+    },
+    saveComment: function saveComment() {
+      var _this2 = this;
+
+      var formData = new FormData();
+      formData.append('comment', this.currentComment);
+      formData.append('username', this.actor);
+      axios.post('/staff/workflowApi/addComment/' + this.requisitionId, formData).then(function (res) {
+        return _this2.getComments();
+      })["catch"](function (err) {
+        return console.log(error);
       });
     }
   }
@@ -12106,10 +12171,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$refs.acting.hide();
       axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor).then(function (response) {
-        if (response.data.length) {
-          _this4.requisitions = response.data;
-        }
-
+        _this4.requisitions = response.data;
         _this4.loading = false;
       })["catch"](function (error) {
         console.log(error);
@@ -27606,7 +27668,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -27617,7 +27679,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -30276,16 +30338,10 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -31209,8 +31265,8 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -33027,7 +33083,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -34210,7 +34266,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -34218,6 +34274,10 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -38018,6 +38078,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -42404,9 +42465,12 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -42439,7 +42503,9 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -44644,10 +44710,11 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -44718,7 +44785,7 @@ var Pt=function(){function t(){this.pos=0,this.bufferLength=0,this.eof=!1,this.b
 __webpack_require__.r(__webpack_exports__);
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.15.0
+ * @version 1.16.0
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -44740,16 +44807,17 @@ __webpack_require__.r(__webpack_exports__);
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined';
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';
 
-var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
-var timeoutDuration = 0;
-for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
-  if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
-    timeoutDuration = 1;
-    break;
+var timeoutDuration = function () {
+  var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];
+  for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {
+    if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {
+      return 1;
+    }
   }
-}
+  return 0;
+}();
 
 function microtaskDebounce(fn) {
   var called = false;
@@ -44867,6 +44935,17 @@ function getScrollParent(element) {
   }
 
   return getScrollParent(getParentNode(element));
+}
+
+/**
+ * Returns the reference node of the reference object, or the reference object itself.
+ * @method
+ * @memberof Popper.Utils
+ * @param {Element|Object} reference - the reference element (the popper will be relative to this)
+ * @returns {Element} parent
+ */
+function getReferenceNode(reference) {
+  return reference && reference.referenceNode ? reference.referenceNode : reference;
 }
 
 var isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);
@@ -45177,8 +45256,8 @@ function getBoundingClientRect(element) {
 
   // subtract scrollbar size from sizes
   var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};
-  var width = sizes.width || element.clientWidth || result.right - result.left;
-  var height = sizes.height || element.clientHeight || result.bottom - result.top;
+  var width = sizes.width || element.clientWidth || result.width;
+  var height = sizes.height || element.clientHeight || result.height;
 
   var horizScrollbar = element.offsetWidth - width;
   var vertScrollbar = element.offsetHeight - height;
@@ -45330,7 +45409,7 @@ function getBoundaries(popper, reference, padding, boundariesElement) {
   // NOTE: 1 DOM access here
 
   var boundaries = { top: 0, left: 0 };
-  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
 
   // Handle viewport case
   if (boundariesElement === 'viewport') {
@@ -45458,7 +45537,7 @@ function computeAutoPlacement(placement, refRect, popper, reference, boundariesE
 function getReferenceOffsets(state, popper, reference) {
   var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
 
-  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, reference);
+  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));
   return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);
 }
 
@@ -45720,7 +45799,7 @@ function destroy() {
 
   this.disableEventListeners();
 
-  // remove the popper if user explicity asked for the deletion on destroy
+  // remove the popper if user explicitly asked for the deletion on destroy
   // do not use `remove` because IE11 doesn't support it
   if (this.options.removeOnDestroy) {
     this.popper.parentNode.removeChild(this.popper);
@@ -55611,450 +55690,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "printarea", staticClass: "font-sans" }, [
-    _c("div", { staticClass: "flex w-full mb-3" }, [
-      _c("div", { staticClass: "w-1/6 border-black" }, [
-        _c("img", {
-          staticClass: "mx-auto object-scale-down h-24",
-          attrs: { src: _vm.imgurl }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-5/6 ml-4" }, [
-        _c("p", { staticClass: "font-extrabold" }, [
-          _vm._v("PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row ml-0" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-1/2" }, [
-            _c("p", [
-              _c("strong", [_vm._v("Requisition Date:")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "req_date req_data" }, [
-                _vm._v(_vm._s(_vm.row.Date))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", [
-              _c("strong", [_vm._v("Purchase No.:")]),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  staticClass: "ponum req_data",
-                  staticStyle: { "text-align": "right", width: "105px" }
-                },
-                [_vm._v(_vm._s(_vm.row.PONumber))]
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(1)
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex w-full" }, [
-      _c("div", { staticClass: "w-2/5 col" }, [
-        _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
-          _c("div", { staticClass: "flex w-full mb-3" }, [
-            _c("p", { staticClass: "object-left" }, [
-              _vm._v("Vendor Information:")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "mr-2 ml-auto" }, [
-              _vm._v("Vendor #: "),
-              _c("span", { staticClass: "ven_num req_data" }, [
-                _vm._v(_vm._s(_vm.row.VendorID))
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex w-full" }, [
-            _c("span", { staticClass: "vendor_info req_data" }, [
-              _vm._v(_vm._s(_vm.caseString(_vm.row.Vendor))),
-              _c("br"),
-              _vm._v(_vm._s(_vm.caseString(_vm.row.VendorAddress))),
-              _c("br"),
-              _vm._v(
-                _vm._s(_vm.caseString(_vm.row.VendorCity)) +
-                  ", " +
-                  _vm._s(_vm.caseString(_vm.row.VendorState)) +
-                  " " +
-                  _vm._s(_vm.row.VendorZip)
-              )
-            ]),
-            _vm._v(" "),
-            _vm._m(2)
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex w-full" }, [
-            _c("p", [
-              _c("label", [_vm._v("Phone")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "ven_phone req_data" }, [
-                _vm._v(_vm._s(_vm.row.VendorPhone))
-              ]),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", [_vm._v("Fax")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "ven_fax req_data" })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " m-2 p-2 border-2 border-black" }, [
-          _c("p", { staticClass: "bg-black text-white p-1 mb-3" }, [
-            _vm._v("Ship To:")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "vendor_info req_data" }, [
-            _vm._v(_vm._s(_vm.caseString(_vm.row.Attn))),
-            _c("br"),
-            _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingCompany))),
-            _c("br"),
-            _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingAddress))),
-            _c("br"),
-            _vm._v(
-              _vm._s(_vm.caseString(_vm.row.ShippingCity)) +
-                ", " +
-                _vm._s(_vm.caseString(_vm.row.ShippingState)) +
-                " " +
-                _vm._s(_vm.caseString(_vm.row.ShippingZip))
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "clear_all" }),
-          _vm._v(" "),
-          _c("p", { staticClass: "comm" }, [
-            _c("label", [_vm._v("Phone")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "ship_phone req_data" }, [
-              _vm._v(_vm._s(_vm.row.ShipToPhone))
-            ]),
-            _c("br"),
-            _vm._v(" "),
-            _c("label", [_vm._v("Fax")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "ship_fax req_data" }, [
-              _vm._v(_vm._s(_vm.row.ShipFax))
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "w-3/5 m-2 p-2 border-2 border-black" }, [
-        _c("div", { staticClass: "flex w-full mb-4" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6" }, [
-            _c("span", { staticClass: "text-left" }, [
-              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAttention))),
-              _c("br"),
-              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToName))),
-              _c("br"),
-              _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAddress))),
-              _c("br"),
-              _vm._v(
-                _vm._s(_vm.caseString(_vm.row.BillToCity)) +
-                  ", " +
-                  _vm._s(_vm.caseString(_vm.row.BillToState)) +
-                  " " +
-                  _vm._s(_vm.row.BillToZip)
-              ),
-              _c("br")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("1st")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatus1))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedBy1))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDate1))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("2nd")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatus2))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedBy2))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDate2))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("3rd")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatus3))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedBy3))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDate3))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("4th")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatus4))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedBy4))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDate4))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("5th")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatus5))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedBy5))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDate5))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("TE")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedStatusTE))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedByTE))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.ApprovedDateTE))
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex w-full mb-2" }, [
-          _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("Final")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-5/6 border-b" }, [
-            _c("div", { staticClass: "flex w-full" }, [
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.FinalApprovedStatus))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.FinalApprovedBy))
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/3" }, [
-                _vm._v(_vm._s(_vm.row.FinalApprovedDate))
-              ])
-            ])
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _vm._m(4),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex w-full" }, [
-      _c("div", { staticClass: "w-full col" }, [
-        _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
-          _vm._v(
-            "\n                " +
-              _vm._s(
-                _vm.row.Instructions.length < 1
-                  ? "No instructions available."
-                  : _vm.row.Instructions
-              ) +
-              "\n            "
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex w-full" }, [
-      _c("div", { staticClass: "w-full col" }, [
-        _c("div", { staticClass: "m-2" }, [
-          _c(
-            "table",
-            {
-              staticClass: "table-fixed border-2 border-top-table border-black"
-            },
-            [
-              _c("tbody", [
-                _vm._m(5),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.FiscalYear))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Fund))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Project))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Function))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Program))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Subject))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.JobClass))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.Site))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "border-2 border-black" }, [
-                    _vm._v(_vm._s(_vm.row.PONumber))
-                  ])
-                ])
-              ])
-            ]
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex w-full" }, [
-      _c("div", { staticClass: "w-full col" }, [
-        _c("div", { staticClass: "m-2" }, [
-          _c(
-            "table",
-            {
-              staticClass: "table-fixed border-2 border-top-table border-black"
-            },
-            [
-              _c(
-                "tbody",
-                [
-                  _vm._m(6),
-                  _vm._v(" "),
-                  _vm._l(_vm.row.requisition_items, function(item) {
-                    return _c("tr", [
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(item.Qty))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(item.FixedAsset))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(item.ItemCount))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(item.Description))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(item.Object))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(_vm._s(parseFloat(item.UnitPrice).toFixed(2)))
-                      ]),
-                      _vm._v(" "),
-                      _c("td", { staticClass: "border-2 border-black" }, [
-                        _vm._v(
-                          _vm._s(
-                            parseFloat(item.Qty * item.UnitPrice).toFixed(2)
-                          )
-                        )
-                      ])
-                    ])
-                  })
-                ],
-                2
-              )
-            ]
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("p", { staticClass: "foot", staticStyle: { "font-size": "14px" } }, [
-      _vm._v("Charge To: " + _vm._s(_vm.row.ChargeTo))
-    ]),
-    _vm._v(" "),
-    _c("p", [_vm._v("Comments Go Here.....")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "flex" }, [
+  return _c("div", [
+    _c("div", { staticClass: "flex mb-2 mr-2 float-right" }, [
       _c(
-        "span",
+        "button",
         {
-          staticClass: "btn-success p-3 ml-auto mr-2",
+          staticClass:
+            "bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2",
+          on: { click: _vm.printTEST }
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "file-pdf" } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2",
           on: {
             click: function($event) {
               return _vm.approveReq(_vm.row.pk, _vm.rowIndex)
@@ -56065,9 +55718,10 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "span",
+        "button",
         {
-          staticClass: "btn-danger p-3 mr-2",
+          staticClass:
+            "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2",
           on: {
             click: function($event) {
               return _vm.rejectReq(_vm.row.pk, _vm.rowIndex)
@@ -56075,15 +55729,461 @@ var render = function() {
           }
         },
         [_vm._v("Reject")]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        { staticClass: "btn-danger p-3 mr-2", on: { click: _vm.printTEST } },
-        [_c("font-awesome-icon", { attrs: { icon: "file-pdf" } })],
-        1
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { ref: "printarea", staticClass: "font-sans" },
+      [
+        _c("div", { staticClass: "flex w-full mb-3" }, [
+          _c("div", { staticClass: "w-1/6 border-black" }, [
+            _c("img", {
+              staticClass: "mx-auto object-scale-down h-24",
+              attrs: { src: _vm.imgurl }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-5/6 ml-4" }, [
+            _c("p", { staticClass: "font-extrabold" }, [
+              _vm._v("PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row ml-0" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-1/2" }, [
+                _c("p", [
+                  _c("strong", [_vm._v("Requisition Date:")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "req_date req_data" }, [
+                    _vm._v(_vm._s(_vm.row.Date))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("strong", [_vm._v("Purchase No.:")]),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "ponum req_data",
+                      staticStyle: { "text-align": "right", width: "105px" }
+                    },
+                    [_vm._v(_vm._s(_vm.row.PONumber))]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(1)
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full" }, [
+          _c("div", { staticClass: "w-2/5 col" }, [
+            _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
+              _c("div", { staticClass: "flex w-full mb-3" }, [
+                _c("p", { staticClass: "object-left" }, [
+                  _vm._v("Vendor Information:")
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "mr-2 ml-auto" }, [
+                  _vm._v("Vendor #: "),
+                  _c("span", { staticClass: "ven_num req_data" }, [
+                    _vm._v(_vm._s(_vm.row.VendorID))
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex w-full" }, [
+                _c("span", { staticClass: "vendor_info req_data" }, [
+                  _vm._v(_vm._s(_vm.caseString(_vm.row.Vendor))),
+                  _c("br"),
+                  _vm._v(_vm._s(_vm.caseString(_vm.row.VendorAddress))),
+                  _c("br"),
+                  _vm._v(
+                    _vm._s(_vm.caseString(_vm.row.VendorCity)) +
+                      ", " +
+                      _vm._s(_vm.caseString(_vm.row.VendorState)) +
+                      " " +
+                      _vm._s(_vm.row.VendorZip)
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex w-full" }, [
+                _c("p", [
+                  _c("label", [_vm._v("Phone")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "ven_phone req_data" }, [
+                    _vm._v(_vm._s(_vm.row.VendorPhone))
+                  ]),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("Fax")]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "ven_fax req_data" })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: " m-2 p-2 border-2 border-black" }, [
+              _c("p", { staticClass: "bg-black text-white p-1 mb-3" }, [
+                _vm._v("Ship To:")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "vendor_info req_data" }, [
+                _vm._v(_vm._s(_vm.caseString(_vm.row.Attn))),
+                _c("br"),
+                _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingCompany))),
+                _c("br"),
+                _vm._v(_vm._s(_vm.caseString(_vm.row.ShippingAddress))),
+                _c("br"),
+                _vm._v(
+                  _vm._s(_vm.caseString(_vm.row.ShippingCity)) +
+                    ", " +
+                    _vm._s(_vm.caseString(_vm.row.ShippingState)) +
+                    " " +
+                    _vm._s(_vm.caseString(_vm.row.ShippingZip))
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "clear_all" }),
+              _vm._v(" "),
+              _c("p", { staticClass: "comm" }, [
+                _c("label", [_vm._v("Phone")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "ship_phone req_data" }, [
+                  _vm._v(_vm._s(_vm.row.ShipToPhone))
+                ]),
+                _c("br"),
+                _vm._v(" "),
+                _c("label", [_vm._v("Fax")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "ship_fax req_data" }, [
+                  _vm._v(_vm._s(_vm.row.ShipFax))
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-3/5 m-2 p-2 border-2 border-black" }, [
+            _c("div", { staticClass: "flex w-full mb-4" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6" }, [
+                _c("span", { staticClass: "text-left" }, [
+                  _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAttention))),
+                  _c("br"),
+                  _vm._v(_vm._s(_vm.caseString(_vm.row.BillToName))),
+                  _c("br"),
+                  _vm._v(_vm._s(_vm.caseString(_vm.row.BillToAddress))),
+                  _c("br"),
+                  _vm._v(
+                    _vm._s(_vm.caseString(_vm.row.BillToCity)) +
+                      ", " +
+                      _vm._s(_vm.caseString(_vm.row.BillToState)) +
+                      " " +
+                      _vm._s(_vm.row.BillToZip)
+                  ),
+                  _c("br")
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("1st")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatus1))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedBy1))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDate1))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("2nd")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatus2))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedBy2))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDate2))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("3rd")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatus3))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedBy3))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDate3))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("4th")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatus4))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedBy4))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDate4))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("5th")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatus5))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedBy5))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDate5))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [_vm._v("TE")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedStatusTE))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedByTE))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.ApprovedDateTE))
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "flex w-full mb-2" }, [
+              _c("div", { staticClass: "w-1/6 text-center" }, [
+                _vm._v("Final")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-5/6 border-b" }, [
+                _c("div", { staticClass: "flex w-full" }, [
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.FinalApprovedStatus))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.FinalApprovedBy))
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "w-1/3" }, [
+                    _vm._v(_vm._s(_vm.row.FinalApprovedDate))
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full" }, [
+          _c("div", { staticClass: "w-full col" }, [
+            _c("div", { staticClass: "m-2 p-2 border-2 border-black" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(
+                    _vm.row.Instructions.length < 1
+                      ? "No instructions available."
+                      : _vm.row.Instructions
+                  ) +
+                  "\n                "
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full" }, [
+          _c("div", { staticClass: "w-full col" }, [
+            _c("div", { staticClass: "m-2" }, [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table-fixed border-2 border-top-table border-black"
+                },
+                [
+                  _c("tbody", [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.FiscalYear))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Fund))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Project))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Function))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Program))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Subject))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.JobClass))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.Site))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "border-2 border-black" }, [
+                        _vm._v(_vm._s(_vm.row.PONumber))
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "flex w-full" }, [
+          _c("div", { staticClass: "w-full col" }, [
+            _c("div", { staticClass: "m-2" }, [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table-fixed border-2 border-top-table border-black"
+                },
+                [
+                  _c(
+                    "tbody",
+                    [
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _vm._l(_vm.row.requisition_items, function(item) {
+                        return _c("tr", [
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(_vm._s(item.Qty))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(_vm._s(item.FixedAsset))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(_vm._s(item.ItemCount))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(_vm._s(item.Description))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(_vm._s(item.Object))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(
+                              _vm._s(parseFloat(item.UnitPrice).toFixed(2))
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "border-2 border-black" }, [
+                            _vm._v(
+                              _vm._s(
+                                parseFloat(item.Qty * item.UnitPrice).toFixed(2)
+                              )
+                            )
+                          ])
+                        ])
+                      })
+                    ],
+                    2
+                  )
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "foot", staticStyle: { "font-size": "14px" } }, [
+          _vm._v("Charge To: " + _vm._s(_vm.row.ChargeTo))
+        ]),
+        _vm._v(" "),
+        _c("workflow-comment", {
+          attrs: { requisitionId: _vm.row.pk, actor: _vm.actor }
+        })
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
@@ -56216,6 +56316,80 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "flex w-full" }, [
+    _c("div", { staticClass: "w-full m-2 col" }, [
+      _c("div", { staticClass: "h4" }, [_vm._v("Comments:")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "w-full p-2 border-2 h-16 border-black" },
+        _vm._l(_vm.comments, function(c) {
+          return _c("div", [_vm._v(_vm._s(c))])
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "w-full p-2 mt-4 border-2 border-black" }, [
+        _c("label", [_vm._v("\n                Your Comment:\n            ")]),
+        _vm._v(" "),
+        _c("textarea", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.currentComment,
+              expression: "currentComment"
+            }
+          ],
+          staticClass: "w-full",
+          attrs: { type: "text", placeholder: "Add Your Comment Here...." },
+          domProps: { value: _vm.currentComment },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.currentComment = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass:
+            "bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mt-2 rounded float-right",
+          on: { click: _vm.saveComment }
+        },
+        [_c("font-awesome-icon", { attrs: { icon: "save" } })],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -86268,6 +86442,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faFilePdf"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_3__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faSave"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_tailwind__WEBPACK_IMPORTED_MODULE_1___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_html2canvas_src__WEBPACK_IMPORTED_MODULE_2__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('font-awesome-icon', _fortawesome_vue_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"]);
@@ -86275,6 +86450,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('navbar', __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('workflow-table', __webpack_require__(/*! ./components/WorkflowTable.vue */ "./resources/js/components/WorkflowTable.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('workflow-requisition-modal', __webpack_require__(/*! ./components/WorflowRequisitionModal */ "./resources/js/components/WorflowRequisitionModal.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('workflow-comment', __webpack_require__(/*! ./components/WorkflowComment */ "./resources/js/components/WorkflowComment.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -86547,6 +86723,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorflowRequisitionModal_vue_vue_type_template_id_4d137b3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkflowComment.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/WorkflowComment.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WorkflowComment.vue?vue&type=template&id=a29cf3f6& */ "./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6&");
+/* harmony import */ var _WorkflowComment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WorkflowComment.vue?vue&type=script&lang=js& */ "./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _WorkflowComment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/WorkflowComment.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkflowComment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./WorkflowComment.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowComment.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkflowComment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WorkflowComment.vue?vue&type=template&id=a29cf3f6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WorkflowComment.vue?vue&type=template&id=a29cf3f6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WorkflowComment_vue_vue_type_template_id_a29cf3f6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

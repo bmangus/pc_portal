@@ -9,6 +9,7 @@ class BTRequisition extends Model
 
     protected $primaryKey = 'pk';
     protected $guarded = ['id'];
+    protected $with = ['approvers', 'requisitionItems'];
 
     public function approvers() {
         return $this->hasOne('App\BTApprovers', 'ProjectCode', 'Project');

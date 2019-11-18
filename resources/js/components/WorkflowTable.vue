@@ -127,9 +127,7 @@
                 this.$refs.acting.hide();
                 axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor)
                     .then(response => {
-                        if (response.data.length){
-                            this.requisitions = response.data;
-                        }
+                        this.requisitions = response.data;
                         this.loading = false;
                     })
                     .catch(error => {

@@ -18,10 +18,6 @@ Route::get('/public/extendedcare', 'ExtendedCare@index');
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');
 
 
-
-Route::get('/workflow/{id}/pdf', 'WorkflowController@generatePDF');
-
-
 Auth::routes([
     'reset' => false,
     'verify' => false,
@@ -31,15 +27,14 @@ Auth::routes([
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
-
     Route::get('/workflow', 'WorkflowController@index');
     Route::get('/workflowBackend/{app}', 'WorkflowController@requisitionsByApprover');
     Route::get('/workflowBackend/{app}/{status}', 'WorkflowController@requisitionsByStatus');
     Route::get('/workflowBackend/{app}/user/{username}', 'WorkflowController@requisitionsByStatus');
+    Route::get('/workflowBackend/{app}/user/{username}/test', 'WorkflowController@requisitionsByApprover');
     Route::get('/workflowBackendSync', 'WorkflowController@manualSync');
     Route::get('/workflowBackend/{app}/{id}/{status}', 'WorkflowController@requisitionAction');
     Route::get('/workflowBackend/{app}/{id}/{status}/{username}', 'WorkflowController@requisitionAction');
-    Route::post('/pdf/test', 'WorkflowController@testPDF');
-    Route::get('/pdf/show/{id}', 'WorkflowController@showPDF');
-
+    Route::get('/workflowApi/getComments/{id}', 'WorkflowController@getComments');
+    Route::post('/workflowApi/addComment/{id}', 'WorkflowController@postComment');
 });
