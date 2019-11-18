@@ -23,10 +23,11 @@ import Vue from 'vue';
 import VueTailwind from 'vue-tailwind';
 import VueHtml2Canvas from "vue-html2canvas/src";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faFilePdf} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf, faSave} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faFilePdf);
+library.add(faSave);
 
 Vue.use(VueTailwind);
 Vue.use(VueHtml2Canvas);
@@ -36,6 +37,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
 Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
+Vue.component('workflow-comment', require('./components/WorkflowComment').default);
 
 
 /**
