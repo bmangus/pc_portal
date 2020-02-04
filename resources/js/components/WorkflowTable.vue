@@ -17,6 +17,7 @@
                     </li>
                 </ul>
             </t-dropdown>
+            <div v-if="this.actor" class="mt-3 ml-2 text-red-500">Currently Acting As: {{this.actor}}</div>
             <span class="btn-primary mb-2 p-3 mr-2 ml-auto" @click="manualSync">Sync</span>
         </div>
             <div v-if="loading" class="flex inset-auto">

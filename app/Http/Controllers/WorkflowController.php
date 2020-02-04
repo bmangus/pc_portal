@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\BTApprovers;
 use App\BTRequisition;
+use App\EmailTokens;
 use App\Jobs\SyncBudgetTrackerJob;
+use App\Mail\BTNextApprover;
 use App\Services\BTWorkflowService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class WorkflowController extends Controller
 {
@@ -14,6 +17,7 @@ class WorkflowController extends Controller
     protected $approvalFields;
     protected $approvalDates;
     protected $bt;
+    protected $emailToken;
 
     public function __construct(BTWorkflowService $bt)
     {
@@ -93,6 +97,7 @@ class WorkflowController extends Controller
                 $this->setRequisitionStatus($requisition, $status, $username);
             }
 
+            Mail::to('b.mangus@me.com')->send(new BTNextApprover($requisition));
             $this->sendStatusToFM($requisition);
         }
         return response()->json(['success']);
@@ -200,9 +205,14 @@ class WorkflowController extends Controller
         //Call self to handle situation where the next approver has already approved this requisition in another position (mainly for Cory).
         if($this->nextApproverHasAlreadyApproved($requisition)) {
             //dd($requisition, $status, $requisition->Status);
-            $this->setApproverFields($requisition, $status, $requisition->Status);
+            $requisition = $this->setApproverFields($requisition, $status, $requisition->Status);
         }
 
+        $this->emailToken = new EmailTokens();
+        $this->emailToken->requisition_id = $requisition->pk;
+        $this->emailToken->username = $requisition->Status;
+        $this->emailToken->token = $this->uuidGen();
+        $this->emailToken->save();
         return $requisition->save();
     }
 
@@ -387,6 +397,14 @@ class WorkflowController extends Controller
         if($requisition->ApprovedStatusTE === "Rejected") return true;
         if($requisition->ApprovedFinalStatus === "Rejected") return true;
         return false;
+    }
+
+    private function uuidGen()
+    {
+        $data = random_bytes(16);
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40);
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
     }
 
     private function verifyApprover()

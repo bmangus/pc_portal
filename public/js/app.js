@@ -12111,6 +12111,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'workflow-table',
   props: ['imgurl'],
@@ -56474,6 +56475,12 @@ var render = function() {
               ])
             ]
           ),
+          _vm._v(" "),
+          this.actor
+            ? _c("div", { staticClass: "mt-3 ml-2 text-red-500" }, [
+                _vm._v("Currently Acting As: " + _vm._s(this.actor))
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _c(
             "span",
