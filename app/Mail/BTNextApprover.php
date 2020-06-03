@@ -3,16 +3,19 @@
 namespace App\Mail;
 
 use App\BTRequisition;
+use App\EmailTokens;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Str;
 
 class BTNextApprover extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $requisition;
+    public $emailToken;
 
     /**
      * Create a new message instance.
@@ -31,11 +34,40 @@ class BTNextApprover extends Mailable
      */
     public function build()
     {
-        return $this->from('workflow@putnamcityschools.org')
+        $this->generateEmailToken();
+        $approvalLink = $this->buildApprovalLink();
+        $rejectionLink = $this->buildRejectionLink();
+        return $this->subject('Budget Tracker Request for Approval')
+            ->from('workflow@putnamcityschools.org')
             ->view('workflow.mail.nextApprover')
             ->with([
-                'approvalLink'=>'http://somewhere.com',
-                'btLink'=>'http://somewhereelse.com'
+                'approvalLink'=>$approvalLink,
+                'rejectionLink'=>$rejectionLink,
+                'btLink'=>env('APP_URL'). '/staff/workflow'
             ]);
     }
+
+    private function buildApprovalLink()
+    {
+        $token = $this->emailToken->token;
+        return env('APP_URL')
+            . "/staff/workflowApproval/budgetTracker/". $token . "/Approved";
+    }
+
+    private function buildRejectionLink()
+    {
+        $token = $this->emailToken->token;
+        return env('APP_URL')
+            . "/staff/workflowApproval/budgetTracker/". $token . "/Rejected";
+    }
+    private function generateEmailToken()
+    {
+        $this->emailToken = new EmailTokens();
+        $this->emailToken->token = (string) Str::uuid();
+        $this->emailToken->requisition_id = $this->requisition->pk;
+        $this->emailToken->username = $this->requisition->Status;
+        $this->emailToken->is_valid = true;
+        $this->emailToken->save();
+    }
+
 }

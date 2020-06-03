@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 import Vue from 'vue';
+import VueHtml2Canvas from 'vue-html2canvas';
 
 /**
  * The following block of code may be used to automatically register your
@@ -21,13 +22,15 @@ import Vue from 'vue';
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 import VueTailwind from 'vue-tailwind';
-import VueHtml2Canvas from "vue-html2canvas/src";
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faFilePdf, faSave} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf, faSave, faPaperPlane, faShare} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faFilePdf);
 library.add(faSave);
+library.add(faPaperPlane);
+library.add(faShare);
+
 
 Vue.use(VueTailwind);
 Vue.use(VueHtml2Canvas);
@@ -38,6 +41,7 @@ Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
 Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
 Vue.component('workflow-comment', require('./components/WorkflowComment').default);
+Vue.component('workflow-forward-modal', require('./components/WorkflowForwardModal').default);
 
 
 /**

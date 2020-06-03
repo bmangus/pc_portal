@@ -2,23 +2,26 @@
 
 namespace App\Mail;
 
+use App\BTRequisition;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class BTApproved extends Mailable
+class BTFinal extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $requisition;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(BTRequisition $requisition)
     {
-        //
+        $this->requisition = $requisition;
     }
 
     /**
@@ -28,6 +31,8 @@ class BTApproved extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->subject('Purchase Order Status Update')
+            ->from('workflow@putnamcityschools.org')
+            ->view('workflow.mail.final');
     }
 }

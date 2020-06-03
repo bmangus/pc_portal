@@ -16,7 +16,7 @@ class CreateEmailTokensTable extends Migration
         Schema::create('email_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('token');
-            $table->bigInteger('requisition_id');
+            $table->string('requisition_id');
             $table->string('username');
             $table->boolean('is_valid')->default(true);
             $table->timestamps();

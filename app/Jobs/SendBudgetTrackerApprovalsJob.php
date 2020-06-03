@@ -49,11 +49,11 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
 
     public function getActiveRequisitions()
     {
-        $this->activeRequisitions = $this->bt
+        $this->activeRequisitions = collect($this->bt
             ->find('Web_Requisition_Approvals')
             ->where('Web_Status_New', 1)
             ->limit(10000)
-            ->get();
+            ->get());
 
         return $this;
     }
@@ -61,9 +61,9 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     public function parseAndUpdate()
     {
         $this->activeRequisitions->each(function($r){
-            $local = BTRequisition::where('RecID', $r->RecID)->first();
+            $local = BTRequisition::where('RecID', $r['RecID'])->first();
             if($local->ApprovedStatus1 !== ""){
-                $this->sendRecord($local, $r->zg_recid);
+                $this->sendRecord($local, $r['zg_recid']);
             }
         });
 
