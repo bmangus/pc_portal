@@ -13,6 +13,8 @@
 
 Route::redirect('/', '/public/extendedcare');
 
+Route::get('/workflowApproval/{app}/{token}/{status}', 'WorkflowController@approveFromEmail');
+
 Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');
@@ -37,4 +39,12 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflowBackend/{app}/{id}/{status}/{username}', 'WorkflowController@requisitionAction');
     Route::get('/workflowApi/getComments/{id}', 'WorkflowController@getComments');
     Route::post('/workflowApi/addComment/{id}', 'WorkflowController@postComment');
+    Route::get('/workflowApproval/{app}/{token}/{status}', 'WorkflowController@approveFromEmail');
+    Route::post('/workflowPDF/forward', 'WorkflowController@forwardPDF');
+
+
+    Route::get('/test', 'WorkflowController@test');
 });
+
+Route::get('/test', 'WorkflowController@test');
+

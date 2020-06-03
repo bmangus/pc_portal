@@ -4,14 +4,17 @@ namespace App\Jobs;
 
 use App\BTApprovals;
 use App\BTApprovers;
+use App\BTApproverSetup;
 use App\BTRequisition;
 use App\BTRequisitionItem;
+use App\Mail\BTNextApprover;
 use App\Services\BTWorkflowService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Mail;
 
 class SyncBudgetTrackerJob implements ShouldQueue
 {
@@ -35,7 +38,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     public function __construct()
     {
         $this->createExclusions = [
-            'submissionLog', 'Web_Status_New'
+            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail'
         ];
 
         $this->updateExclustions = [
@@ -67,6 +70,10 @@ class SyncBudgetTrackerJob implements ShouldQueue
             'Approver3', 'Approver3Email', 'Approver3FullName', 'Approver4', 'Approver4Email', 'Approver4FullName', 'Approver5', 'Approver5FullName',
             'Approver5Email', 'ApproverFinal', 'ApproverFinalEmail', 'ApproverFinalName', 'ApproverTE', 'ApproverTEEmail', 'ApproverTEFullName'
         ];
+
+        $this->includedApproverSetupFields = [
+            'Approver', 'ApproverEmail', 'ApproverFName', 'ApproverLName', 'ReceiveEmails', 'SuperUser'
+        ];
     }
 
     /**
@@ -78,9 +85,10 @@ class SyncBudgetTrackerJob implements ShouldQueue
     {
         $this->bt = $bt;
         $this->syncDt = now()->toDateTimeString();
-        $this->findActiveFMRequisitions()
+        $this->syncApprovers()
+            ->syncApproverSetup()
+            ->findActiveFMRequisitions()
             ->runImport()
-            ->syncApprovers()
             ->updateApprovals();
     }
 
@@ -105,7 +113,11 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 $modTimestamp = \Carbon\Carbon::parse($requisition['zd_ModifiedDateTime']);
                 if ($modTimestamp > $syncTimestamp) $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
             } else {
-                $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
+                //New requisition is created here...
+                $requisition = $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
+
+                //... then send initial email to first approver when new requisition is imported.
+                Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
             }
 
         }
@@ -121,11 +133,40 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 } else {
                     $rec->{$key} = $item;
                 }
+            } elseif ($key === "Requisition | Setup::SubmitterEmail") {
+                $rec->SubmitterEmail = $item;
             }
         }
         $rec->lvl_lastSyncDateTime = $this->syncDt;
         $this->constructRequisitionItems($requisition);
         $rec->save();
+        return $rec;
+    }
+
+    private function getNextApproverEmail($requisition)
+    {
+        $approvers = BTApprovers::where('ProjectCode', $requisition->Project)->first();
+
+
+        switch($requisition->Status){
+            case $approvers->Approver1:
+                return $approvers->Approver1Email;
+            case $approvers->Approver2:
+                return $approvers->Approver2Email;
+            case $approvers->Approver3:
+                return $approvers->Approver3Email;
+            case $approvers->Approver4:
+                return $approvers->Approver4Email;
+            case $approvers->Approver5:
+                return $approvers->Approver5Email;
+            case $this->getUserFromEmail($approvers->ApproverTEEmail):
+                return $approvers->ApproverTEEmail;
+            case $this->getUserFromEmail($approvers->ApproverFinalEmail):
+                return $approvers->ApproverFinalEmail;
+        }
+
+        return null;
+
     }
 
     private function constructRequisitionItems($requisition)
@@ -188,6 +229,27 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 }
             }
             $localRec->fmId = $recId;
+            $localRec->save();
+        }
+        return $this;
+    }
+
+    private function syncApproverSetup()
+    {
+        $approvers = $this->bt
+            ->records('Web_ApproverSetup')
+            ->limit(10000)
+            ->get();
+
+        foreach ($approvers as $recId => $approver) {
+            $localRec = BTApproverSetup::where('fm_id', $recId)->first();
+            if($localRec === null) $localRec = new BTApproverSetup();
+            foreach ($approver as $key=>$value) {
+                if(in_array($key, $this->includedApproverSetupFields)){
+                    $localRec->{$key} = $value;
+                }
+            }
+            $localRec->fm_id = $recId;
             $localRec->save();
         }
         return $this;

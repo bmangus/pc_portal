@@ -2,6 +2,7 @@
     <div>
         <div class="flex mb-2 mr-2 float-right">
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="printTEST"><font-awesome-icon icon="file-pdf"/></button>
+            <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="openModal" ><font-awesome-icon icon="share"/></button>
             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, rowIndex)">Approve</button>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="rejectReq(row.pk, rowIndex)">Reject</button>
         </div>
@@ -220,6 +221,9 @@
             </div>
             <p class="foot" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
             <workflow-comment :requisitionId="row.pk" :actor="actor"/>
+            <t-modal ref="modal-forward" :width="width">
+                <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor"/>
+            </t-modal>
         </div>
     </div>
 </template>
@@ -232,7 +236,8 @@
         props: ['imgurl', 'row', 'rowIndex', 'actor'],
         data() {
             return {
-                doc: ''
+                doc: '',
+                output: null
             }
         },
         methods: {
@@ -285,7 +290,26 @@
                         doc.addImage(response, 'png', 5, 5, 200, 200);
                         doc.save('test_pdf.pdf')
                     })
-            }
+            },
+            executePrint(){
+                this.printHtml2Canvas().then((output)=>{
+                    const formData = new FormData();
+                    formData.append('dataURL', output);
+                    axios.post('/staff/workflowPDF/send/budgetTracker', formData)
+                    .then(res=>console.log(res))
+                    .catch(err=>console.log(err))
+                })
+            },
+            async printHtml2Canvas() {
+                const el = this.$refs.printarea;
+                const options = {
+                    type: 'dataURL'
+                }
+                this.output = await this.$html2canvas(el, options);
+            },
+            openModal(){
+                this.$refs['modal-forward'].show();
+            },
 
         }
     }

@@ -47,8 +47,10 @@
                                 ${{parseFloat(props.row.GrandTotal).toFixed(2)}}
                             </td>
                             <td :class="props.tdClass">
-                                <t-button size="sm" variant="primary" @click="openModal(props.rowIndex)">Open</t-button>
-                                <t-button size="sm" variant="secondary" >Forward</t-button>
+                                <t-input-group>
+                                    <t-button class="w-full" size="sm" variant="primary" @click="openModal(props.rowIndex)">Open</t-button>
+                                    <t-button class="w-full" size="sm" variant="secondary" >Re-Assign</t-button>
+                                </t-input-group>
                             </td>
                             <t-modal :ref="'modal'+ props.rowIndex" :width="width">
                                <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
