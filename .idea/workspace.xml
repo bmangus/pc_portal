@@ -2,7 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_04_222003_add_reassigned_fields.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/WorkflowReassignModal.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/workflow/pdftest.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/fonts/DejaVuSans.ufm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/fonts/Times-Bold.afm.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/fonts/Times-Roman.afm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,6 +308,7 @@
       <workItem from="1576534453726" duration="600000" />
       <workItem from="1576878049178" duration="256000" />
       <workItem from="1580782664232" duration="5973000" />
+      <workItem from="1591319935372" duration="16826000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -452,6 +472,10 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591154402248" />
+    <state x="-651" y="-888" key="com.intellij.ide.util.TipDialog" timestamp="1591319937652">
+      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    </state>
+    <state x="-651" y="-888" key="com.intellij.ide.util.TipDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591319937652" />
     <state x="-633" y="-922" key="git4idea.merge.GitPullDialog" timestamp="1591154393488">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>

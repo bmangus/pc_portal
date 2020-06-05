@@ -18,7 +18,7 @@
                 </ul>
             </t-dropdown>
             <div v-if="this.actor" class="mt-3 ml-2 text-red-500">Currently Acting As: {{this.actor}}</div>
-            <span class="btn-primary mb-2 p-3 mr-2 ml-auto" @click="manualSync">Sync</span>
+            <span class="btn-primary mb-2 p-3 mr-2 ml-auto" @click="manualSync"><span v-if="loadingSync"><font-awesome-icon icon="spinner" spin/></span>Sync</span>
         </div>
             <div v-if="loading" class="flex inset-auto">
                 <div class="loader">Loading...</div>
@@ -44,16 +44,19 @@
                                 {{props.row.Project}}
                             </td>
                             <td :class="props.tdClass">
-                                ${{parseFloat(props.row.GrandTotal).toFixed(2)}}
+                                ${{parseFloat(props.row.GrandTotal).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}
                             </td>
                             <td :class="props.tdClass">
                                 <t-input-group>
                                     <t-button class="w-full" size="sm" variant="primary" @click="openModal(props.rowIndex)">Open</t-button>
-                                    <t-button class="w-full" size="sm" variant="secondary" >Re-Assign</t-button>
+                                    <t-button class="w-full" size="sm" variant="secondary" @click="openReassignModal(props.rowIndex)">Re-Assign</t-button>
                                 </t-input-group>
                             </td>
                             <t-modal :ref="'modal'+ props.rowIndex" :width="width">
                                <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
+                            </t-modal>
+                            <t-modal :ref="'reassign-modal' + props.rowIndex" :width="450">
+                                <workflow-reassign-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
                             </t-modal>
                         </tr>
                     </template>
@@ -75,6 +78,7 @@
             return {
                 requisitions: [],
                 loading: true,
+                loadingSync: false,
                 modalWidth: "768",
                 selectedStatus: "My Requisitions",
                 actor: "",
@@ -86,6 +90,9 @@
         methods: {
             openModal(id){
                 this.$refs['modal'+id].show();
+            },
+            openReassignModal(id){
+                this.$refs['reassign-modal'+id].show();
             },
             loadActive(){
                 this.selectedStatus = "My Requisitions";
@@ -139,9 +146,16 @@
                     });
             },
             manualSync(){
+                this.loadingSync = true;
                 axios.get('/staff/workflowBackendSync')
-                    .then(res=>console.log(res))
-                    .catch(err=>console.log(err))
+                    .then(res=>{
+                        console.log(res);
+                        this.loadingSync = false;
+                    })
+                    .catch(err=>{
+                        console.log(err);
+                        this.loadingSync = false;
+                    })
             }
         },
         computed: {

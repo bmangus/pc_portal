@@ -23,13 +23,15 @@ import VueHtml2Canvas from 'vue-html2canvas';
 
 import VueTailwind from 'vue-tailwind';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faFilePdf, faSave, faPaperPlane, faShare} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf, faSave, faPaperPlane, faShare, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faFilePdf);
 library.add(faSave);
 library.add(faPaperPlane);
 library.add(faShare);
+library.add(faSpinner);
+
 
 
 Vue.use(VueTailwind);
@@ -42,6 +44,7 @@ Vue.component('workflow-table', require('./components/WorkflowTable.vue').defaul
 Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
 Vue.component('workflow-comment', require('./components/WorkflowComment').default);
 Vue.component('workflow-forward-modal', require('./components/WorkflowForwardModal').default);
+Vue.component('workflow-reassign-modal', require('./components/WorkflowReassignModal').default);
 
 
 /**

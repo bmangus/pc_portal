@@ -1,58 +1,121 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <link rel="stylesheet" href="{{asset('/css/app.css')}}" media="all" />
+        <style type="text/css">
+            .column {
+                float: left;
+                font-size: 10px;
+                vertical-align: bottom;
+            }
+
+            .left{
+                width: 20%;
+            }
+
+            .middle {
+                width: 45%;
+            }
+
+            .right {
+                width: 35%;
+            }
+
+            .col-2-1 {
+                width: 50%;
+                border: black;
+                border-width: thin;
+            }
+
+            .col-2-2 {
+                width: 50%;
+                border: black;
+                border-width: thin;
+            }
+
+            .mb-0{
+                margin-bottom: 0px;
+                padding-bottom: 0px;
+            }
+
+            .mb-1{
+                margin-bottom: 1px;
+            }
+
+            .mb-2{
+                margin-bottom: 2px;
+            }
+        </style>
     </head>
-    <body>
-        <div class="font-sans">
-            <div class="flex w-full mb-3">
-                <div class="w-1/6 border-black">
-                    <img src="{{asset('/img/pc_logo.png')}}" class="mx-auto object-scale-down h-24">
-                </div>
-                <div class="w-5/6 ml-4">
-                    <p class="font-extrabold">PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE</p>
-                    <div class="row ml-0">
-                        <div class="w-1/2">
-                            <p>5401 NW 40th  - Oklahoma City, OK 73122</p>
-                            <p>Phone:(405) 495-5200  Fax (405) 495-8648</p>
-                            <p class="">FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE</p>
-                        </div>
-                        <div class="w-1/2">
-                            <p><strong>Requisition Date:</strong> <span class="req_date req_data">TEST</span></p>
-                            <p><strong>Purchase No.:</strong> <span class="ponum req_data" style="text-align: right;width: 105px">{{$po->PONumber}}</span></p>
-                            <p><strong>Created By:</strong></p>
-                        </div>
-                    </div>
-                </div>
+    <body style="display: grid;">
+        <div style="width: 100%" style="font-size: 0.5em;">
+            <div class="column left">
+                <img src="{{public_path('/img/pc_logo.png')}}" style="width: 100px;">
             </div>
-            <div class="flex w-full">
-                <div class="w-2/5 col">
-                    <div class="m-2 p-2 border-2 border-black">
-                        <div class="flex w-full mb-3">
-                            <p class="object-left">Vendor Information:</p>
-                            <p class="mr-2 ml-auto">Vendor #: <span class="ven_num req_data">{{$po->VendorID}}</span></p>
-                        </div>
-                        <div class="flex w-full">
-                            <span class="vendor_info req_data">{{$po->Vendor}}<br>{{$po->VendorAddress}}<br>{{$po->VendorCity}}, {{$po->VendorState}} {{$po->VendorZip}}</span>
-                            <p class="mr-2 ml-auto">
-                                <span>W9</span>
-                                <br>
-                                <input type="checkbox" disabled="">
-                                <br>
-                                <span>FD</span>
-                                <br>
-                                <input type="checkbox" disabled="">
-                            </p>
-                        </div>
-                        <div class="flex w-full">
-                            <p>
-                                <label>Phone</label>
-                                <span class="ven_phone req_data">{{$po->VendorPhone}}</span><br>
-                                <label>Fax</label>
-                                <span class="ven_fax req_data"></span>
-                            </p>
-                        </div>
-                    </div>
+            <div class="column middle">
+
+                <b>PUTNAM CITY PUBLIC SCHOOLS ACCOUNTS PAYABLE</b><br>
+                5401 NW 40th  - Oklahoma City, OK 73122<br>
+                Phone:(405) 495-5200  Fax (405) 495-8648<br>
+                FINAL APPROVAL MUST BE OBTAINED PRIOR TO PURCHASE
+            </div>
+            <div class="column right">
+               <b>Requisition Date:</b> <span class="req_date req_data">{{$po->Date}}</span><br>
+                <b>Purchase No.:</b> {{$po->PONumber}}<br>
+                <b>Created By:</b>
+            </div>
+        </div>
+        <div style="width: 100%">
+            <div class="col-1-1">
+                <p style="float: left; width:50%">Vendor Information:</p>
+                <p style="float:right; width: 50%">Vendor #: <span class="ven_num req_data">{{$po->VendorID}}</span></p>
+                <span class="vendor_info req_data">{{$po->Vendor}}<br>
+                    {{$po->VendorAddress}}<br>
+                    {{$po->VendorCity}}, {{$po->VendorState}} {{$po->VendorZip}}</span>
+                <div style="float:right;"><span>W9</span><br><input type="checkbox" disabled=""></div>
+                <div style="float:right;"><span>FD</span><br><input type="checkbox" disabled=""></div>
+
+
+                <p>
+                    <label>Phone</label>
+                    <span class="ven_phone req_data">{{$po->VendorPhone}}</span><br>
+                    <label>Fax</label>
+                    <span class="ven_fax req_data"></span>
+                </p>
+            </div>
+            <div class="col-1-2">
+                <span>Bill To:</span>
+                <span >{{$po->BillToAttention}}<br>{{$po->BillToName}}<br>{{$po->BillToAddress}}<br>{{$po->BillToCity}}, {{$po->BillToState}} {{$po->BillToZip}}<br></span>
+                <div>1st</div>
+                <div>{{$po->ApprovedStatus1}}</div>
+                <div>{{$po->ApprovedBy1}}</div>
+                <div>{{$po->ApprovedDate1}}</div>
+                <div>2nd</div>
+                <div>{{$po->ApprovedStatus2}}</div>
+                <div>{{$po->ApprovedBy2}}</div>
+                <div>{{$po->ApprovedDate2}}</div>
+                <div>3rd</div>
+                <div>{{$po->ApprovedStatus3}}</div>
+                <div>{{$po->ApprovedBy3}}</div>
+                <div>{{$po->ApprovedDate3}}</div>
+                <div>4th</div>
+                <div>{{$po->ApprovedStatus4}}</div>
+                <div>{{$po->ApprovedBy4}}</div>
+                <div>{{$po->ApprovedDate4}}</div>
+                <div>5th</div>
+                <div>{{$po->ApprovedStatus5}}</div>
+                <div>{{$po->ApprovedBy5}}</div>
+                <div>{{$po->ApprovedDate5}}</div>
+                <div>TE</div>
+                <div>{{$po->ApprovedStatusTE}}</div>
+                <div>{{$po->ApprovedByTE}}</div>
+                <div>{{$po->ApprovedDateTE}}</div>
+                <div>Final</div>
+                <div>{{$po->FinalApprovedStatus}}</div>
+                <div>{{$po->FinalApprovedBy}}</div>
+                <div>{{$po->FinalApprovedDate}}</div>
+            </div>
+        </div>
+
 
                     <div class=" m-2 p-2 border-2 border-black">
                         <p class="bg-black text-white p-1 mb-3">Ship To:</p>
@@ -69,79 +132,58 @@
                 <div class="w-3/5 m-2 p-2 border-2 border-black">
                     <div class="flex w-full mb-4">
                         <div class="w-1/6 text-center">
-                            <span class="mx-auto">Bill To:</span>
+
                         </div>
                         <div class="w-5/6">
-                            <span class="text-left">{{$po->BillToAttention}}<br>{{$po->BillToName}}<br>{{$po->BillToAddress}}<br>{{$po->BillToCity}}, {{$po->BillToState}} {{$po->BillToZip}}<br></span>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">1st</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatus1}}</div>
-                                <div class="w-1/3">{{$po->ApprovedBy1}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDate1}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">2nd</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatus2}}</div>
-                                <div class="w-1/3">{{$po->ApprovedBy2}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDate2}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">3rd</div>
+
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatus3}}</div>
-                                <div class="w-1/3">{{$po->ApprovedBy3}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDate3}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">4th</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatus4}}</div>
-                                <div class="w-1/3">{{$po->ApprovedBy4}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDate4}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">5th</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatus5}}</div>
-                                <div class="w-1/3">{{$po->ApprovedBy5}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDate5}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">TE</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->ApprovedStatusTE}}</div>
-                                <div class="w-1/3">{{$po->ApprovedByTE}}</div>
-                                <div class="w-1/3">{{$po->ApprovedDateTE}}</div>
+
                             </div>
                         </div>
                     </div>
                     <div class="flex w-full mb-2">
-                        <div class="w-1/6 text-center">Final</div>
                         <div class="w-5/6 border-b">
                             <div class="flex w-full">
-                                <div class="w-1/3">{{$po->FinalApprovedStatus}}</div>
-                                <div class="w-1/3">{{$po->FinalApprovedBy}}</div>
-                                <div class="w-1/3">{{$po->FinalApprovedDate}}</div>
+
                             </div>
                         </div>
                     </div>
