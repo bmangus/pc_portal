@@ -41,9 +41,11 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/workflowApi/addComment/{id}', 'WorkflowController@postComment');
     Route::get('/workflowApproval/{app}/{token}/{status}', 'WorkflowController@approveFromEmail');
     Route::post('/workflowPDF/forward', 'WorkflowController@forwardPDF');
+    Route::get('/test', 'WorkflowController@viewPDF');
+    Route::get('/workflowApprovers', 'WorkflowController@getApproverList');
+    Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
 
 
-    Route::get('/test', 'WorkflowController@test');
 });
 
 Route::get('/test', 'WorkflowController@test');

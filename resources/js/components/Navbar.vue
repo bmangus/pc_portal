@@ -54,9 +54,13 @@
             logout() {
                 axios.post('/logout')
                     .then(response=>{
-                        window.location.href = '/staff/workflow';
+                        console.log('testing logout...........');
+                        window.location.href='/login';
                     })
-                    .catch(err=>console.log(err))
+                    .catch(err=>{
+                        console.log(err);
+                        window.location.href='/login';
+                    })
             }
         }
     }

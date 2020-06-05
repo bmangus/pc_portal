@@ -21,4 +21,5 @@ mix.js('resources/js/app.js', 'public/js')
     })
     .webpackConfig({
         plugins: [new LiveReloadPlugin()]
-    });
+    })
+    .copy('storage/fonts', 'public/storage/fonts');

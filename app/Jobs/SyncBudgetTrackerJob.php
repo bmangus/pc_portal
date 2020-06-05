@@ -48,7 +48,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
             'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
             'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
             'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedStatus6Rejected',
-            'submissionLog', 'Web_Status_New'
+            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail'
         ];
 
         $this->approvalFields = [
@@ -138,7 +138,8 @@ class SyncBudgetTrackerJob implements ShouldQueue
             }
         }
         $rec->lvl_lastSyncDateTime = $this->syncDt;
-        $this->constructRequisitionItems($requisition);
+
+        $this->deleteExistingReqItems($requisition)->constructRequisitionItems($requisition);
         $rec->save();
         return $rec;
     }
@@ -167,6 +168,12 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
         return null;
 
+    }
+
+    private function deleteExistingReqItems($requisition)
+    {
+        BTRequisitionItem::where('zd_RequisRecId', $requisition['RecID'])->delete();
+        return $this;
     }
 
     private function constructRequisitionItems($requisition)

@@ -211,8 +211,8 @@
                                 <td class="border-2 border-black">{{item.ItemCount}}</td>
                                 <td class="border-2 border-black">{{item.Description}}</td>
                                 <td class="border-2 border-black">{{item.Object}}</td>
-                                <td class="border-2 border-black">{{parseFloat(item.UnitPrice).toFixed(2)}}</td>
-                                <td class="border-2 border-black">{{parseFloat(item.Qty * item.UnitPrice).toFixed(2)}}</td>
+                                <td class="border-2 border-black">{{parseFloat(item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="border-2 border-black">{{parseFloat(item.Qty * item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                             </tr>
                             </tbody>
                         </table>
