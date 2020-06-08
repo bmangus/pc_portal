@@ -96,6 +96,7 @@
             },
             loadActive(){
                 this.selectedStatus = "My Requisitions";
+                this.actor = "";
                 axios.get('/staff/workflowBackend/budgetTracker')
                     .then(response => {
                         this.requisitions = response.data;
@@ -108,7 +109,7 @@
             },
             loadCompleted(){
                 this.selectedStatus = "Completed";
-
+                this.actor = "";
                 axios.get('/staff/workflowBackend/budgetTracker/Completed')
                     .then(response => {
                         this.requisitions = response.data;
@@ -122,7 +123,7 @@
             },
             loadRejected(){
                 this.selectedStatus = "Rejected";
-
+                this.actor = "";
                 axios.get('/staff/workflowBackend/budgetTracker/Rejected')
                     .then(response => {
                         this.requisitions = response.data;

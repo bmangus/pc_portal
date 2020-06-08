@@ -2,26 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_04_222003_add_reassigned_fields.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/WorkflowReassignModal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/workflow/pdftest.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/fonts/DejaVuSans.ufm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/fonts/Times-Bold.afm.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/fonts/Times-Roman.afm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Navbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +293,8 @@
       <workItem from="1576534453726" duration="600000" />
       <workItem from="1576878049178" duration="256000" />
       <workItem from="1580782664232" duration="5973000" />
-      <workItem from="1591319935372" duration="16826000" />
+      <workItem from="1591319935372" duration="18180000" />
+      <workItem from="1591479801377" duration="9871000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -415,7 +401,21 @@
       <option name="project" value="LOCAL" />
       <updated>1591154384406</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Numerous bug fixes. Updated code to support mail functionality. Updated login page. Fixed bugs with reassign button. Rebuilt pdf scaffold.">
+      <created>1591337784118</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1591337784118</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Committing production build assets.">
+      <created>1591337974312</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1591337974312</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,30 +453,33 @@
     <MESSAGE value="Completely rewrote the pdf generation process for workflow. Uses front end js framework, with no backend/php code processing." />
     <MESSAGE value="Numerous bug fixes. Added comment creation. Updated workflow approval process to properly skip approvers who have approved in previous positions." />
     <MESSAGE value="Numerous bug fixes. Updated code to support mail functionality. Updated pdf rendering. Updated approval logic. Updated code for FM19 support in the future." />
-    <option name="LAST_COMMIT_MESSAGE" value="Numerous bug fixes. Updated code to support mail functionality. Updated pdf rendering. Updated approval logic. Updated code for FM19 support in the future." />
+    <MESSAGE value="Numerous bug fixes. Updated code to support mail functionality. Updated login page. Fixed bugs with reassign button. Rebuilt pdf scaffold." />
+    <MESSAGE value="Committing production build assets." />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing production build assets." />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591143724051">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1045" y="-1118" key="CommitChangelistDialog2" timestamp="1591337783592">
+    <state x="-1045" y="-1118" key="CommitChangelistDialog2" timestamp="1591337974028">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
-    <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591154383850" />
+    <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337974028" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="615" y="254" key="RollbackChangesDialog" timestamp="1591063291786">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1591337792163">
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1591338013800">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591154402248" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337792163" />
-    <state x="-651" y="-888" key="com.intellij.ide.util.TipDialog" timestamp="1591319937652">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337981516" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
+    <state x="1718" y="-696" key="com.intellij.ide.util.TipDialog" timestamp="1591479801939">
+      <screen x="952" y="-1129" width="2048" height="1129" />
     </state>
+    <state x="1718" y="-696" key="com.intellij.ide.util.TipDialog/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@952.-1129.2048.1129" timestamp="1591479801939" />
     <state x="-651" y="-888" key="com.intellij.ide.util.TipDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591319937652" />
     <state x="-633" y="-922" key="git4idea.merge.GitPullDialog" timestamp="1591154393488">
       <screen x="-1608" y="-1440" width="2560" height="1440" />

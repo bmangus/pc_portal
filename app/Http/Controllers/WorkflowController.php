@@ -195,21 +195,6 @@ class WorkflowController extends Controller
         return response()->json($approvers->values()->all());
     }
 
-    public function update($app, $id)
-    {
-
-    }
-
-    public function viewPDF()
-    {
-
-        ini_set('max_execution_time', 60);
-        $po = BTRequisition::findOrFail(1);
-
-        //return view('workflow.pdftest', compact('po'));
-        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.pdftest', compact('po'));
-        return $pdf->stream();
-    }
 
     public function forwardPDF(Request $request)
     {
