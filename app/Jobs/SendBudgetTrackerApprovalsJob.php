@@ -36,7 +36,7 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
         ];
 
         $this->approvalDates = [
-            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5'
+            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5', 'ApprovedDateTE', 'FinalApprovedDate'
         ];
     }
 
