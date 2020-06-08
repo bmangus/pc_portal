@@ -150,12 +150,22 @@
                 axios.get('/staff/workflowBackendSync')
                     .then(res=>{
                         console.log(res);
-                        this.loadActive();
+                        if(this.actor === ""){
+                            this.loadActive();
+                        } else {
+                            this.impersonate();
+                        }
+
                         this.loadingSync = false;
                     })
                     .catch(err=>{
                         console.log(err);
-                        this.loadActive();
+                        alert('Something with wrong while attempting to communicate with FileMaker. Please contact IT.')
+                        if(this.actor === ""){
+                            this.loadActive();
+                        } else {
+                            this.impersonate();
+                        }
                         this.loadingSync = false;
                     })
             }
