@@ -21,11 +21,13 @@
             <th width="250px" style="text-align:left">DESCRIPTION</th>
             <th width="100px" style="text-align:left">TOTAL</th>
         </tr>
-        <tr>
-            <td style="font-size:13px!important">5</td>
-            <td style="font-size:13px!important">Pencils </td>
-            <td style="font-size:13px!important">$45.00</td>
-        </tr>
+        @foreach($requisition->requisitionItems as $i)
+            <tr>
+                <td style="font-size:13px!important">{{$i->QtyAmt}}</td>
+                <td style="font-size:13px!important">{{$i->Description}} </td>
+                <td style="font-size:13px!important">${{number_format($i->Total, 2, '.', ',')}}</td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 </div>
