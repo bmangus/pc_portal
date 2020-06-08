@@ -62,8 +62,14 @@
                 formData.append('recipientEmail', this.toEmail);
                 formData.append('custMessage', this.message);
                 axios.post('/staff/workflowPDF/forward', formData)
-                .then(res=>console.log(res))
-                .catch(err=>console.log(err));
+                .then(res=>{
+                    console.log(res);
+                    this.$emit('load', true);
+                })
+                .catch(err=>{
+                    console.log(err)
+                    alert('Something went wront. Please contact IT for assistance.');
+                });
             }
         }
     }

@@ -26,8 +26,6 @@ Auth::routes([
     'register' => false,
 ]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflow', 'WorkflowController@index');
     Route::get('/workflowBackend/{app}', 'WorkflowController@requisitionsByApprover');

@@ -56,7 +56,7 @@
                                <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
                             </t-modal>
                             <t-modal :ref="'reassign-modal' + props.rowIndex" :width="450">
-                                <workflow-reassign-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
+                                <workflow-reassign-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" />
                             </t-modal>
                         </tr>
                     </template>
@@ -113,7 +113,6 @@
                 axios.get('/staff/workflowBackend/budgetTracker/Completed')
                     .then(response => {
                         this.requisitions = response.data;
-
                         this.loading = false;
                     })
                     .catch(error => {
@@ -151,10 +150,12 @@
                 axios.get('/staff/workflowBackendSync')
                     .then(res=>{
                         console.log(res);
+                        this.loadActive();
                         this.loadingSync = false;
                     })
                     .catch(err=>{
                         console.log(err);
+                        this.loadActive();
                         this.loadingSync = false;
                     })
             }

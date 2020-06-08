@@ -222,7 +222,7 @@
             <p class="foot" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
             <workflow-comment :requisitionId="row.pk" :actor="actor"/>
             <t-modal ref="modal-forward" :width="width">
-                <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor"/>
+                <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor" v-on:load="hideModal"/>
             </t-modal>
         </div>
     </div>
@@ -305,7 +305,9 @@
             openModal(){
                 this.$refs['modal-forward'].show();
             },
-
+            hideModal(){
+                this.$refs['modal-forward'].hide();
+            }
         }
     }
 </script>
