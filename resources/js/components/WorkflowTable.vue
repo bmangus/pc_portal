@@ -85,7 +85,6 @@
             }
         },
         mounted() {
-            alert(JSON.stringify(this.authUser));
             this.loadActive();
         },
         methods: {
