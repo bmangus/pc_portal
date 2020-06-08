@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +292,7 @@
       <workItem from="1580782664232" duration="5973000" />
       <workItem from="1591319935372" duration="18180000" />
       <workItem from="1591479801377" duration="13543000" />
-      <workItem from="1591619081840" duration="3249000" />
+      <workItem from="1591619081840" duration="5169000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -462,7 +462,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591622260410</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="removed debug alert">
+      <created>1591622483244</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1591622483244</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -507,17 +514,18 @@
     <MESSAGE value="Added comments to pdf in bt. Added money formatter to pdf blade template." />
     <MESSAGE value="Added super user filter for impersonation so that only super users can impersonate." />
     <MESSAGE value="committing production assets." />
-    <option name="LAST_COMMIT_MESSAGE" value="committing production assets." />
+    <MESSAGE value="removed debug alert" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed debug alert" />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591143724051">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591622471319">
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591622482988">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591622471319" />
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591622482988" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591621083761" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337974028" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
@@ -525,10 +533,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591622266334">
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591622487707">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591622266334" />
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591622487707" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337981516" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="-650" y="-874" key="com.intellij.ide.util.TipDialog" timestamp="1591619081939">
