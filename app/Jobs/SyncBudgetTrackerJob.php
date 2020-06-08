@@ -170,6 +170,11 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     }
 
+    private function getUserFromEmail($email) {
+        return substr($email, 0, strpos($email, '@'));
+    }
+
+    
     private function deleteExistingReqItems($requisition)
     {
         BTRequisitionItem::where('zd_RequisRecId', $requisition['RecID'])->delete();
