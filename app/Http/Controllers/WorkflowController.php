@@ -313,7 +313,8 @@ class WorkflowController extends Controller
     {
         if($status === 'Rejected'){
             $requisition->Status = 'Rejected';
-        } else if($requisition->Reassigned){
+        }
+        if($requisition->Reassigned){
             $position = $requisition->ReassignedPosition;
             $requisition->Reassigned = false;
             if($position === 'Approver1'){
@@ -331,19 +332,26 @@ class WorkflowController extends Controller
             }else {
                 return $this->setApproverFinal($requisition, $status, $username);
             }
-        }else if($requisition->ApprovedBy1 === "" && $requisition->approvers->Approver1 === $username) {
+        }
+        if($requisition->ApprovedBy1 === "" && $requisition->approvers->Approver1 === $username) {
             return $this->setApprover1($requisition, $status, $username);
-        }else if($requisition->ApprovedBy2 === "" && $requisition->approvers->Approver2 === $username) {
+        }
+        if($requisition->ApprovedBy2 === "" && $requisition->approvers->Approver2 === $username) {
             return $this->setApprover2($requisition, $status, $username);
-        }else if($requisition->ApprovedBy3 === "" && $requisition->approvers->Approver3 === $username) {
+        }
+        if($requisition->ApprovedBy3 === "" && $requisition->approvers->Approver3 === $username) {
             return $this->setApprover3($requisition, $status, $username);
-        }else if($requisition->ApprovedBy4 === "" && $requisition->approvers->Approver4 === $username) {
+        }
+        if($requisition->ApprovedBy4 === "" && $requisition->approvers->Approver4 === $username) {
             return $this->setApprover4($requisition, $status, $username);
-        }else if($requisition->ApprovedBy5 === "" && $requisition->approvers->Approver5 === $username) {
+        }
+        if($requisition->ApprovedBy5 === "" && $requisition->approvers->Approver5 === $username) {
             return $this->setApprover5($requisition, $status, $username);
-        }else if($requisition->ApprovedByTE === "" && $this->getUserFromEmail($requisition->approvers->ApproverTEEmail) === $username && $requisition->Technology === 'TE') {
+        }
+        if($requisition->ApprovedByTE === "" && $this->getUserFromEmail($requisition->approvers->ApproverTEEmail) === $username && $requisition->Technology === 'TE') {
             return $this->setApproverTE($requisition, $status, $username);
-        }else if($requisition->FinalApprovedBy === "" && $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail) === $username) {
+        }
+        if($requisition->FinalApprovedBy === "" && $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail) === $username) {
             return $this->setApproverFinal($requisition, $status, $username);
         }
 
