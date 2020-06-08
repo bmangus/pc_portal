@@ -4,6 +4,7 @@
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +293,7 @@
       <workItem from="1580782664232" duration="5973000" />
       <workItem from="1591319935372" duration="18180000" />
       <workItem from="1591479801377" duration="13543000" />
-      <workItem from="1591619081840" duration="10800000" />
+      <workItem from="1591619081840" duration="11396000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -504,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591638765768</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="added missing period in .pdf.">
+      <created>1591638983172</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1591638983172</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -527,7 +535,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated field name from Students Full Name to First and Last Name per Cory." />
     <MESSAGE value="Updated remaining field names to First and Last Name per Cory." />
     <MESSAGE value="Added most of the parts of Workflow to the master project." />
     <MESSAGE value="Added missing files." />
@@ -552,17 +559,18 @@
     <MESSAGE value="squashed a few bugs." />
     <MESSAGE value="Fixed a few more bugs" />
     <MESSAGE value="Added missing approved dates." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added missing approved dates." />
+    <MESSAGE value="added missing period in .pdf." />
+    <option name="LAST_COMMIT_MESSAGE" value="added missing period in .pdf." />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591143724051">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591638765646">
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591639583338">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591638765646" />
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639583338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591621083761" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337974028" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
@@ -570,10 +578,10 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591638772708">
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591638988146">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591638772708" />
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591638988146" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337981516" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="-650" y="-874" key="com.intellij.ide.util.TipDialog" timestamp="1591619081939">

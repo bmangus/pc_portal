@@ -53,10 +53,10 @@
                                 </t-input-group>
                             </td>
                             <t-modal :ref="'modal'+ props.rowIndex" :width="width">
-                               <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="loadActive"/>
+                               <workflow-requisition-modal :imgurl="imgurl" :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="load"/>
                             </t-modal>
                             <t-modal :ref="'reassign-modal' + props.rowIndex" :width="450">
-                                <workflow-reassign-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" />
+                                <workflow-reassign-modal :row="props.row" :rowIndex="props.rowIndex" :actor="actor" v-on:load="load"/>
                             </t-modal>
                         </tr>
                     </template>
@@ -93,6 +93,13 @@
             },
             openReassignModal(id){
                 this.$refs['reassign-modal'+id].show();
+            },
+            load(){
+                if(this.actor === ""){
+                    this.loadActive();
+                }  else {
+                    this.impersonate();
+                }
             },
             loadActive(){
                 this.selectedStatus = "My Requisitions";
