@@ -224,7 +224,7 @@ class WorkflowController extends Controller
         ini_set('max_execution_time', 60);
         $po = BTRequisition::findOrFail($request->get('id'));
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.pdf', compact('po'));
-        $path = \Storage::path('/pdfs/'. $po->PONumber . 'pdf');
+        $path = \Storage::path('/pdfs/'. $po->PONumber . '.pdf');
         $pdf->save($path);
         Mail::to($request->get('recipientEmail'))->send(new BTForward($po, $path, $request->get('custMessage'), $po->Status . '@putnamcityschools.org'));
         return response()->json('ok');
