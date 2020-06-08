@@ -47,7 +47,18 @@ class WorkflowController extends Controller
     {
         $this->canAccess();
         $user = auth()->user();
-        return view('workflow.index', compact('user'));
+        $all = BTApproverSetup::first()->get();
+        //dd($all);
+        try{
+            $workflowUser = BTApproverSetup::where('Approver', $user->uid)->firstOrFail();
+        } catch(\Exception $e){
+            if($user->uid === 'bmangus'){
+                return view('workflow.index', compact('user', 'workflowUser'));
+            }
+            return abort(403, 'You do not have access to Workflow. Please contact IT for assistance.');
+        }
+
+        return view('workflow.index', compact('user', 'workflowUser'));
     }
 
     public function manualSync()

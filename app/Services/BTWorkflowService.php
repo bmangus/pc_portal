@@ -13,7 +13,6 @@ class BTWorkflowService extends FluentFMRepository
             'host' => env('BT_FM_HOST', '127.0.0.1'),
             'user' => env('BT_FM_USERNAME', 'user'),
             'pass' => env('BT_FM_PASSWORD', 'password'),
-            'client' => ['verify'=>false]
         ]);
     }
 }

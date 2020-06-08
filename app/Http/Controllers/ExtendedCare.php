@@ -13,16 +13,21 @@ class ExtendedCare extends Controller
     public function __construct()
     {
         $this->fm = new FluentFMRepository([
-            'file'=>'ExtendedCareEnrollment',
-            'host'=>'10.40.1.97',
-            'user'=>'web_user',
-            'pass'=>'ec_web_user'
+            'file'=>env('EC_FM_FILE', 'SomeFile'),
+            'host'=>env('EC_FM_HOST', 'somewhere.com'),
+            'user'=>env('EC_FM_USERNAME','user'),
+            'pass'=>env('EC_FM_PASSWORD', 'password')
         ]);
     }
 
     public function index()
     {
-        $sites = collect($this->fm->find('web_sites')->where('Enabled', 'Yes')->get());
+        try{
+            $sites = collect($this->fm->find('web_sites')->where('Enabled', 'Yes')->get());
+        } catch (\Exception $e) {
+            return abort('503', 'Sorry, there are currently no sites available for extended care registration at this time.');
+        }
+
         $sites = $sites->sort();
         return response()->view('extendedCare.index', compact('sites'));
     }
