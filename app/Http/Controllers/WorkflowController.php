@@ -108,7 +108,9 @@ class WorkflowController extends Controller
 
             if($this->isRejected($requisition)) return response()->json(['error']);
 
-            $username = $username ?? auth()->user()->uid;
+            //return response()->json(auth()->user()->uid);
+
+            $username = $username ?? strtolower(auth()->user()->uid);
 
             if($this->currentPositionMatchesUser($requisition, $username)){
                 $this->setRequisitionStatus($requisition, $status, $username);
@@ -221,7 +223,6 @@ class WorkflowController extends Controller
 
     public function forwardPDF(Request $request)
     {
-        ini_set('max_execution_time', 60);
         $po = BTRequisition::findOrFail($request->get('id'));
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.pdf', compact('po'));
         $path = \Storage::path('/pdfs/'. $po->PONumber . '.pdf');
