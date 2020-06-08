@@ -203,6 +203,7 @@ class WorkflowController extends Controller
         ini_set('max_execution_time', 60);
         $po = BTRequisition::findOrFail($id);
 
+        //return response()->json($po);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.pdf', compact('po'));
         return $pdf->stream();
     }

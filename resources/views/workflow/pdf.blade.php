@@ -72,6 +72,12 @@
 
             .row-6{
                 margin-top: 10px;
+                font-size: 12px;
+            }
+
+            .row-7{
+                margin-top: 10px;
+                font-size: 12px;
             }
 
             .col-2-2 {
@@ -330,8 +336,8 @@
                         <td class="border">{{$i->ItemCount}}</td>
                         <td class="border">{{$i->Description}}</td>
                         <td class="border">{{$i->Object}}</td>
-                        <td class="border">{{$i->UnitPrice}}</td>
-                        <td class="border">{{$i->Total}}</td>
+                        <td class="border">${{number_format($i->UnitPrice, 2, '.', ',')}}</td>
+                        <td class="border">${{number_format($i->Total, 2, '.', ',')}}</td>
                     </tr>
                 @endforeach
             </table>
@@ -339,116 +345,39 @@
         <div class="row-6">
             <b>Charge To:</b> {{$po->ChargeTo}}
         </div>
-
-
-
-
-<!--
-                    <div class=" m-2 p-2 border-2 border-black">
-                        <p class="bg-black text-white p-1 mb-3">Ship To:</p>
-                        <span class="vendor_info req_data"></span>
-                        <p class="clear_all"></p>
-                        <p class="comm">
-
-                        </p>
-                    </div>
-                </div>
-                <div class="w-3/5 m-2 p-2 border-2 border-black">
-                    <div class="flex w-full mb-4">
-                        <div class="w-1/6 text-center">
-
-                        </div>
-                        <div class="w-5/6">
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex w-full mb-2">
-                        <div class="w-5/6 border-b">
-                            <div class="flex w-full">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row-7">
+            <b>Comments</b>
+            <div class="border" style="margin-top: 5px; height: 75px;">
+                @php
+                    $comments = "";
+                    if(strlen($po->ApprovedComments1) > 0){
+                        $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedComments1 . "<br>"     ;
+                    }
+                    if(strlen($po->ApprovedComments2) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedComments2 . "<br>"     ;
+                        }
+                    if(strlen($po->ApprovedComments3) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedComments3 . "<br>"     ;
+                        }
+                    if(strlen($po->ApprovedComments4) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedComments4 . "<br>"     ;
+                        }
+                    if(strlen($po->ApprovedComments5) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedComments5 . "<br>"     ;
+                        }
+                    if(strlen($po->ApprovedCommentsTE) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->ApprovedCommentsTE . "<br>"    ;
+                        }
+                    if(strlen($po->FinalApprovedComments) > 0){
+                            $comments = $comments . "<b>Approver 1 Comments: </b>" . $po->FinalApprovedComments . "<br>" ;
+                        }
+                    if(strlen($comments) === 0){
+                        $comments = "No Comments Available.";
+                    }
+                @endphp
+                {!! $comments !!}
             </div>
-            <div class="flex w-full mx-2 px-2">
-                <span>Instructions</span>
-            </div>
-            <div class="flex w-full">
-                <div class="w-full col">
-                    <div class="m-2 p-2 border-2 border-black">
-                        "($po->Instructions.length < 1) ? "No instructions available." : $po.Instructions"
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-full">
-                <div class="w-full col">
-                    <div class="m-2">
-
-                    </div>
-                </div>
-            </div>
-            <div class="flex w-full">
-                <div class="w-full col">
-                    <div class="m-2">
-                        <table class="table-fixed border-2 border-top-table border-black">
-                            <tbody>
-                            <tr>
-
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <p class="foot" style="font-size:14px"></p>
-            <p>Comments Go Here.....</p>
-
         </div>
--->
     </body>
 
 </html>

@@ -4,9 +4,7 @@
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorflowRequisitionModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/workflow/pdf.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -294,7 +292,7 @@
       <workItem from="1576878049178" duration="256000" />
       <workItem from="1580782664232" duration="5973000" />
       <workItem from="1591319935372" duration="18180000" />
-      <workItem from="1591479801377" duration="10378000" />
+      <workItem from="1591479801377" duration="12867000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -422,7 +420,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591581884675</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated workflow modal vue template to use new download url.">
+      <created>1591582440775</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1591582440775</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,27 +468,28 @@
     <MESSAGE value="Numerous bug fixes. Updated code to support mail functionality. Updated login page. Fixed bugs with reassign button. Rebuilt pdf scaffold." />
     <MESSAGE value="Committing production build assets." />
     <MESSAGE value="Finished pdf rewrite. fixed a few bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished pdf rewrite. fixed a few bugs." />
+    <MESSAGE value="Updated workflow modal vue template to use new download url." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated workflow modal vue template to use new download url." />
   </component>
   <component name="WindowStateProjectService">
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591143724051">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591581884384">
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2" timestamp="1591582440523">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591581884384" />
+    <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591582440523" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337974028" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="615" y="254" key="RollbackChangesDialog" timestamp="1591063291786">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591581891979">
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2" timestamp="1591582445707">
       <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
-    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591581891979" />
+    <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591582445707" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591337981516" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="1718" y="-696" key="com.intellij.ide.util.TipDialog" timestamp="1591479801939">
@@ -495,9 +501,10 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-633" y="-922" key="git4idea.merge.GitPullDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591154393488" />
-    <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup" timestamp="1591149973347">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="-838" y="-1102" width="1021" height="914" key="search.everywhere.popup" timestamp="1591584616470">
+      <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
+    <state x="-838" y="-1102" width="1021" height="914" key="search.everywhere.popup/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591584616470" />
     <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591149973347" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591131534551" />
   </component>
