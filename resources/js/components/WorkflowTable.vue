@@ -12,7 +12,7 @@
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadRejected">Rejected</a>
                     </li>
-                    <li>
+                    <li v-if="authUser.SuperUser === 'Yes'">
                         <a class="block no-underline px-4 py-2 hover" @click="$refs.acting.show()">Act As</a>
                     </li>
                 </ul>
@@ -73,7 +73,7 @@
 <script>
     export default {
         name: 'workflow-table',
-        props: ['imgurl'],
+        props: ['imgurl', 'authUser'],
         data() {
             return {
                 requisitions: [],
@@ -85,6 +85,7 @@
             }
         },
         mounted() {
+            alert(JSON.stringify(this.authUser));
             this.loadActive();
         },
         methods: {
