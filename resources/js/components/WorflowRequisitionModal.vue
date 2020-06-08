@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="flex mb-2 mr-2 float-right">
-            <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="printTEST"><font-awesome-icon icon="file-pdf"/></button>
+            <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="print(row.pk)"><font-awesome-icon icon="file-pdf"/></button>
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="openModal" ><font-awesome-icon icon="share"/></button>
             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, rowIndex)">Approve</button>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="rejectReq(row.pk, rowIndex)">Reject</button>
@@ -283,13 +283,8 @@
                     return resolve(this.doc);
                 });
             },
-            printTEST(){
-                this.getDataURL()
-                    .then((response) => {
-                        let doc = new jsPDF();
-                        doc.addImage(response, 'png', 5, 5, 200, 200);
-                        doc.save('test_pdf.pdf')
-                    })
+            print(id){
+                window.open('/staff/workflowPDF/download/' + id, '_blank');
             },
             executePrint(){
                 this.printHtml2Canvas().then((output)=>{
