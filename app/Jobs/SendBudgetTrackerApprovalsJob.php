@@ -49,11 +49,15 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
 
     public function getActiveRequisitions()
     {
-        $this->activeRequisitions = collect($this->bt
-            ->find('Web_Requisition_Approvals')
-            ->where('Web_Status_New', 1)
-            ->limit(10000)
-            ->get());
+        try{
+            $this->activeRequisitions = collect($this->bt
+                ->find('Web_Requisition_Approvals')
+                ->where('Web_Status_New', 1)
+                ->limit(10000)
+                ->get());
+        } catch (\Exception $e) {
+            $this->activeRequisitions = collect();
+        }
 
         return $this;
     }
