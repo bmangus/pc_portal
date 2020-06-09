@@ -114,7 +114,7 @@
             <div class="column top-right">
                <b>Requisition Date:</b> <span class="req_date req_data">{{$po->Date}}</span><br>
                 <b>Purchase No.:</b> {{$po->PONumber}}<br>
-                <b>Created By:</b>
+                <b>Created By:</b> {{$po->CreatedBy}}
             </div>
         </div>
         <div style="width: 100%" class="row-2">

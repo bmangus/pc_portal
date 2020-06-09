@@ -22,7 +22,7 @@
                         <div class="w-1/2">
                             <p><strong>Requisition Date:</strong> <span class="req_date req_data">{{row.Date}}</span></p>
                             <p><strong>Purchase No.:</strong> <span class="ponum req_data" style="text-align: right;width: 105px">{{row.PONumber}}</span></p>
-                            <p><strong>Created By:</strong></p>
+                            <p><strong>Created By:</strong> {{row.CreatedBy}}</p>
                         </div>
                     </div>
                 </div>
