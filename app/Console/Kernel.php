@@ -27,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->job(new SyncBudgetTrackerJob())
                   ->everyMinute();
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
