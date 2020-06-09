@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\BTApprovals;
 use App\BTApprovers;
 use App\BTApproverSetup;
 use App\BTRequisition;
@@ -15,7 +14,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
-use phpDocumentor\Reflection\Types\Collection;
 
 class SyncBudgetTrackerJob implements ShouldQueue
 {
