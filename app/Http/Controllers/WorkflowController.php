@@ -14,7 +14,6 @@ use App\Services\BTWorkflowService;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Dompdf\Options;
 
 class WorkflowController extends Controller
 {
@@ -113,7 +112,7 @@ class WorkflowController extends Controller
             $username = $username ?? strtolower(auth()->user()->uid);
 
             if($this->currentPositionMatchesUser($requisition, $username)){
-                $this->setRequisitionStatus($requisition, $status, $username);
+               $this->setRequisitionStatus($requisition, $status, $username);
             }
 
 
@@ -153,20 +152,22 @@ class WorkflowController extends Controller
         $comment = $request->get('comment');
         if($requisition->Status === $username)
         {
-            if($username === $requisition->approvers->Approver1){
-                $requisition->ApprovedComments1 = $comment;
-            } else if($username === $requisition->approvers->Approver2){
-                $requisition->ApprovedComments2 = $comment;
-            } else if($username === $requisition->approvers->Approver3){
-                $requisition->ApprovedComments3 = $comment;
-            } else if($username === $requisition->approvers->Approver4){
-                $requisition->ApprovedComments4 = $comment;
-            } else if($username === $requisition->approvers->Approver5){
-                $requisition->ApprovedComments5 = $comment;
-            } else if($username === $this->getUserFromEmail($requisition->approvers->ApproverTEEmail)){
+            if($username === $requisition->approvers->Approver1 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
+                $requisition->ApprovedComments1 .= $comment;
+            } else if($username === $requisition->approvers->Approver2 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver2")){
+                $requisition->ApprovedComments2 .= $comment;
+            } else if($username === $requisition->approvers->Approver3 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver3")){
+                $requisition->ApprovedComments3 .= $comment;
+            } else if($username === $requisition->approvers->Approver4 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver4")){
+                $requisition->ApprovedComments4 .= $comment;
+            } else if($username === $requisition->approvers->Approver5 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver5")){
+                $requisition->ApprovedComments5 .= $comment;
+            } else if($username === $requisition->approvers->ApproverTE || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverTE")){
                 $requisition->ApprovedCommentsTE = $comment;
-            } else if($username === $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail)){
-                $requisition->FinalApprovedComments = $comment;
+            } else if($username === $requisition->approvers->ApproverFinal || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverFinal")){
+                $requisition->FinalApprovedComments .= $comment;
+            } else {
+                $requisition->FinalApprovedComments .= 'Unknown approver position comments added to final approver comments field ... ' . $comment;
             }
             $requisition->save();
         }
@@ -296,10 +297,11 @@ class WorkflowController extends Controller
 
     }
 
-    private function setRequisitionStatus($requisition, $status, $username)
+    public function setRequisitionStatus($requisition, $status, $username)
     {
         $requisition = $this->setApproverFields($requisition, $status, $username);
 
+        //dd($requisition);
         //dd($this->nextApproverHasAlreadyApproved($requisition));
         //Call self to handle situation where the next approver has already approved this requisition in another position (mainly for Cory).
         if($this->nextApproverHasAlreadyApproved($requisition)) {
@@ -343,9 +345,9 @@ class WorkflowController extends Controller
             return $this->setApprover4($requisition, $status, $username);
         }else if($requisition->ApprovedBy5 === "" && $requisition->approvers->Approver5 === $username) {
             return $this->setApprover5($requisition, $status, $username);
-        }else if($requisition->ApprovedByTE === "" && $this->getUserFromEmail($requisition->approvers->ApproverTEEmail) === $username && $requisition->Technology === 'TE') {
+        }else if($requisition->ApprovedByTE === "" && $requisition->approvers->ApproverTE === $username && $requisition->Technology === 'TE') {
             return $this->setApproverTE($requisition, $status, $username);
-        }else if($requisition->FinalApprovedBy === "" && $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail) === $username) {
+        }else if($requisition->FinalApprovedBy === "" && $requisition->approvers->ApproverFinal === $username) {
             return $this->setApproverFinal($requisition, $status, $username);
         }
 
@@ -356,7 +358,7 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedBy1 = $username;
         $requisition->ApprovedStatus1 = $status;
-        $requisition->ApprovedDate1 = now();
+        $requisition->ApprovedDate1 = now()->format('m/d/Y');
         $this->getNextApprover($requisition, $status, 'ap1');
         $requisition->save();
         return $requisition;
@@ -366,7 +368,7 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedBy2 = $username;
         $requisition->ApprovedStatus2 = $status;
-        $requisition->ApprovedDate2 = now();
+        $requisition->ApprovedDate2 = now()->format('m/d/Y');
         $this->getNextApprover($requisition, $status, 'ap2');
         $requisition->save();
         return $requisition;
@@ -376,7 +378,7 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedBy3 = $username;
         $requisition->ApprovedStatus3 = $status;
-        $requisition->ApprovedDate3 = now();
+        $requisition->ApprovedDate3 = now()->format('m/d/Y');
         $this->getNextApprover($requisition, $status, 'ap3');
         $requisition->save();
         return $requisition;
@@ -386,7 +388,7 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedBy4 = $username;
         $requisition->ApprovedStatus4 = $status;
-        $requisition->ApprovedDate4 = now();
+        $requisition->ApprovedDate4 = now()->format('m/d/Y');
         $this->getNextApprover($requisition, $status, 'ap4');
         $requisition->save();
         return $requisition;
@@ -396,7 +398,7 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedBy5 = $username;
         $requisition->ApprovedStatus5 = $status;
-        $requisition->ApprovedDate5 = now();
+        $requisition->ApprovedDate5 = now()->format('m/d/Y');
         $this->getNextApprover($requisition, $status, 'ap5');
         $requisition->save();
         return $requisition;
@@ -406,8 +408,8 @@ class WorkflowController extends Controller
     {
         $requisition->ApprovedByTE = $username;
         $requisition->ApprovedStatusTE = $status;
-        $requisition->ApprovedDateTE = now();
-        $requisition->Status = $status === 'Rejected' ? 'Rejected' : $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail);
+        $requisition->ApprovedDateTE = now()->format('m/d/Y');
+        $requisition->Status = $status === 'Rejected' ? 'Rejected' : $requisition->approvers->ApproverFinal;
         $requisition->save();
         return $requisition;
     }
@@ -416,8 +418,8 @@ class WorkflowController extends Controller
     {
         $requisition->FinalApprovedBy = $username;
         $requisition->FinalApprovedStatus = $status;
-        $requisition->FinalApprovedDate = now();
-        $requisition->Status = ($status === 'Approved') ? 'Completed' : 'Rejected';
+        $requisition->FinalApprovedDate = now()->format('m/d/Y');
+        $requisition->Status = ($status === 'Approved') ? 'Approved' : 'Rejected';
         $requisition->save();
         return $requisition;
     }
@@ -444,8 +446,8 @@ class WorkflowController extends Controller
                     $approvers = "";
                     break;
             }
-            $approvers = (trim($approvers) === "" && $requisition->Technology === "TE") ? $this->getUserFromEmail($requisition->approvers->ApproverTEEmail) : $approvers;
-            $requisition->Status = (trim($approvers) === "") ? $this->getUserFromEmail($requisition->approvers->ApproverFinalEmail) : $approvers;
+            $approvers = (trim($approvers) === "" && $requisition->Technology === "TE") ? $requisition->approvers->ApproverTE : $approvers;
+            $requisition->Status = (trim($approvers) === "") ? $requisition->approvers->ApproverFinal : $approvers;
         }
         return $requisition;
     }
@@ -549,8 +551,8 @@ class WorkflowController extends Controller
 
     private function isRejected($requisition)
     {
-        if($requisition->ApprovedStatus1 === "Rejected" || $requisition->ApprovedStatus1 === "Completed" ) return true;
-        if($requisition->ApprovedStatus2 === "Rejected" || $requisition->ApprovedStatus2 === "Completed") return true;
+        if($requisition->ApprovedStatus1 === "Rejected") return true;
+        if($requisition->ApprovedStatus2 === "Rejected") return true;
         if($requisition->ApprovedStatus3 === "Rejected") return true;
         if($requisition->ApprovedStatus4 === "Rejected") return true;
         if($requisition->ApprovedStatus5 === "Rejected") return true;
@@ -576,9 +578,9 @@ class WorkflowController extends Controller
                 return $approvers->Approver4Email;
             case $approvers->Approver5:
                 return $approvers->Approver5Email;
-            case $this->getUserFromEmail($approvers->ApproverTEEmail):
+            case $approvers->ApproverTE:
                 return $approvers->ApproverTEEmail;
-            case $this->getUserFromEmail($approvers->ApproverFinalEmail):
+            case $approvers->ApproverFinal:
                 return $approvers->ApproverFinalEmail;
         }
 
@@ -589,32 +591,8 @@ class WorkflowController extends Controller
     private function approverWantsEmail($email)
     {
         $approver = BTApproverSetup::where('ApproverEmail', $email)->first();
-        if($approver->ReceiveEmails === "Yes") return true;
+        if(isset($approver->RecieveEmails) && $approver->ReceiveEmails === "Yes") return true;
         return false;
     }
 
-    private function verifyApprover()
-    {
-
-    }
-
-    private function approve()
-    {
-
-    }
-
-    private function reject()
-    {
-
-    }
-
-    private function emailNextApprover()
-    {
-
-    }
-
-    private function sendFinalEmail()
-    {
-
-    }
 }

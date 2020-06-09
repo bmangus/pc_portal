@@ -4,7 +4,7 @@
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="print(row.pk)"><font-awesome-icon icon="file-pdf"/></button>
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="openModal" ><font-awesome-icon icon="share"/></button>
             <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, rowIndex)">Approve</button>
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="rejectReq(row.pk, rowIndex)">Reject</button>
+            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="openRejectionModal">Reject</button>
         </div>
         <div ref='printarea' class="font-sans">
             <div class="flex w-full mb-3">
@@ -224,6 +224,9 @@
             <t-modal ref="modal-forward" :width="width">
                 <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor" v-on:load="hideModal"/>
             </t-modal>
+            <t-modal ref="rejection-modal" :width="width">
+                <workflow-rejection-modal :requisition-id="row.pk" :actor="actor" v-on:load="emitLoad"/>
+            </t-modal>
         </div>
     </div>
 </template>
@@ -249,6 +252,12 @@
                         this.$emit('load', true);
                     })
                     .catch(err=>this.$emit('load', true))
+            },
+            openRejectionModal(){
+              this.$refs['rejection-modal'].show();
+            },
+            emitLoad(){
+                this.$emit('load', true);
             },
             rejectReq(id, mid){
                 let actorString = (this.actor !== "") ? '/' + this.actor : "";

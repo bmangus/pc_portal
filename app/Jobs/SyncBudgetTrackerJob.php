@@ -15,6 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Mail;
+use phpDocumentor\Reflection\Types\Collection;
 
 class SyncBudgetTrackerJob implements ShouldQueue
 {
@@ -117,7 +118,11 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 $requisition = $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
 
                 //... then send initial email to first approver when new requisition is imported.
-                Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
+                if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
+                    $email = $this->getNextApproverEmail($requisition);
+                    if($email === null) dd($requisition);
+                    Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
+                }
             }
 
         }
@@ -148,7 +153,6 @@ class SyncBudgetTrackerJob implements ShouldQueue
     {
         $approvers = BTApprovers::where('ProjectCode', $requisition->Project)->first();
 
-
         switch($requisition->Status){
             case $approvers->Approver1:
                 return $approvers->Approver1Email;
@@ -160,14 +164,16 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 return $approvers->Approver4Email;
             case $approvers->Approver5:
                 return $approvers->Approver5Email;
-            case $this->getUserFromEmail($approvers->ApproverTEEmail):
+            case $approvers->ApproverTE:
                 return $approvers->ApproverTEEmail;
-            case $this->getUserFromEmail($approvers->ApproverFinalEmail):
+            case $approvers->ApproverFinal:
                 return $approvers->ApproverFinalEmail;
+            default:
+
+                $rec = BTApproverSetup::where('Approver', $requisition->Status)->first();
+                return $rec->ApproverEmail;
+
         }
-
-        return null;
-
     }
 
     private function getUserFromEmail($email) {
