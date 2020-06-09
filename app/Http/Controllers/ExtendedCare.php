@@ -13,10 +13,10 @@ class ExtendedCare extends Controller
     public function __construct()
     {
         $this->fm = new FluentFMRepository([
-            'file'=>env('EC_FM_FILE', 'SomeFile'),
-            'host'=>env('EC_FM_HOST', 'somewhere.com'),
-            'user'=>env('EC_FM_USERNAME','user'),
-            'pass'=>env('EC_FM_PASSWORD', 'password')
+            'file'=>config('app.ec_file', 'SomeFile'),
+            'host'=>config('app.ec_host', 'somewhere.com'),
+            'user'=>config('app.ec_username','user'),
+            'pass'=>config('app.ec_password', 'password')
         ]);
     }
 

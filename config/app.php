@@ -241,6 +241,14 @@ return [
     'bt_username' => env('BT_FM_USERNAME'),
     'bt_password' => env('BT_FM_PASSWORD'),
     'bt_host' => env('BT_FM_HOST'),
-    'bt_file' => env('BT_FM_FILE')
+    'bt_file' => env('BT_FM_FILE'),
+
+    /**
+     * Extended Care configs
+     */
+    'ec_username' => env('EC_FM_USERNAME'),
+    'ec_password' => env('EC_FM_PASSWORD'),
+    'ec_file' => env('EC_FM_FILE'),
+    'ec_host' => env('EC_FM_HOST'),
 
 ];
