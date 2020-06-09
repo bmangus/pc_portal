@@ -23,7 +23,7 @@ import VueHtml2Canvas from 'vue-html2canvas';
 
 import VueTailwind from 'vue-tailwind';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import {faFilePdf, faSave, faPaperPlane, faShare, faSpinner} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf, faSave, faPaperPlane, faShare, faSpinner, faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faFilePdf);
@@ -31,6 +31,7 @@ library.add(faSave);
 library.add(faPaperPlane);
 library.add(faShare);
 library.add(faSpinner);
+library.add(faTimesCircle);
 
 
 
@@ -45,6 +46,8 @@ Vue.component('workflow-requisition-modal', require('./components/WorflowRequisi
 Vue.component('workflow-comment', require('./components/WorkflowComment').default);
 Vue.component('workflow-forward-modal', require('./components/WorkflowForwardModal').default);
 Vue.component('workflow-reassign-modal', require('./components/WorkflowReassignModal').default);
+Vue.component('workflow-rejection-modal', require('./components/WorkflowRejectionModal').default);
+
 
 
 /**
