@@ -123,6 +123,7 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -233,5 +234,13 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    /*
+     * BT Workflow configs
+     */
+    'bt_username' => env('BT_FM_USERNAME'),
+    'bt_password' => env('BT_FM_PASSWORD'),
+    'bt_host' => env('BT_FM_HOST'),
+    'bt_file' => env('BT_FM_FILE')
 
 ];
