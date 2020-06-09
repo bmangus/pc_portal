@@ -43,21 +43,21 @@ class BTNextApprover extends Mailable
             ->with([
                 'approvalLink'=>$approvalLink,
                 'rejectionLink'=>$rejectionLink,
-                'btLink'=>env('APP_URL'). '/staff/workflow'
+                'btLink'=>config('app.url'). '/staff/workflow'
             ]);
     }
 
     private function buildApprovalLink()
     {
         $token = $this->emailToken->token;
-        return env('APP_URL')
+        return config('app.url')
             . "/staff/workflowApproval/budgetTracker/". $token . "/Approved";
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
-        return env('APP_URL')
+        return config('app.url')
             . "/staff/workflowApproval/budgetTracker/". $token . "/Rejected";
     }
     private function generateEmailToken()
