@@ -95,11 +95,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function findActiveFMRequisitions()
     {
-        $this->requisitions = $this->bt
-            ->find('Web_Requisition')
-            ->where('Web_Status_New', 1)
-            ->limit(10000)
-            ->get();
+        try{
+            $this->requisitions = $this->bt
+                ->find('Web_Requisition')
+                ->where('Web_Status_New', 1)
+                ->limit(10000)
+                ->get();
+        } catch (\Exception $e) {
+            $this->requisitions = [];
+        }
 
         return $this;
     }
