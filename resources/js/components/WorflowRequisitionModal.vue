@@ -206,13 +206,13 @@
                                 <td class="w-1/6 border-2 border-black">Total</td>
                             </tr>
                             <tr v-for="item in row.requisition_items">
-                                <td class="border-2 border-black">{{item.Qty}}</td>
+                                <td class="border-2 border-black">{{item.QtyAmt}}</td>
                                 <td class="border-2 border-black">{{item.FixedAsset}}</td>
                                 <td class="border-2 border-black">{{item.ItemCount}}</td>
                                 <td class="border-2 border-black">{{item.Description}}</td>
                                 <td class="border-2 border-black">{{item.Object}}</td>
                                 <td class="border-2 border-black">{{parseFloat(item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
-                                <td class="border-2 border-black">{{parseFloat(item.Qty * item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="border-2 border-black">{{parseFloat(item.Total).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                             </tr>
                             </tbody>
                         </table>
