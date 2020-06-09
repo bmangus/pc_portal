@@ -7,7 +7,7 @@
                         <a class="block no-underline px-4 py-2 hover" @click="loadActive">My Requisitions</a>
                     </li>
                     <li>
-                        <a class="block no-underline px-4 py-2 hover" @click="loadCompleted">Completed</a>
+                        <a class="block no-underline px-4 py-2 hover" @click="loadCompleted">Approved</a>
                     </li>
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadRejected">Rejected</a>
@@ -117,7 +117,7 @@
             loadCompleted(){
                 this.selectedStatus = "Completed";
                 this.actor = "";
-                axios.get('/staff/workflowBackend/budgetTracker/Completed')
+                axios.get('/staff/workflowBackend/budgetTracker/Approved')
                     .then(response => {
                         this.requisitions = response.data;
                         this.loading = false;
