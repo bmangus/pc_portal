@@ -107,11 +107,29 @@ class WorkflowController extends Controller
 
             if($this->isRejected($requisition)) return response()->json(['error']);
 
-            //return response()->json(auth()->user()->uid);
-
             $username = $username ?? strtolower(auth()->user()->uid);
 
-            if($this->currentPositionMatchesUser($requisition, $username)){
+            if($username !== strtolower(auth()->user()->uid)){
+                $requisition->Reassigned = true;
+                $requisition->ReassignedBy = $username;
+                if($this->checkApprover1($requisition, $username)){
+                    $requisition->ReassignedPosition = 'Approver1';
+                }else if ($this->checkApprover2($requisition, $username)){
+                    $requisition->ReassignedPosition = 'Approver2';
+                }else if ($this->checkApprover3($requisition, $username)){
+                    $requisition->ReassignedPosition = 'Approver3';
+                }else if ($this->checkApprover4($requisition, $username)){
+                    $requisition->ReassignedPosition = 'Approver4';
+                }else if ($this->checkApprover5($requisition, $username)){
+                    $requisition->ReassignedPosition = 'Approver5';
+                }else if ($this->checkTEApprover($requisition, $username)){
+                    $requisition->ReassignedPosition = 'ApproverTE';
+                }else{
+                    $requisition->ReassignedPosition = 'ApproverFinal';
+                }
+                $requisition->Status = strtolower(auth()->user()->uid);
+                $this->setRequisitionStatus($requisition, $status, $username);
+            }else if($this->currentPositionMatchesUser($requisition, $username)){
                $this->setRequisitionStatus($requisition, $status, $username);
             }
 
@@ -506,7 +524,7 @@ class WorkflowController extends Controller
         return  $requisition->Technology === "TE" &&
                 $requisition->ApprovedByTE === "" &&
                 $requisition->ApprovedStatusTE === "" &&
-                //$requisition->approvers->ApproverTE === $requisition->Status &&
+                $requisition->approvers->ApproverTE === $requisition->Status &&
                 $requisition->Status === $username;
 
     }
@@ -516,12 +534,8 @@ class WorkflowController extends Controller
         if($this->isRejected($requisition)) return false;
         return  $requisition->FinalApprovedBy === "" &&
                 $requisition->FinalApprovedStatus === "" &&
-                //$requisition->approvers->ApproverFinalEmail === $requisition->Status . '@putnamcityschools.org' &&
+                $requisition->approvers->ApproverFinal === $requisition->Status &&
                 $requisition->Status === $username;
-    }
-
-    private function getUserFromEmail($email) {
-        return substr($email, 0, strpos($email, '@'));
     }
 
     private function canAccess($bypass = false)
