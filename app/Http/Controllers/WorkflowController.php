@@ -242,12 +242,13 @@ class WorkflowController extends Controller
 
         if($tokenRecord->is_valid){
             $requisition = BTRequisition::findOrFail($tokenRecord->requisition_id);
+            $ponum = $requisition->PONumber;
             $this->requisitionAction($app, $tokenRecord->requisition_id, $status, $tokenRecord->username, true);
             $tokenRecord->is_valid = false;
             $tokenRecord->save();
-            return view('workflow.emailApproval')->with(['message'=>"This requisition has been successfully ${status}."]);
+            return view('workflow.emailApproval')->with(['message'=>"PO #${ponum} requisition has been successfully ${status}.", 'valid'=>1, 'status' =>$status, 'ponum'=>$ponum]);
         } else {
-            return view('workflow.emailApproval')->with(['message'=>'This link is no longer valid.']);
+            return view('workflow.emailApproval')->with(['message'=>'This link is no longer valid.', 'valid'=>0]);
         }
     }
 
