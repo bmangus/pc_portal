@@ -264,7 +264,7 @@ class WorkflowController extends Controller
             $this->requisitionAction($app, $tokenRecord->requisition_id, $status, $tokenRecord->username, true);
             $tokenRecord->is_valid = false;
             $tokenRecord->save();
-            return view('workflow.emailApproval')->with(['message'=>"PO #${$ponum} requisition has been successfully ${status}.", 'valid'=>1, 'status' =>$status, 'ponum'=>$ponum]);
+            return view('workflow.emailApproval')->with(['message'=>"PO #${ponum} requisition has been successfully ${status}.", 'valid'=>1, 'status' =>$status, 'ponum'=>$ponum]);
         } else {
             return view('workflow.emailApproval')->with(['message'=>'This link is no longer valid.', 'valid'=>0]);
         }
