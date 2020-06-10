@@ -122,7 +122,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 //... then send initial email to first approver when new requisition is imported.
                 if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
                     $email = $this->getNextApproverEmail($requisition);
-                    if($email === null) dd($requisition);
+
                     Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
                 }
             }

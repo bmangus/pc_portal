@@ -149,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            <div class="flex w-full mx-2 px-2">
+            <div class="flex w-full mx-2 px-3">
                 <span>Instructions</span>
             </div>
             <div class="flex w-full">
@@ -219,7 +219,7 @@
                     </div>
                 </div>
             </div>
-            <p class="foot" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
+            <p class="foot mx-4" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
             <workflow-comment :requisitionId="row.pk" :actor="actor"/>
             <t-modal ref="modal-forward" :width="width">
                 <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor" v-on:load="hideModal"/>
