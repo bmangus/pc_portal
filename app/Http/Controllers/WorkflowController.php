@@ -105,11 +105,11 @@ class WorkflowController extends Controller
         if($app === 'budgetTracker'){
             $requisition = BTRequisition::findOrFail($id);
 
+            $realUser = strtolower(auth()->user()->uid);
+
             if($this->isRejected($requisition)) return response()->json(['error']);
 
-            $username = $username ?? strtolower(auth()->user()->uid);
-
-            if($username !== strtolower(auth()->user()->uid)){
+            if($username !== $realUser){
                 $requisition->Reassigned = true;
                 $requisition->ReassignedBy = $username;
                 if($this->checkApprover1($requisition, $username)){
@@ -127,10 +127,10 @@ class WorkflowController extends Controller
                 }else{
                     $requisition->ReassignedPosition = 'ApproverFinal';
                 }
-                $requisition->Status = strtolower(auth()->user()->uid);
-                $this->setRequisitionStatus($requisition, $status, $username);
-            }else if($this->currentPositionMatchesUser($requisition, $username)){
-               $this->setRequisitionStatus($requisition, $status, $username);
+                $requisition->Status = $realUser;
+                $this->setRequisitionStatus($requisition, $status, $realUser);
+            }else if($this->currentPositionMatchesUser($requisition, $realUser)){
+               $this->setRequisitionStatus($requisition, $status, $realUser);
             }
 
 
