@@ -103,13 +103,18 @@ class WorkflowController extends Controller
     {
         $this->canAccess($bypassAuth);
         if($app === 'budgetTracker'){
+
             $requisition = BTRequisition::findOrFail($id);
 
             if($this->isRejected($requisition)) return response()->json(['error']);
 
             //return response()->json(auth()->user()->uid);
 
-            $username = $username ?? strtolower(auth()->user()->uid);
+            if($username !== strtolower(auth()->user()->uid)){
+                $this->reassignRequisition($id, $username, strtolower(auth()->user()->uid), true, $requisition);
+            }
+
+            $username = strtolower(auth()->user()->uid);
 
             if($this->currentPositionMatchesUser($requisition, $username)){
                 $this->setRequisitionStatus($requisition, $status, $username);
@@ -176,29 +181,7 @@ class WorkflowController extends Controller
 
     public function reassign($id, Request $request)
     {
-        $requisition = BTRequisition::findOrFail($id);
-        $requisition->Reassigned = true;
-        $requisition->ReassignedBy = $request->get('from_user') ?? auth()->user()->uid;
-        if($this->checkApprover1($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'Approver1';
-        }else if ($this->checkApprover2($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'Approver2';
-        }else if ($this->checkApprover3($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'Approver3';
-        }else if ($this->checkApprover4($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'Approver4';
-        }else if ($this->checkApprover5($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'Approver5';
-        }else if ($this->checkTEApprover($requisition, $request->get('from_user'))){
-            $requisition->ReassignedPosition = 'ApproverTE';
-        }else{
-            $requisition->ReassignedPosition = 'ApproverFinal';
-        }
-        $requisition->Status = $request->get('to_user');
-        $nextApproverEmail = $requisition->Status . '@putnamcityschools.org';
-        $requisition->save();
-
-        if($this->approverWantsEmail($nextApproverEmail)) Mail::to($nextApproverEmail)->send(new BTNextApprover($requisition));
+        $this->reassignRequisition($id, $request->get('from_user'), $request->get('to_user'), false);
         return response()->json(['success']);
     }
 
@@ -250,6 +233,35 @@ class WorkflowController extends Controller
         } else {
             return view('workflow.emailApproval')->with(['message'=>'This link is no longer valid.', 'valid'=>0]);
         }
+    }
+
+    private function reassignRequisition($id, $from_user, $to_user, $shouldBypassEmail, $requisition = null)
+    {
+        $requisition = $requisition ?? BTRequisition::findOrFail($id);
+        $requisition->Reassigned = true;
+        $requisition->ReassignedBy = $from_user ?? auth()->user()->uid;
+        if($this->checkApprover1($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'Approver1';
+        }else if ($this->checkApprover2($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'Approver2';
+        }else if ($this->checkApprover3($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'Approver3';
+        }else if ($this->checkApprover4($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'Approver4';
+        }else if ($this->checkApprover5($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'Approver5';
+        }else if ($this->checkTEApprover($requisition, $from_user)){
+            $requisition->ReassignedPosition = 'ApproverTE';
+        }else{
+            $requisition->ReassignedPosition = 'ApproverFinal';
+        }
+        $requisition->Status = $to_user;
+        $nextApproverEmail = $to_user . '@putnamcityschools.org';
+        $requisition->save();
+
+        $this->sendStatusToFM($requisition);
+
+        if(!$shouldBypassEmail && $this->approverWantsEmail($nextApproverEmail)) Mail::to($nextApproverEmail)->send(new BTNextApprover($requisition));
     }
 
     private function sendStatusToFM($r)
@@ -592,7 +604,7 @@ class WorkflowController extends Controller
     private function approverWantsEmail($email)
     {
         $approver = BTApproverSetup::where('ApproverEmail', $email)->first();
-        if(isset($approver->RecieveEmails) && $approver->ReceiveEmails === "Yes") return true;
+        if($approver !== null && $approver->ReceiveEmails === "Yes") return true;
         return false;
     }
 

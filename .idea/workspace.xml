@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="committing some changes to try an update.">
+    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/BTApprovalLog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_10_215516_create_b_t_approval_logs_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,9 +15,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -176,7 +175,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -222,18 +220,6 @@
         <item itemvalue="PHPUnit.ExampleTest.testBTSyncJob" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -297,7 +283,9 @@
       <workItem from="1591479801377" duration="13543000" />
       <workItem from="1591619081840" duration="23263000" />
       <workItem from="1591666827461" duration="6087000" />
-      <workItem from="1591723177404" duration="12129000" />
+      <workItem from="1591723177404" duration="12947000" />
+      <workItem from="1591842685236" duration="35000" />
+      <workItem from="1591842764952" duration="4364000" />
     </task>
     <task id="LOCAL-00001" summary="fixed image stretching issue.">
       <created>1563934896103</created>
@@ -628,31 +616,42 @@
       <option name="project" value="LOCAL" />
       <updated>1591755554040</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="reverting impersonation change from last night.">
+      <created>1591814850249</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1591814850249</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Adding back in email token approval changes.">
+      <created>1591815023393</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1591815023393</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated workflow modal vue template to use new download url." />
-    <MESSAGE value="Added comments to pdf in bt. Added money formatter to pdf blade template." />
     <MESSAGE value="Added super user filter for impersonation so that only super users can impersonate." />
     <MESSAGE value="removed debug alert" />
     <MESSAGE value="Fixed bug with rejection." />
@@ -676,20 +675,26 @@
     <MESSAGE value="Another fix to impersonation" />
     <MESSAGE value="Fixed a few cosmetic things for Cory." />
     <MESSAGE value="committing some changes to try an update." />
-    <option name="LAST_COMMIT_MESSAGE" value="committing some changes to try an update." />
+    <MESSAGE value="reverting impersonation change from last night." />
+    <MESSAGE value="Adding back in email token approval changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding back in email token approval changes." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="-478" y="-1031" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1591842704979">
+      <screen x="-1608" y="-1417" width="2560" height="1417" />
+    </state>
+    <state x="-478" y="-1031" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591842704979" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591143724051">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1591814850050">
+    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1591815023240">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639597429" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645748338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
-    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591814850050" />
+    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591815023240" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591723396642" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1591723472258" />
@@ -698,23 +703,24 @@
     </state>
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1591814856361">
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1591815028266">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639603113" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645884214" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591814856361" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591815028266" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1591723406168" />
     <state x="578" y="330" key="Vcs.Push.Dialog.v2/0.23.1680.960@0.23.1680.960" timestamp="1591723479633" />
-    <state x="629" y="390" key="com.intellij.ide.util.TipDialog" timestamp="1591723177729">
-      <screen x="0" y="23" width="1680" height="958" />
+    <state x="629" y="402" key="com.intellij.ide.util.TipDialog" timestamp="1591842685366">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="-650" y="-874" key="com.intellij.ide.util.TipDialog/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591619081939" />
     <state x="-650" y="-874" key="com.intellij.ide.util.TipDialog/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591667890756" />
     <state x="1718" y="-696" key="com.intellij.ide.util.TipDialog/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@952.-1129.2048.1129" timestamp="1591479801939" />
     <state x="-651" y="-888" key="com.intellij.ide.util.TipDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591319937652" />
+    <state x="629" y="402" key="com.intellij.ide.util.TipDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591842685366" />
     <state x="629" y="390" key="com.intellij.ide.util.TipDialog/0.23.1680.958@0.23.1680.958" timestamp="1591723177729" />
     <state x="-545" y="-796" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591799985273">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
@@ -724,12 +730,13 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-633" y="-922" key="git4idea.merge.GitPullDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591154393488" />
-    <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup" timestamp="1591752810037">
+    <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup" timestamp="1591844308010">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-838" y="-1102" width="1021" height="914" key="search.everywhere.popup/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591584616470" />
     <state x="-838" y="-1102" width="1021" height="914" key="search.everywhere.popup/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591668128351" />
     <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591752810037" />
     <state x="505" y="233" width="670" height="676" key="search.everywhere.popup/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591131534551" />
+    <state x="-838" y="-1120" width="1021" height="928" key="search.everywhere.popup/-1608.-1440.2560.1440/0.23.1680.960/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591844308010" />
   </component>
 </project>
