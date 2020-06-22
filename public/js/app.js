@@ -12714,7 +12714,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'workflow-table-2',
   props: ['imgurl', 'authUser'],
@@ -12826,6 +12825,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       this.$refs.acting.hide();
+      this.selectedStatus = this.actor;
       this.loading = true;
       this.noRequisitions = false;
       axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor).then(function (response) {
@@ -12873,34 +12873,6 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     width: function width() {
       return window.innerWidth * .85;
-    },
-    sortColumns: function sortColumns(name, asc) {
-      function sortAsc(a, b) {
-        if (a[name] < b[name]) {
-          return -1;
-        }
-
-        if (a[name] > b[name]) {
-          return 1;
-        }
-
-        return 0;
-      }
-
-      function sortDesc(a, b) {
-        if (a[name] < b[name]) {
-          return 1;
-        }
-
-        if (a[name] > b[name]) {
-          return -1;
-        }
-
-        return 0;
-      }
-
-      if (asc) return this.requisitions.sort(sortAsc);
-      return this.requisitions.sort(sortDesc);
     },
     filteredRequisitions: function filteredRequisitions() {
       var _this6 = this;
@@ -51738,12 +51710,6 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          this.actor
-            ? _c("div", { staticClass: "mt-3 ml-2 text-red-500" }, [
-                _vm._v("Currently Acting As: " + _vm._s(this.actor))
-              ])
-            : _vm._e(),
-          _vm._v(" "),
           _c("div", { staticClass: "mt-3 ml-auto mr-2" }, [
             _c("input", {
               directives: [
@@ -51817,7 +51783,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "row" },
+                        { staticClass: "flex-row" },
                         [
                           _vm._v(
                             "\n                            PO Number\n                            "
@@ -51857,7 +51823,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "row" },
+                        { staticClass: "flex-row" },
                         [
                           _vm._v(
                             "\n                            Vendor\n                            "
@@ -51897,7 +51863,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "row" },
+                        { staticClass: "flex-row" },
                         [
                           _vm._v(
                             "\n                            Site\n                            "
@@ -51937,7 +51903,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "row" },
+                        { staticClass: "flex-row" },
                         [
                           _vm._v(
                             "\n                            Project\n                            "
@@ -51977,7 +51943,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "row" },
+                        { staticClass: "flex-row" },
                         [
                           _vm._v(
                             "\n                            Cost\n                            "
@@ -52204,7 +52170,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-6 py-4" }, [
+    return _c("div", { staticClass: "m-auto" }, [
       _c("div", { staticClass: "font-bold text-xl mb-2" }, [
         _vm._v("No Results:")
       ]),
