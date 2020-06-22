@@ -17,7 +17,6 @@
                     </li>
                 </ul>
             </t-dropdown>
-            <div v-if="this.actor" class="mt-3 ml-2 text-red-500">Currently Acting As: {{this.actor}}</div>
             <div class="mt-3 ml-auto mr-2">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" v-model="searchStr" placeholder="Search.."/>
             </div>
@@ -27,7 +26,7 @@
             <div class="loader">Loading...</div>
         </div>
         <div v-else-if="noRequisitions" class="flex inset-auto">
-            <div class="px-6 py-4">
+            <div class="m-auto">
                 <div class="font-bold text-xl mb-2">No Results:</div>
                 <p class="text-gray-700 text-base">
                     No requisitions match the current filter criteria.
@@ -39,7 +38,7 @@
                 <thead>
                     <tr class="bg-white">
                         <th v-on:click="sort('PONumber')" class="px-4 py-2">
-                            <div class="row">
+                            <div class="flex-row">
                                 PO Number
                                 <font-awesome-icon class="ml-2 mt-1" v-if="this.currentSort === 'PONumber' && this.currentSortDir === 'asc'" icon="sort-up"/>
                                 <font-awesome-icon class="ml-2 mt-1" v-else-if="this.currentSort === 'PONumber' && this.currentSortDir === 'desc'" icon="sort-down"/>
@@ -47,7 +46,7 @@
                             </div>
                         </th>
                         <th v-on:click="sort('Vendor')" class="px-4 py-2">
-                            <div class="row">
+                            <div class="flex-row">
                                 Vendor
                                 <font-awesome-icon class="ml-2 mt-1" v-if="this.currentSort === 'Vendor' && this.currentSortDir === 'asc'" icon="sort-up"/>
                                 <font-awesome-icon class="ml-2 mt-1" v-else-if="this.currentSort === 'Vendor' && this.currentSortDir === 'desc'" icon="sort-down"/>
@@ -55,7 +54,7 @@
                             </div>
                         </th>
                         <th v-on:click="sort('ShippingCompany')" class="px-4 py-2">
-                            <div class="row">
+                            <div class="flex-row">
                                 Site
                                 <font-awesome-icon class="ml-2 mt-1" v-if="this.currentSort === 'ShippingCompany' && this.currentSortDir === 'asc'" icon="sort-up"/>
                                 <font-awesome-icon class="ml-2 mt-1" v-else-if="this.currentSort === 'ShippingCompany' && this.currentSortDir === 'desc'" icon="sort-down"/>
@@ -63,7 +62,7 @@
                             </div>
                         </th>
                         <th v-on:click="sort('Project')" class="px-4 py-2">
-                            <div class="row">
+                            <div class="flex-row">
                                 Project
                                 <font-awesome-icon class="ml-2 mt-1" v-if="this.currentSort === 'Project' && this.currentSortDir === 'asc'" icon="sort-up"/>
                                 <font-awesome-icon class="ml-2 mt-1" v-else-if="this.currentSort === 'Project' && this.currentSortDir === 'desc'" icon="sort-down"/>
@@ -71,7 +70,7 @@
                             </div>
                         </th>
                         <th v-on:click="sort('GrandTotal')" class="px-4 py-2">
-                            <div class="row">
+                            <div class="flex-row">
                                 Cost
                                 <font-awesome-icon class="ml-2 mt-1" v-if="this.currentSort === 'GrandTotal' && this.currentSortDir === 'asc'" icon="sort-up"/>
                                 <font-awesome-icon class="ml-2 mt-1" v-else-if="this.currentSort === 'GrandTotal' && this.currentSortDir === 'desc'" icon="sort-down"/>
@@ -229,6 +228,7 @@
             },
             impersonate(){
                 this.$refs.acting.hide();
+                this.selectedStatus = this.actor;
                 this.loading = true;
                 this.noRequisitions = false;
                 axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor)
@@ -274,28 +274,6 @@
         computed: {
             width(){
                 return window.innerWidth * .85;
-            },
-            sortColumns(name, asc){
-                function sortAsc(a, b) {
-                    if(a[name] < b[name]){
-                        return -1;
-                    }
-                    if(a[name] > b[name]){
-                        return 1;
-                    }
-                    return 0;
-                }
-                function sortDesc(a, b) {
-                    if(a[name] < b[name]){
-                        return 1;
-                    }
-                    if(a[name] > b[name]){
-                        return -1;
-                    }
-                    return 0;
-                }
-                if(asc) return this.requisitions.sort(sortAsc);
-                return this.requisitions.sort(sortDesc);
             },
             filteredRequisitions(){
                 if(this.requisitions.length > 0){
