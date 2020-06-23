@@ -108,12 +108,15 @@ class WorkflowController extends Controller
 
             if($this->isRejected($requisition)) return response()->json(['error']);
 
-            //return response()->json(auth()->user()->uid);
+            //get passed in user or assign to current logged in user
+            $username = $username ?? strtolower(auth()->user()->uid);
 
+            //reassign if the logged in user is not the same as the passed in user
             if($username !== strtolower(auth()->user()->uid)){
                 $this->reassignRequisition($id, $username, strtolower(auth()->user()->uid), true, $requisition);
             }
 
+            //set to current logged in user
             $username = strtolower(auth()->user()->uid);
 
             if($this->currentPositionMatchesUser($requisition, $username)){

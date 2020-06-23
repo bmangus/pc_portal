@@ -182,7 +182,7 @@
                                 <td class="border-2 border-black">{{row.Function}}</td>
                                 <td class="border-2 border-black">{{row.Program}}</td>
                                 <td class="border-2 border-black">{{row.Subject}}</td>
-                                <td class="border-2 border-black">{{row.JobClass}}</td>
+                                <td class="border-2 border-black">{{row.OCASiteNo}}</td>
                                 <td class="border-2 border-black">{{row.Site}}</td>
                                 <td class="border-2 border-black">{{row.PONumber}}</td>
                             </tr>
@@ -208,7 +208,7 @@
                             <tr v-for="item in row.requisition_items">
                                 <td class="border-2 border-black">{{item.QtyAmt}}</td>
                                 <td class="border-2 border-black">{{item.FixedAsset}}</td>
-                                <td class="border-2 border-black">{{item.ItemCount}}</td>
+                                <td class="border-2 border-black">{{item.CatalogNo}}</td>
                                 <td class="border-2 border-black">{{item.Description}}</td>
                                 <td class="border-2 border-black">{{item.Object}}</td>
                                 <td class="border-2 border-black">{{parseFloat(item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
