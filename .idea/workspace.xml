@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="committing production assets">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowComment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowComment.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -290,14 +292,7 @@
       <workItem from="1592786965192" duration="8975000" />
       <workItem from="1592836592520" duration="646000" />
       <workItem from="1592869821701" duration="4478000" />
-      <workItem from="1592934857062" duration="1037000" />
-    </task>
-    <task id="LOCAL-00008" summary="Multiple fixes for bugs.">
-      <created>1572011476345</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1572011476345</updated>
+      <workItem from="1592934857062" duration="1350000" />
     </task>
     <task id="LOCAL-00009" summary="minor front end fixes.">
       <created>1572011943071</created>
@@ -635,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592937295736</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="committing production assets">
+      <created>1592937533073</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1592937533073</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -693,7 +695,7 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="0" y="0" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1592937306255">
+    <state x="0" y="0" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1592937930752">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639597429" />
@@ -701,7 +703,7 @@
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
     <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876449494" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592937306255" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592937930752" />
     <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591927571048" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1591723472258" />
     <state x="-671" y="-1092" key="RollbackChangesDialog" timestamp="1591813135245">
@@ -709,7 +711,7 @@
     </state>
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="578" y="335" key="Vcs.Push.Dialog.v2" timestamp="1592937312209">
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2" timestamp="1592937541084">
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639603113" />
@@ -717,7 +719,7 @@
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876456214" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
-    <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1592937312209" />
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1592937541084" />
     <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1591927579758" />
     <state x="578" y="330" key="Vcs.Push.Dialog.v2/0.23.1680.960@0.23.1680.960" timestamp="1591723479633" />
     <state x="629" y="402" key="com.intellij.ide.util.TipDialog" timestamp="1591842685366">

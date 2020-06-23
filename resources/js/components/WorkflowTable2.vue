@@ -148,11 +148,11 @@
             openModal(id){
                 console.log(this.$refs['modal-'+id]);
                 this.$refs['modal-'+id][0].show();
-                this.$refs['modal-'+id].show();
+                //this.$refs['modal-'+id].show();
             },
             openReassignModal(id){
                 this.$refs['reassign-modal-'+id][0].show();
-                this.$refs['reassign-modal-'+id].show();
+                //this.$refs['reassign-modal-'+id].show();
             },
             load(){
                 if(this.actor === ""){
@@ -279,7 +279,7 @@
             },
             filteredRequisitions(){
                 if(this.requisitions.length > 0){
-                   return this.filteredRequisitions = this.requisitions.filter(req => {
+                   return this.requisitions.filter(req => {
                         return req.PONumber.toLowerCase().includes(this.searchStr.toLowerCase()) ||
                         req.Vendor.toLowerCase().includes(this.searchStr.toLowerCase()) ||
                         req.ShippingCompany.toLowerCase().includes(this.searchStr.toLowerCase()) ||
