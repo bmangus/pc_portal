@@ -35,7 +35,7 @@
             getComments(){
                 axios.get('/staff/workflowApi/getComments/' + this.requisitionId)
                     .then( res => this.comments = res.data )
-                    .catch( error = console.log(error));
+                    .catch( error => console.log(error));
             },
             saveComment(){
                 const formData = new FormData();
