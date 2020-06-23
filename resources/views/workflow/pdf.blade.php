@@ -311,7 +311,7 @@
                     <td class="border">{{$po->Function}}</td>
                     <td class="border">{{$po->Program}}</td>
                     <td class="border">{{$po->Subject}}</td>
-                    <td class="border">{{$po->JobClass}}</td>
+                    <td class="border">{{$po->OCASiteNo}}</td>
                     <td class="border">{{$po->Site}}</td>
                     <td class="border">{{$po->PONumber}}</td>
                 </tr>
@@ -333,7 +333,7 @@
                     <tr>
                         <td class="border">{{$i->QtyAmt}}</td>
                         <td class="border">{{$i->FixedAsset}}</td>
-                        <td class="border">{{$i->ItemCount}}</td>
+                        <td class="border">{{$i->CatalogNo}}</td>
                         <td class="border">{{$i->Description}}</td>
                         <td class="border">{{$i->Object}}</td>
                         <td class="border">${{number_format($i->UnitPrice, 2, '.', ',')}}</td>
