@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="" />
+    <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -287,14 +290,8 @@
       <workItem from="1592182698856" duration="607000" />
       <workItem from="1592786965192" duration="8975000" />
       <workItem from="1592836592520" duration="646000" />
-      <workItem from="1592869821701" duration="3277000" />
-    </task>
-    <task id="LOCAL-00006" summary="Added most of the parts of Workflow to the master project.">
-      <created>1571024331958</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1571024331958</updated>
+      <workItem from="1592869821701" duration="4478000" />
+      <workItem from="1592934857062" duration="796000" />
     </task>
     <task id="LOCAL-00007" summary="Added missing files.">
       <created>1571024970385</created>
@@ -632,7 +629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592876069678</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="committing production assets">
+      <created>1592876449806</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1592876449806</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,7 +658,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed a few more bugs" />
     <MESSAGE value="Added missing approved dates." />
     <MESSAGE value="added missing period in .pdf." />
     <MESSAGE value="fixed a few more bugs" />
@@ -679,7 +682,8 @@
     <MESSAGE value="Updated BT front end with column sorting and search functionality." />
     <MESSAGE value="Fixed a few other minor ui issues." />
     <MESSAGE value="Fixed issue with BT not following approval chain correctly. Fixed issue with wrong fields on requisitions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with BT not following approval chain correctly. Fixed issue with wrong fields on requisitions." />
+    <MESSAGE value="committing production assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="committing production assets" />
   </component>
   <component name="WindowStateProjectService">
     <state x="-478" y="-1031" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1591842704979">
@@ -690,13 +694,13 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
-    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1592876069381">
+    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2" timestamp="1592876449494">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639597429" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645748338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
-    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876069381" />
+    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876449494" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591927571048" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1591723472258" />
@@ -705,13 +709,13 @@
     </state>
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1592876078733">
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1592876456214">
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639603113" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645884214" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876078733" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876456214" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1591927579758" />
     <state x="578" y="330" key="Vcs.Push.Dialog.v2/0.23.1680.960@0.23.1680.960" timestamp="1591723479633" />
