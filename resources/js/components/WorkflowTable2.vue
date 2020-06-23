@@ -283,8 +283,8 @@
                         return req.PONumber.toLowerCase().includes(this.searchStr.toLowerCase()) ||
                         req.Vendor.toLowerCase().includes(this.searchStr.toLowerCase()) ||
                         req.ShippingCompany.toLowerCase().includes(this.searchStr.toLowerCase()) ||
-                        req.Project.toString().toLowerCase().includes(this.searchStr.toLowerCase()) ||
-                        parseFloat(row.GrandTotal).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").includes(this.searchStr.toLowerCase())
+                        req.Project.toString().toLowerCase().includes(this.searchStr.toLowerCase());
+                        //parseFloat(row.GrandTotal).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",").includes(this.searchStr.toLowerCase())
                     });
                 } else {
                     return [];
