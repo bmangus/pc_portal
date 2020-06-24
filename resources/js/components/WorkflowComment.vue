@@ -1,7 +1,7 @@
 <template>
     <div class="flex w-full">
         <div class="w-full m-2 col">
-            <div class="h4">Comments:</div>
+            <span>Approver Comments:</span>
             <div class="w-full p-2 border-2 h-16 border-black">
                 <div v-for="c in comments">{{c}}</div>
             </div>

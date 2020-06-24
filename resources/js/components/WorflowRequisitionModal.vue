@@ -159,6 +159,16 @@
                     </div>
                 </div>
             </div>
+            <div class="flex w-full mx-2 px-3">
+                <span>Comments</span>
+            </div>
+            <div class="flex w-full">
+                <div class="w-full col">
+                    <div class="m-2 p-2 border-2 border-black">
+                        {{(row.Comments.length < 1) ? "No comments available." : row.Comments}}
+                    </div>
+                </div>
+            </div>
             <div class="flex w-full">
                 <div class="w-full col">
                     <div class="m-2">
