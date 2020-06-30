@@ -26,7 +26,7 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
 
         $this->approvalFields = [
             'ApprovedBy1', 'ApprovedStatus1', 'ApprovedDate1', 'ApprovedComments1',
-            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
+            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE', 'Status'
         ];
 
         $this->approvalDates = [
