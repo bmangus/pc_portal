@@ -9,10 +9,10 @@
                         <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Dashboard
                         </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
+                        <a href="/staff/workflow" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Budget Tracker
                         </a>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
+                        <a href="/staff/ATworkflow" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
                             Activity Tracker
                         </a>
                     </t-dropdown>
