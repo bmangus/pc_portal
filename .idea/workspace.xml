@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Mail/ATForward.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ATWorkflowForwardModal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ATWorkflowRejectionModal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/ATWorkflowRequisitionModal.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/workflow/atpdf.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/workflow/mail/atNextApprover.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/BTWebSetup.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_30_153243_create_b_t_web_setups_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ATWorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ATWorkflowController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SendActivityTrackerApprovalsJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SendActivityTrackerApprovalsJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/ATNextApprover.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/ATNextApprover.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/ATWorkflowTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/ATWorkflowTable.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -309,21 +299,8 @@
       <workItem from="1593011419068" duration="269000" />
       <workItem from="1593048830136" duration="878000" />
       <workItem from="1593104306524" duration="598000" />
-      <workItem from="1593175630987" duration="32245000" />
-    </task>
-    <task id="LOCAL-00012" summary="enabled local save.">
-      <created>1573104714064</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1573104714064</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Completely rewrote the pdf generation process for workflow. Uses front end js framework, with no backend/php code processing.">
-      <created>1573451783038</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1573451783038</updated>
+      <workItem from="1593175630987" duration="33093000" />
+      <workItem from="1593544433731" duration="5104000" />
     </task>
     <task id="LOCAL-00014" summary="Numerous bug fixes. Added comment creation. Updated workflow approval process to properly skip approvers who have approved in previous positions.">
       <created>1574052495001</created>
@@ -654,7 +631,21 @@
       <option name="project" value="LOCAL" />
       <updated>1593529500612</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="Committing final changes to AT.">
+      <created>1593542876720</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1593542876720</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Committing production assets.">
+      <created>1593542957948</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1593542957949</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -676,8 +667,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added strtolower to handle sometimes upper case uid values." />
-    <MESSAGE value="added try/catch for no requisition records in db." />
     <MESSAGE value="added jobs to schedule every 15 minutes." />
     <MESSAGE value="temporarily running jobs every minute. Added created by fields to requisition and pdf." />
     <MESSAGE value="sending some debug code to workflow" />
@@ -701,7 +690,9 @@
     <MESSAGE value="committing dev assets for debugging in production." />
     <MESSAGE value="Fixed some issues with front end per Fonda." />
     <MESSAGE value="Added primary code for AT. Updated migrations for bt requisition items to handle longer floats." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added primary code for AT. Updated migrations for bt requisition items to handle longer floats." />
+    <MESSAGE value="Committing final changes to AT." />
+    <MESSAGE value="Committing production assets." />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing production assets." />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -722,15 +713,17 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="952" y="-1152" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1593529500113">
+    <state x="952" y="-1152" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1593542957580">
       <screen x="952" y="-1152" width="2048" height="1152" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
+    <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542957580" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639597429" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645748338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
     <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876449494" />
     <state x="0" y="0" width="1680" height="1050" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1592970915817" />
+    <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542876147" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592938098673" />
     <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591927571048" />
@@ -741,10 +734,11 @@
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
     <state x="1702" y="-874" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593537803176" />
-    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2" timestamp="1593529508152">
+    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2" timestamp="1593542965035">
       <screen x="952" y="-1152" width="2048" height="1152" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
+    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542965034" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639603113" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645884214" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
@@ -767,9 +761,10 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-545" y="-796" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591799985273" />
-    <state x="-1271" y="-1324" width="1609" height="1155" key="dock-window-1" timestamp="1593537947257">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="-1271" y="-1324" width="1609" height="1155" key="dock-window-1" timestamp="1593545375296">
+      <screen x="-1608" y="-1417" width="2560" height="1417" />
     </state>
+    <state x="-1271" y="-1324" width="1609" height="1155" key="dock-window-1/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593545375296" />
     <state x="-1271" y="-1324" width="1609" height="1155" key="dock-window-1/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593537947257" />
     <state x="-630" y="-1131" width="604" height="822" key="find.popup" timestamp="1592794502065">
       <screen x="-1608" y="-1440" width="2560" height="1440" />

@@ -6,6 +6,7 @@ use App\BTApprovers;
 use App\BTApproverSetup;
 use App\BTRequisition;
 use App\BTRequisitionItem;
+use App\BTWebSetup;
 use App\Mail\BTNextApprover;
 use App\Services\BTWorkflowService;
 use Illuminate\Bus\Queueable;
@@ -86,6 +87,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
         $this->syncDt = now()->toDateTimeString();
         $this->syncApprovers()
             ->syncApproverSetup()
+            ->syncWebSetup()
             ->findActiveFMRequisitions()
             ->runImport()
             ->updateApprovals();
@@ -121,7 +123,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
                 //... then send initial email to first approver when new requisition is imported.
                 if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
-                    Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
+                    //Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
                 }
             }
 
@@ -263,6 +265,24 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 }
             }
             $localRec->fm_id = $recId;
+            $localRec->save();
+        }
+        return $this;
+    }
+
+    private function syncWebSetup()
+    {
+        $setup = $this->bt
+            ->records('Web_Setup')
+            ->limit(10000)
+            ->get();
+
+        BTWebSetup::truncate();
+        foreach($setup as $recId => $rec) {
+            $localRec = new BTWebSetup();
+            foreach ($rec as $key=>$value) {
+                $localRec->{$key} = $value;
+            }
             $localRec->save();
         }
         return $this;
