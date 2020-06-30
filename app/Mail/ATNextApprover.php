@@ -39,7 +39,7 @@ class ATNextApprover extends Mailable
         $rejectionLink = $this->buildRejectionLink();
         return $this->subject('Activity Tracker Request for Approval')
             ->from('workflow21@putnamcityschools.org')
-            ->view('workflow.mail.nextApprover')
+            ->view('workflow.mail.atNextApprover')
             ->with([
                 'approvalLink'=>$approvalLink,
                 'rejectionLink'=>$rejectionLink,
@@ -51,14 +51,14 @@ class ATNextApprover extends Mailable
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/staff/workflowApproval/activityTracker/". $token . "/Approved";
+            . "/staff/atWorkflowApproval/". $token . "/Approved";
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/staff/workflowApproval/activityTracker/". $token . "/Rejected";
+            . "/staff/atWorkflowApproval/". $token . "/Rejected";
     }
     private function generateEmailToken()
     {

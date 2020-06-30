@@ -21,7 +21,6 @@ class WorkflowController extends Controller
     protected $approvalFields;
     protected $approvalDates;
     protected $bt;
-    protected $emailToken;
 
     public function __construct(BTWorkflowService $bt)
     {
@@ -124,7 +123,7 @@ class WorkflowController extends Controller
             }
 
 
-            if($requisition->Status === 'Completed' || $requisition->Status === 'Rejected'){
+            if($requisition->Status === 'Approved' || $requisition->Status === 'Rejected'){
                 Mail::to($requisition->SubmitterEmail)->send(new BTFinal($requisition));
             } else {
                 $nextApproverEmail = $this->getNextApproverEmail($requisition);

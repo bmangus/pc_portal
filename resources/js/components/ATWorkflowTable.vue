@@ -104,7 +104,7 @@
                             <t-button class="w-full" size="sm" variant="primary" @click="openModal(row.id)">Open</t-button>
                         </t-input-group>
                         <t-modal :ref="'modal-'+ row.id" :width="width">
-                            <workflow-requisition-modal :imgurl="imgurl" :row="row" :rowIndex="row.id" :actor="actor" v-on:load="load"/>
+                            <at-workflow-requisition-modal :imgurl="imgurl" :row="row" :rowIndex="row.id" :actor="actor" v-on:load="load"/>
                         </t-modal>
                     </td>
                 </tr>

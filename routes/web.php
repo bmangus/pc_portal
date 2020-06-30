@@ -48,6 +48,12 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/atWorkflowBackend', 'ATWorkflowController@requisitionsByApprover');
     Route::get('/atWorkflowBackend/user/{username}','ATWorkflowController@requisitionsByApprover');
     Route::get('/atWorkflowBackend/status/{status}', 'ATWorkflowController@requisitionsByStatus');
+    Route::get('/atWorkflowBackend/{id}/{status}', 'ATWorkflowController@requisitionAction');
+    Route::get('/atWorkflowBackend/{id}/{status}/{username}', 'ATWorkflowController@requisitionAction');
+    Route::post('/atWorkflowPDF/forward', 'ATWorkflowController@forwardPDF');
+    Route::get('/atWorkflowPDF/download/{id}', 'ATWorkflowController@viewPDF');
+    Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
+    Route::post('/atWorkflowApi/addComment/{id}', 'ATWorkflowController@postComment');
 
 });
 
