@@ -42,7 +42,12 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflowPDF/download/{id}', 'WorkflowController@viewPDF');
     Route::get('/workflowApprovers', 'WorkflowController@getApproverList');
     Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
-
+    //AT
+    Route::get('/ATworkflow', 'ATWorkflowController@index');
+    Route::get('/workflowATBackendSync', 'ATWorkflowController@manualSync');
+    Route::get('/atWorkflowBackend', 'ATWorkflowController@requisitionsByApprover');
+    Route::get('/atWorkflowBackend/user/{username}','ATWorkflowController@requisitionsByApprover');
+    Route::get('/atWorkflowBackend/status/{status}', 'ATWorkflowController@requisitionsByStatus');
 
 });
 

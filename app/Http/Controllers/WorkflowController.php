@@ -74,7 +74,7 @@ class WorkflowController extends Controller
         $username = $username ?? strtolower(auth()->user()->uid);
 
         if($app === 'budgetTracker'){
-            $activeRequisitions =  BTRequisition::whereNotIn('Status', ['Completed', 'Rejected'])
+            $activeRequisitions =  BTRequisition::whereNotIn('Status', ['Approved', 'Rejected'])
                 ->get();
         } else {
             $activeRequisitions = null; //@todo: build logic for AT here....

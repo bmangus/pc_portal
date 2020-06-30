@@ -2,19 +2,20 @@
 
 namespace App\Jobs;
 
-use App\BTRequisition;
-use App\Services\BTWorkflowService;
+use App\ATRequisition;
+use App\ATRequisitionItem;
+use App\Services\ATWorkflowService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class SendBudgetTrackerApprovalsJob implements ShouldQueue
+class SendActivityTrackerApprovalsJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $bt;
+    protected $at;
     protected $approvalFields;
     protected $approvalDates;
     protected $activeRequisitions;
@@ -24,22 +25,18 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     {
 
         $this->approvalFields = [
-            'ApprovedBy1', 'ApprovedBy2', 'ApprovedBy3', 'ApprovedBy4', 'ApprovedBy5',
-            'ApprovedStatus1', 'ApprovedStatus2', 'ApprovedStatus3', 'ApprovedStatus4', 'ApprovedStatus5',
-            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5',
-            'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
+            'ApprovedBy1', 'ApprovedStatus1', 'ApprovedDate1', 'ApprovedComments1',
             'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
-            'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedComments'
         ];
 
         $this->approvalDates = [
-            'ApprovedDate1', 'ApprovedDate2', 'ApprovedDate3', 'ApprovedDate4', 'ApprovedDate5', 'ApprovedDateTE', 'FinalApprovedDate'
+            'ApprovedDate1', 'ApprovedDateTE'
         ];
     }
 
-    public function handle(BTWorkflowService $bt)
+    public function handle(ATWorkflowService $at)
     {
-        $this->bt = $bt;
+        $this->at = $at;
         $this->getActiveRequisitions()
             ->parseAndUpdate();
     }
@@ -47,7 +44,7 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     public function getActiveRequisitions()
     {
         try{
-            $this->activeRequisitions = collect($this->bt
+            $this->activeRequisitions = collect($this->at
                 ->find('Web_Requisition_Approvals')
                 ->where('Web_Status_New', 1)
                 ->limit(10000)
@@ -62,7 +59,7 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     public function parseAndUpdate()
     {
         $this->activeRequisitions->each(function($r){
-            $local = BTRequisition::where('RecID', $r['RecID'])->first();
+            $local = ATRequisition::where('RecID', $r['RecID'])->first();
             if($local->ApprovedStatus1 !== ""){
                 $this->sendRecord($local, $r['zg_recid']);
             }
@@ -74,7 +71,7 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     public function sendRecord($r, $id)
     {
         $record = $this->constructRec($r);
-        $this->bt->update('Web_Requisition_Approvals', $record, $id)->exec();
+        $this->at->update('Web_Requisition_Approvals', $record, $id)->exec();
     }
 
     public function constructRec($r)

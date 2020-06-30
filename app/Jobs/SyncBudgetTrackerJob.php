@@ -193,7 +193,6 @@ class SyncBudgetTrackerJob implements ShouldQueue
         foreach($items as $recordId => $recItem) {
             $recId = (string)$recItem['zd_RequisRecID'];
             $requisitionItem = BTRequisitionItem::where(['zd_RequisRecId'=> $recId, 'fmId' => $recItem['id']])->first();
-            var_dump($requisitionItem);
             if($requisitionItem !== null) {
                 $this->requisitionItemBuilder($requisitionItem, $recItem);
             } else {

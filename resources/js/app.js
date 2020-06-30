@@ -51,7 +51,7 @@ Vue.component('workflow-forward-modal', require('./components/WorkflowForwardMod
 Vue.component('workflow-reassign-modal', require('./components/WorkflowReassignModal').default);
 Vue.component('workflow-rejection-modal', require('./components/WorkflowRejectionModal').default);
 Vue.component('workflow-table-2', require('./components/WorkflowTable2').default);
-
+Vue.component('at-workflow-table', require('./components/ATWorkflowTable').default);
 
 
 /**

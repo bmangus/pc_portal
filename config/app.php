@@ -243,6 +243,16 @@ return [
     'bt_host' => env('BT_FM_HOST'),
     'bt_file' => env('BT_FM_FILE'),
 
+    /*
+     * AT Workflow configs
+     */
+    'at_username' => env('AT_FM_USERNAME'),
+    'at_password' => env('AT_FM_PASSWORD'),
+    'at_host' => env('AT_FM_HOST'),
+    'at_file' => env('AT_FM_FILE'),
+    'at_te_approver' => env('AT_TE_APPROVER'),
+    'at_te_approver_email'=> env('AT_TE_APPROVER_EMAIL'),
+
     /**
      * Extended Care configs
      */
