@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\BTApprovers;
 use App\BTApproverSetup;
 use App\BTRequisition;
+use App\BTWebSetup;
 use App\EmailTokens;
 use App\Jobs\SyncBudgetTrackerJob;
 use App\Mail\BTFinal;
@@ -470,9 +471,19 @@ class WorkflowController extends Controller
     private function checkApprover1($requisition, $username)
     {
         if($this->isRejected($requisition)) return false;
+        if($requisition->approvers->Approver1 === "SITELOOKUP"){
+            try {
+                $site = BTWebSetup::where('SiteNo', $requisition->Site)->first();
+            } catch (\Exception $e) {
+                return false;
+            }
+            $approver = $site->ApproverUsername;
+        } else {
+            $approver = $requisition->approvers->Approver1;
+        }
         return  $requisition->ApprovedBy1 === "" &&
             $requisition->ApprovedStatus1 === "" &&
-            $requisition->approvers->Approver1 === $requisition->Status &&
+            $approver === $requisition->Status &&
             $requisition->Status === $username;
 
     }
