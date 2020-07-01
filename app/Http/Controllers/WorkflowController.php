@@ -160,7 +160,7 @@ class WorkflowController extends Controller
         $comment = $request->get('comment');
         if($requisition->Status === $username)
         {
-            if($username === $requisition->approvers->Approver1 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
+            if($username === $requisition->approvers->Approver1 || $this->isSiteApprover($requisition, $username) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
                 $requisition->ApprovedComments1 .= $comment;
             } else if($username === $requisition->approvers->Approver2 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver2")){
                 $requisition->ApprovedComments2 .= $comment;
