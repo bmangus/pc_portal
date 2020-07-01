@@ -351,8 +351,10 @@ class WorkflowController extends Controller
             }else {
                 return $this->setApproverFinal($requisition, $status, $username);
             }
-        }else if($requisition->ApprovedBy1 === "" && $requisition->approvers->Approver1 === $username) {
-            return $this->setApprover1($requisition, $status, $username);
+        }else if($requisition->ApprovedBy1 === "") {
+            if($requisition->approvers->Approver1 === $username || $this->isSiteApprover($requisition, $username)){
+                return $this->setApprover1($requisition, $status, $username);
+            }
         }else if($requisition->ApprovedBy2 === "" && $requisition->approvers->Approver2 === $username) {
             return $this->setApprover2($requisition, $status, $username);
         }else if($requisition->ApprovedBy3 === "" && $requisition->approvers->Approver3 === $username) {
@@ -486,6 +488,16 @@ class WorkflowController extends Controller
             $approver === $requisition->Status &&
             $requisition->Status === $username;
 
+    }
+
+    private function isSiteApprover($requisition, $username)
+    {
+        try {
+            $site = BTWebSetup::where('SiteNo', $requisition->Site)->first();
+        } catch (\Exception $e) {
+            return false;
+        }
+        return $site->ApproverUsername === $username;
     }
 
     private function checkApprover2($requisition, $username)

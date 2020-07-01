@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/BTWebSetup.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_06_30_153243_create_b_t_web_setups_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,14 +297,7 @@
       <workItem from="1593048830136" duration="878000" />
       <workItem from="1593104306524" duration="598000" />
       <workItem from="1593175630987" duration="33093000" />
-      <workItem from="1593544433731" duration="5104000" />
-    </task>
-    <task id="LOCAL-00014" summary="Numerous bug fixes. Added comment creation. Updated workflow approval process to properly skip approvers who have approved in previous positions.">
-      <created>1574052495001</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1574052495001</updated>
+      <workItem from="1593544433731" duration="6692000" />
     </task>
     <task id="LOCAL-00015" summary="Numerous bug fixes. Updated code to support mail functionality. Updated pdf rendering. Updated approval logic. Updated code for FM19 support in the future.">
       <created>1591154384406</created>
@@ -645,7 +635,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593542957949</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Fixed issue with sitelookup first approvers">
+      <created>1593558705363</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1593558705363</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +664,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added jobs to schedule every 15 minutes." />
     <MESSAGE value="temporarily running jobs every minute. Added created by fields to requisition and pdf." />
     <MESSAGE value="sending some debug code to workflow" />
     <MESSAGE value="updated bt workflow service to use config helper" />
@@ -692,7 +688,8 @@
     <MESSAGE value="Added primary code for AT. Updated migrations for bt requisition items to handle longer floats." />
     <MESSAGE value="Committing final changes to AT." />
     <MESSAGE value="Committing production assets." />
-    <option name="LAST_COMMIT_MESSAGE" value="Committing production assets." />
+    <MESSAGE value="Fixed issue with sitelookup first approvers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with sitelookup first approvers" />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -713,7 +710,7 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="952" y="-1152" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1593542957580">
+    <state x="952" y="-1152" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1593558705138">
       <screen x="952" y="-1152" width="2048" height="1152" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
@@ -723,7 +720,7 @@
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
     <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876449494" />
     <state x="0" y="0" width="1680" height="1050" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1592970915817" />
-    <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542876147" />
+    <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593558705138" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592938098673" />
     <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591927571048" />
@@ -734,7 +731,7 @@
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
     <state x="1702" y="-874" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593537803176" />
-    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2" timestamp="1593542965035">
+    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2" timestamp="1593558757193">
       <screen x="952" y="-1152" width="2048" height="1152" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
@@ -744,6 +741,7 @@
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1592876456214" />
     <state x="578" y="335" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1592970921924" />
+    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593558757193" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1592938106922" />
     <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1591927579758" />
