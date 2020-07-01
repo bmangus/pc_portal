@@ -160,7 +160,7 @@ class WorkflowController extends Controller
         $comment = $request->get('comment');
         if($requisition->Status === $username)
         {
-            if($username === $requisition->approvers->Approver1 || $this->isSiteApprover($requisition, $username) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
+            if($username === $requisition->approvers->Approver1 || ($requisition->approvers->Approver1 === "SITELOOKUP" && $this->isSiteApprover($requisition, $username)) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
                 $requisition->ApprovedComments1 .= $comment;
             } else if($username === $requisition->approvers->Approver2 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver2")){
                 $requisition->ApprovedComments2 .= $comment;
@@ -352,7 +352,7 @@ class WorkflowController extends Controller
                 return $this->setApproverFinal($requisition, $status, $username);
             }
         }else if($requisition->ApprovedBy1 === "") {
-            if($requisition->approvers->Approver1 === $username || $this->isSiteApprover($requisition, $username)){
+            if($requisition->approvers->Approver1 === $username ||  ($requisition->approvers->Approver1 === "SITELOOKUP" && $this->isSiteApprover($requisition, $username)) ){
                 return $this->setApprover1($requisition, $status, $username);
             }
         }else if($requisition->ApprovedBy2 === "" && $requisition->approvers->Approver2 === $username) {
