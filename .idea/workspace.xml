@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_07_08_095017_update_at_requisition_items_floats.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +181,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="jsx.switch.disabled" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Services" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -299,14 +299,8 @@
       <workItem from="1593175630987" duration="33093000" />
       <workItem from="1593544433731" duration="7152000" />
       <workItem from="1593993929240" duration="1265000" />
-      <workItem from="1594135422072" duration="591000" />
-    </task>
-    <task id="LOCAL-00018" summary="Finished pdf rewrite. fixed a few bugs.">
-      <created>1591581884675</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1591581884675</updated>
+      <workItem from="1594135422072" duration="1201000" />
+      <workItem from="1594219769986" duration="695000" />
     </task>
     <task id="LOCAL-00019" summary="Updated workflow modal vue template to use new download url.">
       <created>1591582440775</created>
@@ -644,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593613917819</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Enabled sending initial email in Workflow.">
+      <created>1594136163314</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1594136163314</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +667,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated completed to approved on view." />
     <MESSAGE value="modified all env helpers to use the config helper." />
     <MESSAGE value="Fixed issue with wrong quantity on front end." />
     <MESSAGE value="committing production assets." />
@@ -691,7 +691,8 @@
     <MESSAGE value="Fixed issue with site approver not working unless impersonating." />
     <MESSAGE value="Fixed issue with sitelookup approver comments." />
     <MESSAGE value="Fixed future issue with sitelookup interfering with approver position calcs on non site lookup requisitions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed future issue with sitelookup interfering with approver position calcs on non site lookup requisitions." />
+    <MESSAGE value="Enabled sending initial email in Workflow." />
+    <option name="LAST_COMMIT_MESSAGE" value="Enabled sending initial email in Workflow." />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -712,8 +713,8 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="952" y="-1152" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1593613917671">
-      <screen x="952" y="-1152" width="2048" height="1152" />
+    <state x="369" y="132" width="1680" height="1050" key="CommitChangelistDialog2" timestamp="1594136163093">
+      <screen x="0" y="23" width="1680" height="958" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542957580" />
@@ -725,7 +726,7 @@
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613917671" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591337783592" />
     <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1592938098673" />
-    <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1591927571048" />
+    <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1594136163093" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1591723472258" />
     <state x="1702" y="-874" key="RollbackChangesDialog" timestamp="1593537803176">
       <screen x="952" y="-1152" width="2048" height="1152" />
@@ -733,8 +734,8 @@
     <state x="-671" y="-1092" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1591813135245" />
     <state x="615" y="254" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591063291786" />
     <state x="1702" y="-874" key="RollbackChangesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593537803176" />
-    <state x="1657" y="-784" key="Vcs.Push.Dialog.v2" timestamp="1593613925228">
-      <screen x="952" y="-1152" width="2048" height="1152" />
+    <state x="578" y="329" key="Vcs.Push.Dialog.v2" timestamp="1594136169809">
+      <screen x="0" y="23" width="1680" height="958" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542965034" />
@@ -746,7 +747,7 @@
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613925228" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1591338013800" />
     <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1592938106922" />
-    <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1591927579758" />
+    <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1594136169809" />
     <state x="578" y="330" key="Vcs.Push.Dialog.v2/0.23.1680.960@0.23.1680.960" timestamp="1591723479633" />
     <state x="629" y="402" key="com.intellij.ide.util.TipDialog" timestamp="1591842685366">
       <screen x="0" y="0" width="1680" height="1050" />
