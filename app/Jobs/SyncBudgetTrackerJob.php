@@ -123,12 +123,22 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
                 //... then send initial email to first approver when new requisition is imported.
                 if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
-                    Mail::to($this->getNextApproverEmail($requisition))->send(new BTNextApprover($requisition));
+                    $email = $this->getNextApproverEmail($requisition);
+                    if($this->approverWantsEmail($email)){
+                        Mail::to($email)->send(new BTNextApprover($requisition));
+                    }
                 }
             }
 
         }
         return $this;
+    }
+
+    private function approverWantsEmail($email)
+    {
+        $approver = BTApproverSetup::where('ApproverEmail', $email)->first();
+        if($approver !== null && $approver->ReceiveEmails === "Yes") return true;
+        return false;
     }
 
     private function requisitionBuilder($requisition, $rec, $exclusions)
@@ -154,6 +164,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
     private function getNextApproverEmail($requisition)
     {
         $approvers = BTApprovers::where('ProjectCode', $requisition->Project)->first();
+
+        if($approvers->Approver1 === "SITELOOKUP") {
+            try {
+                $site = BTWebSetup::where('SiteNo', $requisition->Site)->first();
+            } catch (\Exception $e) {
+                return false;
+            }
+            return $site->ApproverEmail;
+        }
 
         switch($requisition->Status){
             case $approvers->Approver1:
