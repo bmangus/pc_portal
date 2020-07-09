@@ -51,14 +51,14 @@ class BTNextApprover extends Mailable
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/staff/workflowApproval/budgetTracker/". $token . "/Approved";
+            . "/workflowApproval/budgetTracker/". $token . "/Approved";
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/staff/workflowApproval/budgetTracker/". $token . "/Rejected";
+            . "/workflowApproval/budgetTracker/". $token . "/Rejected";
     }
     private function generateEmailToken()
     {
