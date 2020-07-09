@@ -112,7 +112,7 @@ class WorkflowController extends Controller
             $username = $username ?? strtolower(auth()->user()->uid);
 
             //reassign if the logged in user is not the same as the passed in user
-            if($username !== strtolower(auth()->user()->uid)){
+            if(!$bypassAuth && $username !== strtolower(auth()->user()->uid)){
                 $this->reassignRequisition($id, $username, strtolower(auth()->user()->uid), true, $requisition);
             }
 

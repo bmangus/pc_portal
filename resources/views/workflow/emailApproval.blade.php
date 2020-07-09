@@ -1,5 +1,5 @@
 <html>
-@if($status === 1)
+@if(isset($status) && $status === 1)
     <h5 style="text-align: center; margin-top: 50px;">
         <b>Budget Workflow 2021 Requisition {{$status}}</b>
     </h5>
