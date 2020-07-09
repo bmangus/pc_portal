@@ -117,7 +117,9 @@ class WorkflowController extends Controller
             }
 
             //set to current logged in user
-            $username = strtolower(auth()->user()->uid);
+            if(!$bypassAuth){
+                $username = strtolower(auth()->user()->uid);
+            }
 
             if($this->currentPositionMatchesUser($requisition, $username)){
                 $this->setRequisitionStatus($requisition, $status, $username);
