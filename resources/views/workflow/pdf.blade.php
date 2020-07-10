@@ -120,7 +120,7 @@
         <div style="width: 100%" class="row-2">
 
             <div class="column col-1">
-                <table style="border: 1px solid black; width: 100%; padding: 5px; height: 100px;">
+                <table style="border: 1px solid black; width: 100%; padding: 5px; height: 103px;">
                     <tr>
                         <td>
                             <b>Vendor Information:</b>
@@ -149,7 +149,7 @@
                         </td>
                     </tr>
                 </table>
-                <table style="border: 1px solid black; margin-top: 10px; width: 100%; padding: 5px; height: 100px;">
+                <table style="border: 1px solid black; margin-top: 10px; width: 100%; padding: 5px; height: 103px;">
                     <tr>
                         <td style="background-color: black; color: white;">
                             Ship To:
