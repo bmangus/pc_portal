@@ -3,7 +3,7 @@
         <div class="flex mb-2 mr-2 float-right">
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="print(row.pk)"><font-awesome-icon icon="file-pdf"/></button>
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="openModal" ><font-awesome-icon icon="share"/></button>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, rowIndex)">Approve</button>
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, row.id)">Approve</button>
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="openRejectionModal">Reject</button>
         </div>
         <div ref='printarea' class="font-sans">
@@ -188,11 +188,11 @@
                             <tr>
                                 <td class="border-2 border-black">{{row.FiscalYear}}</td>
                                 <td class="border-2 border-black">{{row.Fund}}</td>
-                                <td class="border-2 border-black">{{row.Project}}</td>
+                                <td class="border-2 border-black">{{String(row.Project.toString()).padStart(3, '0')}}</td>
                                 <td class="border-2 border-black">{{row.Function}}</td>
                                 <td class="border-2 border-black">{{row.Program}}</td>
                                 <td class="border-2 border-black">{{row.Subject}}</td>
-                                <td class="border-2 border-black">{{row.OCASiteNo}}</td>
+                                <td class="border-2 border-black">{{row.OCASSiteNo}}</td>
                                 <td class="border-2 border-black">{{row.Site}}</td>
                                 <td class="border-2 border-black">{{row.PONumber}}</td>
                             </tr>
@@ -221,8 +221,16 @@
                                 <td class="border-2 border-black">{{item.CatalogNo}}</td>
                                 <td class="border-2 border-black">{{item.Description}}</td>
                                 <td class="border-2 border-black">{{item.Object}}</td>
-                                <td class="border-2 border-black">{{parseFloat(item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
-                                <td class="border-2 border-black">{{parseFloat(item.Total).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="border-2 border-black">${{parseFloat(item.UnitPrice).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                                <td class="border-2 border-black">${{parseFloat(item.Total).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td colspan="2" class="font-weight-bold border-2 border-double border-black">Grand Total:</td>
+                                <td class="border-2 border-double border-black">${{parseFloat(row.GrandTotal).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -232,7 +240,7 @@
             <p class="foot mx-4" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
             <workflow-comment :requisitionId="row.pk" :actor="actor"/>
             <t-modal ref="modal-forward" :width="width">
-                <workflow-forward-modal :row="row" :rowIndex="rowIndex" :actor="actor" v-on:load="hideModal"/>
+                <workflow-forward-modal :row="row" :rowIndex="row.id" :actor="actor" v-on:load="hideModal"/>
             </t-modal>
             <t-modal ref="rejection-modal" :width="width">
                 <workflow-rejection-modal :requisition-id="row.pk" :actor="actor" v-on:load="emitLoad"/>
@@ -246,7 +254,7 @@
 
     export default {
         name: 'workflow-requisition-modal',
-        props: ['imgurl', 'row', 'rowIndex', 'actor'],
+        props: ['imgurl', 'row', 'actor'],
         data() {
             return {
                 doc: '',

@@ -1,5 +1,7 @@
 <template>
     <div class="w-full m-3">
+        <div class="text-xl font-bold mb-2">Budget Tracker</div>
+        <hr/>
         <div class="flex">
             <t-dropdown :text="selectedStatus" class="pb-2">
                 <ul>
@@ -101,15 +103,9 @@
                         </td>
                         <td class="border px-4 py-2">
                             <t-input-group>
-                                <t-button class="w-full" size="sm" variant="primary" @click="openModal(row.id)">Open</t-button>
-                                <t-button class="w-full" size="sm" variant="secondary" @click="openReassignModal(row.id)">Re-Assign</t-button>
+                                <t-button class="w-full" size="sm" variant="primary" @click="openModal(row)">Open</t-button>
+                                <t-button class="w-full" size="sm" variant="secondary" @click="openReassignModal(row)">Re-Assign</t-button>
                             </t-input-group>
-                            <t-modal :ref="'modal-'+ row.id" :width="width">
-                                <workflow-requisition-modal :imgurl="imgurl" :row="row" :rowIndex="row.id" :actor="actor" v-on:load="load"/>
-                            </t-modal>
-                            <t-modal :ref="'reassign-modal-' + row.id" :width="450">
-                                <workflow-reassign-modal :row="row.id" :rowIndex="row.id" :actor="actor" v-on:load="load"/>
-                            </t-modal>
                         </td>
                     </tr>
                 </tbody>
@@ -119,6 +115,12 @@
             <div class="flex mb-4"><p class="mx-auto text-2xl text-center">Impersonation:</p></div>
             <div class="flex mb-4"><span class="w-1/3 text-right">Username:</span><div class="w-2/3"><t-input v-model="actor" name="my-input" class="ml-2"/></div></div>
             <div class="flex mb-4"><button class="btn-primary mt-2 mx-auto p-2" @click="impersonate">Act As This User</button></div>
+        </t-modal>
+        <t-modal ref="requisition-modal" :width="width">
+            <workflow-requisition-modal :imgurl="imgurl" :row="activeRow" :actor="actor" v-on:load="load"/>
+        </t-modal>
+        <t-modal ref="reassign-modal" :width="450">
+            <workflow-reassign-modal :row="activeRow" :rowIndex="activeRow.id" :actor="actor" v-on:load="load"/>
         </t-modal>
     </div>
 </template>
@@ -138,21 +140,21 @@
                 actor: "",
                 searchStr: "",
                 currentSort: '',
-                currentSortDir: 'asc'
+                currentSortDir: 'asc',
+                activeRow: []
             }
         },
         mounted() {
             this.loadActive();
         },
         methods: {
-            openModal(id){
-                console.log(this.$refs['modal-'+id]);
-                this.$refs['modal-'+id][0].show();
-                //this.$refs['modal-'+id].show();
+            openModal(row){
+                this.activeRow = row;
+                this.$refs['requisition-modal'].show();
             },
-            openReassignModal(id){
-                this.$refs['reassign-modal-'+id][0].show();
-                //this.$refs['reassign-modal-'+id].show();
+            openReassignModal(row){
+                this.activeRow = row;
+                this.$refs['reassign-modal'].show();
             },
             load(){
                 if(this.actor === ""){
