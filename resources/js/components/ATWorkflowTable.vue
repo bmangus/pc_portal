@@ -1,5 +1,7 @@
 <template>
     <div class="w-full m-3">
+        <div class="text-xl font-bold mb-2">Activity Tracker</div>
+        <hr/>
         <div class="flex">
             <t-dropdown :text="selectedStatus" class="pb-2">
                 <ul>

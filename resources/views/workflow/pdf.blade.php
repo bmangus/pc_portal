@@ -307,11 +307,11 @@
                 <tr>
                     <td class="border">{{$po->FiscalYear}}</td>
                     <td class="border">{{$po->Fund}}</td>
-                    <td class="border">{{$po->Project}}</td>
+                    <td class="border">{{str_pad($po->Project, 3, '0', STR_PAD_LEFT)}}</td>
                     <td class="border">{{$po->Function}}</td>
                     <td class="border">{{$po->Program}}</td>
                     <td class="border">{{$po->Subject}}</td>
-                    <td class="border">{{$po->OCASiteNo}}</td>
+                    <td class="border">{{$po->OCASSiteNo}}</td>
                     <td class="border">{{$po->Site}}</td>
                     <td class="border">{{$po->PONumber}}</td>
                 </tr>
@@ -340,6 +340,11 @@
                         <td class="border">${{number_format($i->Total, 2, '.', ',')}}</td>
                     </tr>
                 @endforeach
+                <tr>
+                    <td colspan="4" class="border"></td>
+                    <td colspan="2" class="border" style="font-weight: bold;">Grand Total:</td>
+                    <td class="border">${{number_format($po->GrandTotal, 2, '.', ',')}}</td>
+                </tr>
             </table>
         </div>
         <div class="row-6">
