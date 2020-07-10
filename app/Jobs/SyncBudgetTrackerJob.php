@@ -125,7 +125,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
                     $email = $this->getNextApproverEmail($requisition);
                     if($this->approverWantsEmail($email)){
-                        Mail::to($email)->send(new BTNextApprover($requisition));
+                        //Mail::to($email)->send(new BTNextApprover($requisition));
                     }
                 }
             }
