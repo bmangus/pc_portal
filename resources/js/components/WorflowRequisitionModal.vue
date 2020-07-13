@@ -266,7 +266,7 @@
                 let actorString = (this.actor !== "") ? '/' + this.actor : "";
                 axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString)
                     .then(res=>{
-                        this.$refs['modal'+mid].hide();
+                        //this.$refs['modal'+mid].hide();
                         this.$emit('load', true);
                     })
                     .catch(err=>this.$emit('load', true))
@@ -281,7 +281,7 @@
                 let actorString = (this.actor !== "") ? '/' + this.actor : "";
                 axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString)
                     .then(res=>{
-                        this.$refs['modal'+mid].hide();
+                        //this.$refs['modal'+mid].hide();
                         this.$emit('load', true);
                     })
                     .catch(err=>this.$emit('load', true))
