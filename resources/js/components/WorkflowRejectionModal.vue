@@ -27,6 +27,7 @@
                 axios.get('/staff/workflowBackend/budgetTracker/' + this.requisitionId + '/Rejected' + actorString)
                     .then(res=>{
                         this.$emit('load', true);
+                        this.$parent.$refs['close'].click();
                     })
                     .catch(err=>this.$emit('load', true))
             },
