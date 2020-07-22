@@ -85,15 +85,13 @@ class WorkflowController extends Controller
         return response()->json($requisitionsForThisApprover);
     }
 
-    public function requisitionsByStatus($app, $status, $username = null)
+    public function requisitionsByStatus($app, $status)
     {
         $this->canAccess();
 
-        $username = $username ?? auth()->user()->uid;
 
         if($app === 'budgetTracker'){
-            $requisitions = BTRequisition::wasApprover($username)
-                ->where('Status', $status)
+            $requisitions = BTRequisition::where('Status', $status)
                 ->get();
         } else {
             $requisitions = null; //@todo: build logic for AT here....
