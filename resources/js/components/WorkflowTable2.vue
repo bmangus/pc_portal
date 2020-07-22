@@ -8,12 +8,12 @@
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadActive">My Requisitions</a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadCompleted">Approved</a>
                     </li>
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadRejected">Rejected</a>
-                    </li>
+                    </li>-->
                     <li v-if="authUser.SuperUser === 'Yes'">
                         <a class="block no-underline px-4 py-2 hover" @click="$refs.acting.show()">Act As</a>
                     </li>
