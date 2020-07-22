@@ -8,17 +8,20 @@
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadActive">My Requisitions</a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadCompleted">Approved</a>
                     </li>
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadRejected">Rejected</a>
-                    </li>-->
+                    </li>
                     <li v-if="authUser.SuperUser === 'Yes'">
                         <a class="block no-underline px-4 py-2 hover" @click="$refs.acting.show()">Act As</a>
                     </li>
                 </ul>
             </t-dropdown>
+            <div v-if="this.actor.length > 0" class="mt-3 mx-auto">
+                <span class="text-dark">Acting As: {{this.actor}}</span><span class="btn-outline-secondary mb-2 p-3 mr-2 ml-2" @click="()=>this.actor = ''">Clear</span>
+            </div>
             <div class="mt-3 ml-auto mr-2">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" v-model="searchStr" placeholder="Search.."/>
             </div>
@@ -202,8 +205,8 @@
                 this.selectedStatus = "Approved";
                 this.loading = true
                 this.noRequisitions = false;
-                this.actor = "";
-                axios.get('/staff/workflowBackend/budgetTracker/Approved')
+                //this.actor = "";
+                axios.get('/staff/workflowBackend/budgetTracker/Approved' + ((this.actor.length > 0) ? "/" + this.actor : ""))
                     .then(response => {
                         if(response.data.length < 1){
                             this.noRequisitions = true;
@@ -222,8 +225,8 @@
                 this.selectedStatus = "Rejected";
                 this.loading = true;
                 this.noRequisitions = false;
-                this.actor = "";
-                axios.get('/staff/workflowBackend/budgetTracker/Rejected')
+                //this.actor = "";
+                axios.get('/staff/workflowBackend/budgetTracker/Rejected' + ((this.actor.length > 0) ? "/" + this.actor : ""))
                     .then(response => {
                         if(response.data.length < 1){
                             this.noRequisitions = true;
@@ -240,7 +243,7 @@
             },
             impersonate(){
                 this.$refs.acting.hide();
-                this.selectedStatus = this.actor;
+                //this.selectedStatus = this.actor;
                 this.loading = true;
                 this.noRequisitions = false;
                 axios.get('/staff/workflowBackend/budgetTracker/user/' + this.actor)
