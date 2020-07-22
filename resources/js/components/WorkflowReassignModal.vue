@@ -53,6 +53,7 @@
                     .then(res=>{
                         console.log(res);
                         this.$emit('load', true);
+                        this.$parent.$refs['close'].click();
                     })
                     .catch(err=>console.log(err));
             }
