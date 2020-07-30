@@ -31,6 +31,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     protected $approvalFields;
     protected $includedApproverSetupFields;
     protected $createdRecIds;
+    protected $createdRecItemIds;
 
     /**
      * Create a new job instance.
@@ -78,6 +79,8 @@ class SyncBudgetTrackerJob implements ShouldQueue
         ];
 
         $this->createdRecIds = [];
+        $this->createdRecItemIds = [];
+
     }
 
     /**
@@ -219,14 +222,17 @@ class SyncBudgetTrackerJob implements ShouldQueue
             ->limit(500)
             ->get();
         foreach($items as $recordId => $recItem) {
-            $recId = (string)$recItem['zd_RequisRecID'];
-            $requisitionItem = BTRequisitionItem::where(['zd_RequisRecId'=> $recId, 'fmId' => $recItem['id']])->first();
-            if($requisitionItem !== null) {
-                $this->requisitionItemBuilder($requisitionItem, $recItem);
-            } else {
-                $this->requisitionItemBuilder(new BTRequisitionItem(), $recItem);
+            if(!in_array($recordId, $this->createdRecItemIds)){
+                $recId = (string)$recItem['zd_RequisRecID'];
+                $requisitionItem = BTRequisitionItem::where(['zd_RequisRecId'=> $recId, 'fmId' => $recItem['id']])->first();
+                if($requisitionItem !== null) {
+                    $this->requisitionItemBuilder($requisitionItem, $recItem);
+                } else {
+                    $this->requisitionItemBuilder(new BTRequisitionItem(), $recItem);
+                }
+                $requisitionItem = null;
+                $this->createdRecItemIds[] = $recordId;
             }
-            $requisitionItem = null;
         }
     }
 

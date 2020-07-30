@@ -27,9 +27,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new SyncBudgetTrackerJob())
-            ->everyFiveMinutes();
+            ->everyFiveMinutes()
+            ->withoutOverlapping();
         $schedule->job(new SyncActivityTrackerJob())
-            ->everyFiveMinutes();
+            ->everyFiveMinutes()
+            ->withoutOverlapping();
         $schedule->command('horizon:snapshot')
             ->everyFiveMinutes();
     }
