@@ -3,8 +3,8 @@
         <div class="flex mb-2 mr-2 float-right">
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="print(row.pk)"><font-awesome-icon icon="file-pdf"/></button>
             <button class="bg-gray-500 hover:bg-gray-700 text-white text-xl font-bold py-2 px-4 rounded ml-2" @click="openModal" ><font-awesome-icon icon="share"/></button>
-            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, row.id)">Approve</button>
-            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="openRejectionModal">Reject</button>
+            <button v-if="(row.Status !== 'Approved') && (row.Status !== 'Rejected')" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-2" @click="approveReq(row.pk, row.id)">Approve</button>
+            <button v-if="(row.Status !== 'Approved') && (row.Status !== 'Rejected')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" @click="openRejectionModal">Reject</button>
         </div>
         <div ref='printarea' class="font-sans">
             <div class="flex w-full mb-3">
@@ -238,7 +238,7 @@
                 </div>
             </div>
             <p class="foot mx-4" style="font-size:14px">Charge To: {{row.ChargeTo}}</p>
-            <workflow-comment :requisitionId="row.pk" :actor="actor"/>
+            <workflow-comment :requisitionId="row.pk" :actor="actor" :status="row.Status"/>
             <t-modal ref="modal-forward" :width="width">
                 <workflow-forward-modal :row="row" :rowIndex="row.id" :actor="actor" v-on:load="hideModal"/>
             </t-modal>

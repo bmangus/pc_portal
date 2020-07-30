@@ -5,13 +5,15 @@
             <div class="w-full p-2 border-2 h-16 border-black">
                 <div v-for="c in comments">{{c}}</div>
             </div>
-            <div class="w-full p-2 mt-4 border-2 border-black">
-                <label>
-                    Your Comment:
-                </label>
-                <textarea class="w-full" type="text" v-model="currentComment" placeholder="Add Your Comment Here...."></textarea>
+            <div v-if="(status !== 'Approved') && (status !== 'Rejected')">
+                <div class="w-full p-2 mt-4 border-2 border-black">
+                    <label>
+                        Your Comment:
+                    </label>
+                    <textarea class="w-full" type="text" v-model="currentComment" placeholder="Add Your Comment Here...."></textarea>
+                </div>
+                <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mt-2 rounded float-right" @click="saveComment"><font-awesome-icon icon="save"/></button>
             </div>
-            <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 mt-2 rounded float-right" @click="saveComment"><font-awesome-icon icon="save"/></button>
         </div>
     </div>
 </template>
@@ -20,7 +22,7 @@
     export default {
         name:'worflow-comment',
         props: [
-            'requisitionId', 'actor'
+            'requisitionId', 'actor', 'status'
         ],
         data() {
             return {
