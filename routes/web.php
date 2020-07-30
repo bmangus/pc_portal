@@ -29,7 +29,8 @@ Auth::routes([
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflow', 'WorkflowController@index');
     Route::get('/workflowBackend/{app}', 'WorkflowController@requisitionsByApprover');
-    //Route::get('/workflowBackend/{app}/{status}/{username}', 'WorkflowController@requisitionsByStatus');
+    Route::get('/btWorkflowBackend/{status}/{username}', 'WorkflowController@requisitionsByUserStatus');
+    Route::get('/btWorkflowBackend/{status}', 'WorkflowController@requisitionsByUserStatus');
     Route::get('/workflowBackend/{app}/{status}', 'WorkflowController@requisitionsByStatus');
     Route::get('/workflowBackend/{app}/user/{username}', 'WorkflowController@requisitionsByApprover');
     Route::get('/workflowBackend/{app}/user/{username}/test', 'WorkflowController@requisitionsByApprover');

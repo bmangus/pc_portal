@@ -29,6 +29,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     protected $recItemExclusions;
     protected $includedApproverFields;
     protected $approvalFields;
+    protected $includedApproverSetupFields;
 
     /**
      * Create a new job instance.

@@ -19,6 +19,7 @@
         data() {
             return {
                 currentComment: null,
+                commentSaving: false
             }
         },
         methods: {
@@ -26,23 +27,33 @@
                 let actorString = (this.actor !== "") ? '/' + this.actor : "";
                 axios.get('/staff/workflowBackend/budgetTracker/' + this.requisitionId + '/Rejected' + actorString)
                     .then(res=>{
+                        this.commentSaving = false;
                         this.$emit('load', true);
                         this.$parent.$parent.$parent.$refs['close'].click();
                         this.$parent.$refs['close'].click();
                     })
-                    .catch(err=>this.$emit('load', true))
+                    .catch(err=>{
+                        this.commentSaving = false;
+                        this.$emit('load', true);
+                    })
             },
             saveComment(){
                 if(this.currentComment === null|| this.currentComment.length <= 0) {
                     alert('You must provide a comment before rejecting.');
                     return false;
                 }
-                const formData = new FormData();
-                formData.append('comment', this.currentComment);
-                formData.append('username', this.actor);
-                axios.post('/staff/workflowApi/addComment/' + this.requisitionId, formData)
-                    .then(res => this.rejectRequisition())
-                    .catch(err => console.log(error))
+                if(!this.commentSaving){
+                    this.commentSaving = true;
+                    const formData = new FormData();
+                    formData.append('comment', this.currentComment);
+                    formData.append('username', this.actor);
+                    axios.post('/staff/workflowApi/addComment/' + this.requisitionId, formData)
+                        .then(res => this.rejectRequisition())
+                        .catch(err => {
+                            this.commentSaving = false;
+                            console.log(error)
+                        })
+                }
             }
         }
     }
