@@ -30,6 +30,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     protected $includedApproverFields;
     protected $approvalFields;
     protected $includedApproverSetupFields;
+    protected $createdRecIds;
 
     /**
      * Create a new job instance.
@@ -75,6 +76,8 @@ class SyncBudgetTrackerJob implements ShouldQueue
         $this->includedApproverSetupFields = [
             'Approver', 'ApproverEmail', 'ApproverFName', 'ApproverLName', 'ReceiveEmails', 'SuperUser'
         ];
+
+        $this->createdRecIds = [];
     }
 
     /**
@@ -120,13 +123,13 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 if ($modTimestamp > $syncTimestamp) $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
             } else {
                 //New requisition is created here...
-                $requisition = $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
+                $newRequisition = $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
 
                 //... then send initial email to first approver when new requisition is imported.
-                if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
-                    $email = $this->getNextApproverEmail($requisition);
+                if(isset($newRequisition->Status) && $newRequisition->Status !== 'Completed' && $newRequisition->Status !== 'Approved' && $newRequisition->Status !== 'Rejected'){
+                    $email = $this->getNextApproverEmail($newRequisition);
                     if($this->approverWantsEmail($email)){
-                        Mail::to($email)->send(new BTNextApprover($requisition));
+                        Mail::to($email)->send(new BTNextApprover($newRequisition));
                     }
                 }
             }
@@ -144,21 +147,24 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function requisitionBuilder($requisition, $rec, $exclusions)
     {
-        foreach ($requisition as $key => $item) {
-            if (!in_array($key, $exclusions)) {
-                if($key === 'Project'){
-                    $rec->Project = (int) $item;
-                } else {
-                    $rec->{$key} = $item;
+        if(!in_array($requisition['RecID'], $this->createdRecIds)){
+            foreach ($requisition as $key => $item) {
+                if (!in_array($key, $exclusions)) {
+                    if($key === 'Project'){
+                        $rec->Project = (int) $item;
+                    } else {
+                        $rec->{$key} = $item;
+                    }
+                } elseif ($key === "Requisition | Setup::SubmitterEmail") {
+                    $rec->SubmitterEmail = $item;
                 }
-            } elseif ($key === "Requisition | Setup::SubmitterEmail") {
-                $rec->SubmitterEmail = $item;
             }
-        }
-        $rec->lvl_lastSyncDateTime = $this->syncDt;
+            $rec->lvl_lastSyncDateTime = $this->syncDt;
 
-        $this->deleteExistingReqItems($requisition)->constructRequisitionItems($requisition);
-        $rec->save();
+            $this->deleteExistingReqItems($requisition)->constructRequisitionItems($requisition);
+            $rec->save();
+            $this->createdRecIds[] = $requisition['RecID'];
+        }
         return $rec;
     }
 
