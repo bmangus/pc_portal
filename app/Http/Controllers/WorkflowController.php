@@ -100,6 +100,19 @@ class WorkflowController extends Controller
         return response()->json($requisitions);
     }
 
+    public function requisitionsByUserStatus($status, $username = null)
+    {
+        $this->canAccess();
+
+        $username = $username ?? auth()->user()->uid;
+
+        $requisitions = BTRequisition::wasApprover($username)
+            ->where('Status', $status)
+            ->get();
+
+        return response()->json($requisitions);
+    }
+
     public function requisitionAction($app, $id, $status, $username = null, $bypassAuth = false)
     {
         $this->canAccess($bypassAuth);

@@ -8,12 +8,12 @@
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadActive">My Requisitions</a>
                     </li>
-                    <!--<li>
+                    <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadCompleted">Approved</a>
                     </li>
                     <li>
                         <a class="block no-underline px-4 py-2 hover" @click="loadRejected">Rejected</a>
-                    </li>-->
+                    </li>
                     <li v-if="authUser.SuperUser === 'Yes'">
                         <a class="block no-underline px-4 py-2 hover" @click="$refs.acting.show()">Act As</a>
                     </li>
@@ -206,7 +206,7 @@
                 this.loading = true
                 this.noRequisitions = false;
                 //this.actor = "";
-                axios.get('/staff/workflowBackend/budgetTracker/Approved' + ((this.actor.length > 0) ? "/" + this.actor : ""))
+                axios.get('/staff/btWorkflowBackend/Approved' + ((this.actor.length > 0) ? "/" + this.actor : ""))
                     .then(response => {
                         if(response.data.length < 1){
                             this.noRequisitions = true;
@@ -226,7 +226,7 @@
                 this.loading = true;
                 this.noRequisitions = false;
                 //this.actor = "";
-                axios.get('/staff/workflowBackend/budgetTracker/Rejected' + ((this.actor.length > 0) ? "/" + this.actor : ""))
+                axios.get('/staff/btWorkflowBackend/Rejected' + ((this.actor.length > 0) ? "/" + this.actor : ""))
                     .then(response => {
                         if(response.data.length < 1){
                             this.noRequisitions = true;
@@ -262,28 +262,30 @@
                     });
             },
             manualSync(){
-                this.loadingSync = true;
-                axios.get('/staff/workflowBackendSync')
-                    .then(res=>{
-                        console.log(res);
-                        if(this.actor === ""){
-                            this.loadActive();
-                        } else {
-                            this.impersonate();
-                        }
+                if(!this.loadingSync){
+                    this.loadingSync = true;
+                    axios.get('/staff/workflowBackendSync')
+                        .then(res=>{
+                            console.log(res);
+                            if(this.actor === ""){
+                                this.loadActive();
+                            } else {
+                                this.impersonate();
+                            }
 
-                        this.loadingSync = false;
-                    })
-                    .catch(err=>{
-                        console.log(err);
-                        alert('Something with wrong while attempting to communicate with FileMaker. Please contact IT.')
-                        if(this.actor === ""){
-                            this.loadActive();
-                        } else {
-                            this.impersonate();
-                        }
-                        this.loadingSync = false;
-                    })
+                            this.loadingSync = false;
+                        })
+                        .catch(err=>{
+                            console.log(err);
+                            alert('Something with wrong while attempting to communicate with FileMaker. Please contact IT.')
+                            if(this.actor === ""){
+                                this.loadActive();
+                            } else {
+                                this.impersonate();
+                            }
+                            this.loadingSync = false;
+                        })
+                }
             }
         },
         computed: {

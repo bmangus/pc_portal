@@ -258,36 +258,33 @@
         data() {
             return {
                 doc: '',
-                output: null
+                output: null,
+                requisitionApproving: false,
             }
         },
         methods: {
             approveReq(id){
-                let actorString = (this.actor !== "") ? '/' + this.actor : "";
-                axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString)
-                    .then(res=>{
-                        this.$emit('load', true);
-                        this.$parent.$refs['close'].click();
-                    })
-                    .catch(err=>{
-                        this.$emit('load', true);
-                        this.$parent.$refs['close'].click();
-                    })
+                if(!this.requisitionApproving){
+                    this.requisitionApproving = true;
+                    let actorString = (this.actor !== "") ? '/' + this.actor : "";
+                    axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Approved' + actorString)
+                        .then(res=>{
+                            this.requisitionApproving = false;
+                            this.$emit('load', true);
+                            this.$parent.$refs['close'].click();
+                        })
+                        .catch(err=>{
+                            this.requisitionApproving = false;
+                            this.$emit('load', true);
+                            this.$parent.$refs['close'].click();
+                        })
+                }
             },
             openRejectionModal(){
               this.$refs['rejection-modal'].show();
             },
             emitLoad(){
                 this.$emit('load', true);
-            },
-            rejectReq(id, mid){
-                let actorString = (this.actor !== "") ? '/' + this.actor : "";
-                axios.get('/staff/workflowBackend/budgetTracker/' + id + '/Rejected' + actorString)
-                    .then(res=>{
-                        this.$refs['modal'+mid].hide();
-                        this.$emit('load', true);
-                    })
-                    .catch(err=>this.$emit('load', true))
             },
             caseString(str) {
                 if (typeof str !== "string") return str;
