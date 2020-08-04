@@ -25,7 +25,9 @@
             <div class="mt-3 ml-auto mr-2">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" v-model="searchStr" placeholder="Search.."/>
             </div>
-            <span class="btn-primary mb-2 p-3 mr-2 ml-2" @click="manualSync"><span v-if="loadingSync"><font-awesome-icon icon="spinner" spin/></span>Sync</span>
+            <div v-show="authUser.SuperUser === 'Yes'">
+                <span class="btn-primary mb-2 p-3 mr-2 ml-2" @click="manualSync"><span v-if="loadingSync"><font-awesome-icon icon="spinner" spin/></span>Sync</span>
+            </div>
         </div>
         <div v-if="loading" class="flex inset-auto">
             <div class="loader">Loading...</div>
