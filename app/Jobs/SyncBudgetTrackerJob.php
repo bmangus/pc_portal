@@ -51,7 +51,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
             'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
             'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
             'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedStatus6Rejected',
-            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail'
+            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail', 'Status'
         ];
 
         $this->approvalFields = [
