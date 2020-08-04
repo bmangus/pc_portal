@@ -1,6 +1,8 @@
 const mix = require('laravel-mix');
-const LiveReloadPlugin = require('webpack-livereload-plugin');
+//const LiveReloadPlugin = require('webpack-livereload-plugin');
 const tailwindcss = require('tailwindcss');
+const domain = 'pc_portal.test'; // <== edit this one
+const homedir = require('os').homedir();
 
 /*
  |--------------------------------------------------------------------------
@@ -19,7 +21,13 @@ mix.js('resources/js/app.js', 'public/js')
         processCssUrls: false,
         postCss: [ tailwindcss('./tailwind.config.js')]
     })
-    .webpackConfig({
-        plugins: [new LiveReloadPlugin()]
+    .browserSync({
+        proxy: 'https://' + domain,
+        host: domain,
+        open: 'external',
+        https: {
+            key: homedir + '/.config/valet/Certificates/' + domain + '.key',
+            cert: homedir + '/.config/valet/Certificates/' + domain + '.crt',
+        },
     })
     .copy('storage/fonts', 'public/storage/fonts');
