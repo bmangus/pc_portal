@@ -74,7 +74,11 @@ class SendBudgetTrackerApprovalsJob implements ShouldQueue
     public function sendRecord($r, $id)
     {
         $record = $this->constructRec($r);
-        $this->bt->update('Web_Requisition_Approvals', $record, $id)->exec();
+        try{
+            $this->bt->update('Web_Requisition_Approvals', $record, $id)->exec();
+        } catch (\Exception $e){
+            return null;
+        }
     }
 
     public function constructRec($r)
