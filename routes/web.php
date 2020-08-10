@@ -15,8 +15,6 @@ Route::redirect('/', '/public/extendedcare');
 
 Route::get('/workflowApproval/{app}/{token}/{status}', 'WorkflowController@approveFromEmail');
 
-Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
-
 Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');

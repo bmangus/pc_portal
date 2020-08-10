@@ -51,14 +51,14 @@ class ATNextApprover extends Mailable
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/atWorkflowApproval/". $token . "/Approved";
+            . "/staff/atWorkflowApproval/". $token . "/Approved";
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
         return config('app.url')
-            . "/atWorkflowApproval/". $token . "/Rejected";
+            . "/staff/atWorkflowApproval/". $token . "/Rejected";
     }
     private function generateEmailToken()
     {

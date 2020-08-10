@@ -14,7 +14,6 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class SyncBudgetTrackerJob implements ShouldQueue
@@ -326,29 +325,6 @@ class SyncBudgetTrackerJob implements ShouldQueue
         SendBudgetTrackerApprovalsJob::dispatchNow();
         return $this;
     }
-
-   /* private function deleteDuplicates()
-    {
-        $deletedRequisitions = DB::delete(
-            'delete t1 from b_t_requisitions t1
-                    inner join b_t_requisitions t2
-                    where
-                    t1.pk < t2.pk AND
-                    t1.RecID = t2.RecID'
-        );
-
-        $deletedRequisitionItems = DB::delete(
-            'delete t1 from b_t_requisition_items t1
-                    inner join b_t_requisition_items t2
-                    where
-                    t1.id < t2.id AND
-                    t1.RecID = t2.RecID'
-        );
-
-        if($deletedRequisitions > 0 || $deletedRequisitionItems > 0){
-            return null;
-        }
-    }*/
 
 }
 
