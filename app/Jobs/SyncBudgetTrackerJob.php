@@ -217,11 +217,16 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function constructRequisitionItems($requisition)
     {
-        $items = $this->bt
-            ->find('Web_ReqItems')
-            ->where('zd_RequisRecID', $requisition['RecID'])
-            ->limit(500)
-            ->get();
+        try{
+            $items = $this->bt
+                ->find('Web_ReqItems')
+                ->where('zd_RequisRecID', $requisition['RecID'])
+                ->limit(500)
+                ->get();
+        } catch (\Exception $e) {
+            $items = [];
+        }
+
         foreach($items as $recordId => $recItem) {
             if(!in_array($recordId, $this->createdRecItemIds)){
                 $recId = (string)$recItem['zd_RequisRecID'];
@@ -259,10 +264,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function syncApprovers()
     {
-        $approvers = $this->bt
-            ->records('Web_Approvers')
-            ->limit(10000)
-            ->get();
+        try{
+            $approvers = $this->bt
+                ->records('Web_Approvers')
+                ->limit(10000)
+                ->get();
+        } catch(\Exception $e) {
+            $approvers = [];
+        }
+
 
         foreach($approvers as $recId => $approver) {
             $localRec = BTApprovers::where('fmId', $recId)->first();
@@ -284,10 +294,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function syncApproverSetup()
     {
-        $approvers = $this->bt
-            ->records('Web_ApproverSetup')
-            ->limit(10000)
-            ->get();
+        try{
+            $approvers = $this->bt
+                ->records('Web_ApproverSetup')
+                ->limit(10000)
+                ->get();
+        } catch(\Exception $e) {
+            $approvers = [];
+        }
+
 
         foreach ($approvers as $recId => $approver) {
             $localRec = BTApproverSetup::where('fm_id', $recId)->first();
@@ -305,10 +320,15 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function syncWebSetup()
     {
-        $setup = $this->bt
-            ->records('Web_Setup')
-            ->limit(10000)
-            ->get();
+        try{
+            $setup = $this->bt
+                ->records('Web_Setup')
+                ->limit(10000)
+                ->get();
+        } catch(\Exception $e) {
+            $setup = [];
+        }
+
 
         BTWebSetup::truncate();
         foreach($setup as $recId => $rec) {

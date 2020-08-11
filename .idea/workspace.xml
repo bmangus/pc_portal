@@ -4,8 +4,6 @@
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/ATNextApprover.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/ATNextApprover.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
