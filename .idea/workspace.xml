@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SyncBudgetTrackerJob.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,13 +321,6 @@
       <workItem from="1596580786472" duration="2697000" />
       <workItem from="1596724805801" duration="157000" />
       <workItem from="1597070939744" duration="364000" />
-    </task>
-    <task id="LOCAL-00043" summary="committing production assets.">
-      <created>1591723472508</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1591723472508</updated>
     </task>
     <task id="LOCAL-00044" summary="Committing fix for impersonation">
       <created>1591750335221</created>
@@ -666,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596585320784</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="Added try/catch blocks to sync bt job.">
+      <created>1597116491424</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1597116491425</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -688,7 +687,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed future issue with sitelookup interfering with approver position calcs on non site lookup requisitions." />
     <MESSAGE value="Enabled sending initial email in Workflow." />
     <MESSAGE value="Updated migration to allow large numbers in AT." />
     <MESSAGE value="Fixed a few bugs" />
@@ -713,7 +711,8 @@
     <MESSAGE value="Added fix for filemaker record lock causing failures in the sync process. Added exclusion on the status field for requisition updates." />
     <MESSAGE value="Removed sync button for everyone but superusers." />
     <MESSAGE value="Updated webpack.mix.js to use browsersync for local dev." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated webpack.mix.js to use browsersync for local dev." />
+    <MESSAGE value="Added try/catch blocks to sync bt job." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added try/catch blocks to sync bt job." />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -736,8 +735,8 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="-1608" y="-1440" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1596585320627">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="0" y="0" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1597116491259">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542957580" />
@@ -745,7 +744,7 @@
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645748338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
     <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1596585320627" />
-    <state x="0" y="0" width="1680" height="1050" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1595218320175" />
+    <state x="0" y="0" width="1680" height="1050" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1597116491259" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613917671" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1596581460011" />
     <state x="-1608" y="-1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.956/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594346038650" />
@@ -763,8 +762,8 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-827" y="-1081" key="SettingsEditor/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1595975384761" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1596585328175">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2" timestamp="1597116501043">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542965034" />
@@ -772,7 +771,7 @@
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645884214" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1596585328175" />
-    <state x="578" y="335" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1595218330050" />
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1597116501043" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613925228" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594266926879" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.956/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594346044266" />
