@@ -20,6 +20,7 @@
             return {
                 currentComment: null,
                 commentSaving: false,
+                validComment: false,
                 loading: true
             }
         },
@@ -51,10 +52,10 @@
                     })
             },
             saveComment(){
-                if(this.currentComment === null|| this.currentComment.length <= 0) {
+                /*if(this.currentComment === null|| this.currentComment.length <= 0) {
                     alert('You must provide a comment before rejecting.');
                     return false;
-                }
+                }*/
                 if(!this.commentSaving){
                     this.commentSaving = true;
                     const formData = new FormData();
