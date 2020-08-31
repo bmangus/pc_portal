@@ -29,6 +29,8 @@ Auth::routes([
 ]);
 
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
+    Route::get('/workflowBackendCounts/{username}', 'WorkflowController@getCounts');
+    Route::get('/workflowBackendCounts', 'WorkflowController@getCounts');
     Route::get('/workflow', 'WorkflowController@index');
     Route::get('/workflowBackend/{app}', 'WorkflowController@requisitionsByApprover');
     Route::get('/btWorkflowBackend/{status}/{username}', 'WorkflowController@requisitionsByUserStatus');
@@ -46,6 +48,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflowPDF/download/{id}', 'WorkflowController@viewPDF');
     Route::get('/workflowApprovers', 'WorkflowController@getApproverList');
     Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
+    Route::get('/workflowBackendComments/getCurrentPositionComment/{id}', 'WorkflowController@getCurrentPositionComment');
     //AT
     Route::get('/ATworkflow', 'ATWorkflowController@index');
     Route::get('/workflowATBackendSync', 'ATWorkflowController@manualSync');

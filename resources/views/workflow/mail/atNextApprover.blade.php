@@ -12,7 +12,7 @@
     <p style="line-height:1.2; margin:0!important"><span tabindex="0">{{$requisition->VendorAddress1}}</span></p>
     <p style="line-height:1.2; margin:0!important"><span tabindex="0">{{$requisition->VendorCity}}, {{$requisition->VendorState}} {{$requisition->VendorZip}}</span></p>
     <p>{{$requisition->AccountCode}}<br>
-        Charge To: </p>
+        Charge To: {{$requisition->ChargeTo}}</p>
     <p><strong>Items requested:</strong></p>
     <table cellpadding="4" border="0">
         <tbody>
