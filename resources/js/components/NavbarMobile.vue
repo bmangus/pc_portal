@@ -6,14 +6,14 @@
                         <template v-slot:button-content>
                             <svg class="fill-current text-gray-800 h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
                         </template>
-                        <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
+                        <a href="#responsive-header" class="ml-2 flex flex-row block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Dashboard
                         </a>
-                        <a href="/staff/workflow" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
-                            Budget Tracker
+                        <a href="/staff/workflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
+                            Budget Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.btCount }}</span>
                         </a>
-                        <a href="/staff/ATworkflow" class="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
-                            Activity Tracker
+                        <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
+                            Activity Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
                         </a>
                     </t-dropdown>
                 </div>
@@ -42,18 +42,26 @@
 
 <script>
     export default {
-        name: 'navbar',
+        name: 'navbar-mobile',
         props: ['asset', 'user'],
         data() {
            return {
                open: false,
                userJson: JSON.parse(this.user),
-               loading: false
+               loading: false,
+               btCount: 0,
+               atCount: 0
            }
         },
         mounted(){
             console.log(this.asset);
             console.log(this.user);
+            axios.get('/staff/workflowBackendCounts')
+                .then((res)=>{
+                    this.btCount = res.data.btCount;
+                    this.atCount = res.data.atCount;
+                })
+                .catch((err)=>console.log(err));
         },
         methods: {
             toggle() {

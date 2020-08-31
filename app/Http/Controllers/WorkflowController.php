@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ATRequisition;
 use App\BTApprovers;
 use App\BTApproverSetup;
 use App\BTRequisition;
@@ -58,6 +59,14 @@ class WorkflowController extends Controller
         }
 
         return view('workflow.index', compact('user', 'workflowUser'));
+    }
+
+    public function getCounts($username = null){
+        $this->canAccess();
+        $username = $username ?? strtolower(auth()->user()->uid);
+        $btCount = BTRequisition::where('Status', $username)->get()->count();
+        $atCount = ATRequisition::where('Status', $username)->get()->count();
+        return response()->json(['btCount'=>$btCount, 'atCount'=>$atCount]);
     }
 
     public function manualSync()
@@ -177,15 +186,15 @@ class WorkflowController extends Controller
         if($requisition->Status === $username)
         {
             if($username === $requisition->approvers->Approver1 || ($requisition->approvers->Approver1 === "SITELOOKUP" && $this->isSiteApprover($requisition, $username)) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
-                $requisition->ApprovedComments1 .= $comment;
+                $requisition->ApprovedComments1 = $comment;
             } else if($username === $requisition->approvers->Approver2 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver2")){
-                $requisition->ApprovedComments2 .= $comment;
+                $requisition->ApprovedComments2 = $comment;
             } else if($username === $requisition->approvers->Approver3 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver3")){
-                $requisition->ApprovedComments3 .= $comment;
+                $requisition->ApprovedComments3 = $comment;
             } else if($username === $requisition->approvers->Approver4 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver4")){
-                $requisition->ApprovedComments4 .= $comment;
+                $requisition->ApprovedComments4 = $comment;
             } else if($username === $requisition->approvers->Approver5 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver5")){
-                $requisition->ApprovedComments5 .= $comment;
+                $requisition->ApprovedComments5 = $comment;
             } else if($username === $requisition->approvers->ApproverTE || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverTE")){
                 $requisition->ApprovedCommentsTE = $comment;
             } else if($username === $requisition->approvers->ApproverFinal || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverFinal")){
@@ -196,6 +205,32 @@ class WorkflowController extends Controller
             $requisition->save();
         }
         return response()->json(['success']);
+    }
+
+    public function getCurrentPositionComment($id)
+    {
+        $requisition = BTRequisition::findOrFail($id);
+        $username = strtolower(auth()->user()->uid);
+        if($requisition->Status === $username){
+            if($username === $requisition->approvers->Approver1 || ($requisition->approvers->Approver1 === "SITELOOKUP" && $this->isSiteApprover($requisition, $username)) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
+                $comment = $requisition->ApprovedComments1;
+            } else if($username === $requisition->approvers->Approver2 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver2")){
+                $comment = $requisition->ApprovedComments2;
+            } else if($username === $requisition->approvers->Approver3 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver3")){
+                $comment = $requisition->ApprovedComments3;
+            } else if($username === $requisition->approvers->Approver4 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver4")){
+                $comment = $requisition->ApprovedComments4;
+            } else if($username === $requisition->approvers->Approver5 || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver5")){
+                $comment = $requisition->ApprovedComments5;
+            } else if($username === $requisition->approvers->ApproverTE || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverTE")){
+                $comment = $requisition->ApprovedCommentsTE;
+            } else if($username === $requisition->approvers->ApproverFinal || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverFinal")){
+                $comment = $requisition->FinalApprovedComments;
+            } else {
+                $comment = "";
+            }
+        }
+        return response()->json(['comment'=>$comment]);
     }
 
     public function reassign($id, Request $request)

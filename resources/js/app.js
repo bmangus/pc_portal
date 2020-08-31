@@ -43,7 +43,8 @@ Vue.use(VueHtml2Canvas);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('navbar', require('./components/Navbar.vue').default);
+Vue.component('navbar-mobile', require('./components/NavbarMobile.vue').default);
+Vue.component('navbar-desktop', require('./components/NavbarDesktop.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
 Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
 Vue.component('workflow-comment', require('./components/WorkflowComment').default);

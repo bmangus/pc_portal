@@ -3,7 +3,7 @@
         <div class="w-full m-2 col">
             <div class="h4">Please let us know why you are rejecting this requisition:</div>
             <div class="w-full p-2 mt-4 border-2 border-black">
-                <textarea class="w-full" type="text" v-model="currentComment" placeholder="Add Your Comment Here...."></textarea>
+                <textarea class="w-full" type="text" v-model="this.currentComment" placeholder="Add Your Comment Here...."></textarea>
             </div>
             <button title="save and reject" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-2 rounded float-right" @click="saveComment"><font-awesome-icon icon="save"/></button>
         </div>
@@ -21,6 +21,13 @@
                 currentComment: null,
                 commentSaving: false
             }
+        },
+        mounted(){
+              axios.get('/staff/workflowBackendComments/getCurrentPositionComment/' + this.requisitionId)
+                .then((res)=>{
+                    this.currentComment = res.data.comment;
+                })
+                .catch((err)=>console.log(err));
         },
         methods: {
             rejectRequisition(){

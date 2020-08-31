@@ -21,15 +21,9 @@
 </head>
 <body>
     <div id="app">
-        <navbar asset="{{asset('img/PC_Type_1Line_2C.png')}}" user="{{$user}}"></navbar>
+        <navbar-mobile asset="{{asset('img/PC_Type_1Line_2C.png')}}" user="{{$user}}"></navbar-mobile>
         <div class="flex w-100 h-screen mx-auto">
-            <div class="w-1/6 h-full bg-gray-800 hidden lg:flex">
-                <ul class="flex-col w-full pt-2">
-                    <li class="bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">Dashboard</li>
-                    <li class="bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white"><a href="/staff/workflow">Budget Tracker</a></li>
-                    <li class="bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white"><a href="/staff/ATworkflow">Activity Tracker</a></li>
-                </ul>
-            </div>
+            <navbar-desktop user="{{$user}}"></navbar-desktop>
             <div class="flex w-full lg:w-5/6 h-full shadow-inner bg-gray-300">
                 @yield('content')
             </div>
