@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/NavbarDesktop.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WorkflowController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Navbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/NavbarMobile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowRejectionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowRejectionModal.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/workflow/mail/atNextApprover.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/workflow/mail/atNextApprover.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/workflow/mail/nextApprover.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/workflow/mail/nextApprover.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,14 +330,7 @@
       <workItem from="1597241009255" duration="1422000" />
       <workItem from="1597753531208" duration="1189000" />
       <workItem from="1598835805357" duration="44000" />
-      <workItem from="1598835873870" duration="6817000" />
-    </task>
-    <task id="LOCAL-00047" summary="committing some changes to try an update.">
-      <created>1591755554040</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1591755554040</updated>
+      <workItem from="1598835873870" duration="8490000" />
     </task>
     <task id="LOCAL-00048" summary="reverting impersonation change from last night.">
       <created>1591814850249</created>
@@ -682,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597754936349</updated>
     </task>
-    <option name="localTasksCounter" value="96" />
+    <task id="LOCAL-00096" summary="Added BT/AT counts to the navigation menu. Fixed issue with requiring another comment upon rejection. Fixed missing charge to information in the requsition email.">
+      <created>1598843420235</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1598843420235</updated>
+    </task>
+    <option name="localTasksCounter" value="97" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -704,7 +697,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fixed another bug." />
     <MESSAGE value="Updated next approver link to bypass auth middleware." />
     <MESSAGE value="Committing production assets." />
     <MESSAGE value="Updated height in pdf to accommodate more vendor info" />
@@ -729,7 +721,8 @@
     <MESSAGE value="Changed run schedule" />
     <MESSAGE value="Fixed missing status field in sync job" />
     <MESSAGE value="Added migration to rename approved status 3 column to correct case." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added migration to rename approved status 3 column to correct case." />
+    <MESSAGE value="Added BT/AT counts to the navigation menu. Fixed issue with requiring another comment upon rejection. Fixed missing charge to information in the requsition email." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added BT/AT counts to the navigation menu. Fixed issue with requiring another comment upon rejection. Fixed missing charge to information in the requsition email." />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -752,15 +745,15 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="0" y="0" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1597754936155">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="-1608" y="-1440" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1598843419918">
+      <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542957580" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639597429" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645748338" />
     <state x="-1045" y="-1100" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720795307" />
-    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1596585320627" />
+    <state x="-1608" y="-1440" width="2560" height="1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1598843419918" />
     <state x="0" y="0" width="1680" height="1050" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1597754936155" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613917671" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1596581460011" />
@@ -779,15 +772,15 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-827" y="-1081" key="SettingsEditor/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1595975384761" />
-    <state x="578" y="335" key="Vcs.Push.Dialog.v2" timestamp="1597754943887">
-      <screen x="0" y="0" width="1680" height="1050" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1598843429142">
+      <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542965034" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.958/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591639603113" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.960/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591645884214" />
     <state x="-728" y="-964" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.961/952.-1129.2048.1129@-1608.-1417.2560.1417" timestamp="1591720803171" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1596585328175" />
+    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1598843429142" />
     <state x="578" y="335" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1597754943887" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613925228" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594266926879" />
