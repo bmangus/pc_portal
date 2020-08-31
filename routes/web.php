@@ -49,6 +49,8 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/workflowApprovers', 'WorkflowController@getApproverList');
     Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
     Route::get('/workflowBackendComments/getCurrentPositionComment/{id}', 'WorkflowController@getCurrentPositionComment');
+    Route::get('/workflowBackendComments/getCurrentPositionComment/{id}/{username}', 'WorkflowController@getCurrentPositionComment');
+
     //AT
     Route::get('/ATworkflow', 'ATWorkflowController@index');
     Route::get('/workflowATBackendSync', 'ATWorkflowController@manualSync');

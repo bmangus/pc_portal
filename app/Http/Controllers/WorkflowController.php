@@ -207,10 +207,10 @@ class WorkflowController extends Controller
         return response()->json(['success']);
     }
 
-    public function getCurrentPositionComment($id)
+    public function getCurrentPositionComment($id, $username = null)
     {
         $requisition = BTRequisition::findOrFail($id);
-        $username = strtolower(auth()->user()->uid);
+        $username = $username ?? strtolower(auth()->user()->uid);
         if($requisition->Status === $username){
             if($username === $requisition->approvers->Approver1 || ($requisition->approvers->Approver1 === "SITELOOKUP" && $this->isSiteApprover($requisition, $username)) || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
                 $comment = $requisition->ApprovedComments1;

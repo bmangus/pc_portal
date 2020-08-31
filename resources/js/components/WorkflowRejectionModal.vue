@@ -5,7 +5,7 @@
             <div class="w-full p-2 mt-4 border-2 border-black">
                 <textarea class="w-full" type="text" v-model="this.currentComment" placeholder="Add Your Comment Here...."></textarea>
             </div>
-            <button title="save and reject" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-2 rounded float-right" @click="saveComment"><font-awesome-icon icon="save"/></button>
+            <button title="save and reject" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mt-2 rounded float-right" :disabled="this.loading" @click="saveComment"><font-awesome-icon icon="save"/></button>
         </div>
     </div>
 </template>
@@ -19,15 +19,21 @@
         data() {
             return {
                 currentComment: null,
-                commentSaving: false
+                commentSaving: false,
+                loading: true
             }
         },
         mounted(){
-              axios.get('/staff/workflowBackendComments/getCurrentPositionComment/' + this.requisitionId)
+            let actorString = (this.actor !== "") ? '/' + this.actor : "";
+            axios.get('/staff/workflowBackendComments/getCurrentPositionComment/' + this.requisitionId + actorString)
                 .then((res)=>{
                     this.currentComment = res.data.comment;
+                    this.loading = false;
                 })
-                .catch((err)=>console.log(err));
+                .catch((err)=>{
+                    console.log(err);
+                    this.loading = false;
+                });
         },
         methods: {
             rejectRequisition(){
