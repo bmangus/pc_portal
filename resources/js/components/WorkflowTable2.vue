@@ -171,7 +171,7 @@
             },
             load(){
                 if(this.actor === ""){
-                    this.loadActive();
+                    window.location.reload();
                 }  else {
                     this.impersonate();
                 }
@@ -184,6 +184,7 @@
               this.currentSort = s;
             },
             loadActive(){
+
                 this.selectedStatus = "My Requisitions";
                 this.noRequisitions = false;
                 this.loading = true;

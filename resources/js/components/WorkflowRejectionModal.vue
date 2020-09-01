@@ -18,6 +18,7 @@
         ],
         data() {
             return {
+                savedComment: null,
                 currentComment: null,
                 commentSaving: false,
                 validComment: false,
@@ -28,6 +29,7 @@
             let actorString = (this.actor !== "") ? '/' + this.actor : "";
             axios.get('/staff/workflowBackendComments/getCurrentPositionComment/' + this.requisitionId + actorString)
                 .then((res)=>{
+                    this.savedComment = res.data.comment;
                     this.currentComment = res.data.comment;
                     this.loading = false;
                 })
@@ -52,10 +54,11 @@
                     })
             },
             saveComment(){
-                /*if(this.currentComment === null|| this.currentComment.length <= 0) {
+                if(this.currentComment === null|| this.currentComment.length <= 0) {
+                    console.log("The current comment is: " + this.currentComment);
                     alert('You must provide a comment before rejecting.');
                     return false;
-                }*/
+                }
                 if(!this.commentSaving){
                     this.commentSaving = true;
                     const formData = new FormData();
