@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="231eb97e-4106-4f89-8af5-3cbf9dc11cc8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowRejectionModal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowRejectionModal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/WorkflowTable2.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,21 +329,8 @@
       <workItem from="1597753531208" duration="1189000" />
       <workItem from="1598835805357" duration="44000" />
       <workItem from="1598835873870" duration="8807000" />
-      <workItem from="1598891805232" duration="706000" />
-    </task>
-    <task id="LOCAL-00049" summary="Adding back in email token approval changes.">
-      <created>1591815023393</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1591815023393</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Fixed bug with impersonation. Added template for approval logging in the future.">
-      <created>1591847721186</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1591847721187</updated>
+      <workItem from="1598891805232" duration="966000" />
+      <workItem from="1598921806853" duration="1181000" />
     </task>
     <task id="LOCAL-00051" summary="updated logging config to get around permissions issue from different users.">
       <created>1591927572098</created>
@@ -674,7 +661,21 @@
       <option name="project" value="LOCAL" />
       <updated>1598880054757</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="Temporarily disabling the requirement for comments on rejection.">
+      <created>1598893396439</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1598893396440</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Committing production assets">
+      <created>1598893459867</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1598893459867</updated>
+    </task>
+    <option name="localTasksCounter" value="100" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -696,8 +697,6 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Committing production assets." />
-    <MESSAGE value="Updated height in pdf to accommodate more vendor info" />
     <MESSAGE value="committing changes to search behavior." />
     <MESSAGE value="fixed issue with modal not closing when approving requisitions in BT." />
     <MESSAGE value="Fixed issue with email not sending for first approver. Fixed issue with closing requisition modal when approving a requisiton." />
@@ -721,7 +720,9 @@
     <MESSAGE value="Added migration to rename approved status 3 column to correct case." />
     <MESSAGE value="Added BT/AT counts to the navigation menu. Fixed issue with requiring another comment upon rejection. Fixed missing charge to information in the requsition email." />
     <MESSAGE value="Added a few tweaks to allow other users to reject and use their own comments." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a few tweaks to allow other users to reject and use their own comments." />
+    <MESSAGE value="Temporarily disabling the requirement for comments on rejection." />
+    <MESSAGE value="Committing production assets" />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing production assets" />
   </component>
   <component name="WindowStateProjectService">
     <state x="491" y="125" key="#ExampleTest.testBTSyncJob" timestamp="1592967523121">
@@ -744,8 +745,8 @@
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593534549774" />
     <state x="578" y="287" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@0.0.1680.1050" timestamp="1591143724051" />
     <state x="1657" y="-837" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593540586613" />
-    <state x="-1608" y="-1440" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1598880054330">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="0" y="0" width="1680" height="956" key="CommitChangelistDialog2" timestamp="1598893459651">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529500113" />
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542957580" />
@@ -757,7 +758,7 @@
     <state x="952" y="-1152" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613917671" />
     <state x="-1045" y="-1118" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1596581460011" />
     <state x="-1608" y="-1440" key="CommitChangelistDialog2/-1608.-1440.2560.1440/0.23.1680.956/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594346038650" />
-    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1596129961976" />
+    <state x="0" y="0" key="CommitChangelistDialog2/0.0.1680.1050@0.0.1680.1050" timestamp="1598893459651" />
     <state x="0" y="23" width="1680" height="956" key="CommitChangelistDialog2/0.23.1680.956@0.23.1680.956" timestamp="1594221403025" />
     <state x="369" y="132" key="CommitChangelistDialog2/0.23.1680.958@0.23.1680.958" timestamp="1594136163093" />
     <state x="369" y="186" key="CommitChangelistDialog2/0.23.1680.960@0.23.1680.960" timestamp="1591723472258" />
@@ -771,8 +772,8 @@
       <screen x="-1608" y="-1440" width="2560" height="1440" />
     </state>
     <state x="-827" y="-1081" key="SettingsEditor/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@-1608.-1440.2560.1440" timestamp="1595975384761" />
-    <state x="-728" y="-980" key="Vcs.Push.Dialog.v2" timestamp="1598880061066">
-      <screen x="-1608" y="-1440" width="2560" height="1440" />
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2" timestamp="1598893464826">
+      <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.1027/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593529508152" />
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1417.2560.1417/0.23.1680.956/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593542965034" />
@@ -784,7 +785,7 @@
     <state x="1657" y="-784" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.0.1680.1050/952.-1152.2048.1152@952.-1152.2048.1152" timestamp="1593613925228" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.1027/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594266926879" />
     <state x="-728" y="-980" key="Vcs.Push.Dialog.v2/-1608.-1440.2560.1440/0.23.1680.956/952.-1129.2048.1129@-1608.-1440.2560.1440" timestamp="1594346044266" />
-    <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1596129969251" />
+    <state x="578" y="335" key="Vcs.Push.Dialog.v2/0.0.1680.1050@0.0.1680.1050" timestamp="1598893464826" />
     <state x="578" y="328" key="Vcs.Push.Dialog.v2/0.23.1680.956@0.23.1680.956" timestamp="1594221408580" />
     <state x="578" y="329" key="Vcs.Push.Dialog.v2/0.23.1680.958@0.23.1680.958" timestamp="1594136169809" />
     <state x="578" y="330" key="Vcs.Push.Dialog.v2/0.23.1680.960@0.23.1680.960" timestamp="1591723479633" />
