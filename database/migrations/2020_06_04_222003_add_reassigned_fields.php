@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class AddReassignedFields extends Migration
 {
@@ -14,8 +14,8 @@ class AddReassignedFields extends Migration
     public function up()
     {
         //
-        if (Schema::hasTable('b_t_requisitions')) {
-            Schema::table('b_t_requisitions', function (Blueprint $table) {
+        if(Schema::hasTable('b_t_requisitions')){
+            Schema::table('b_t_requisitions', function(Blueprint $table){
                 $table->boolean('Reassigned')->default(false);
                 $table->string('ReassignedBy')->nullable();
                 $table->string('ReassignedPosition')->nullable();
@@ -30,8 +30,8 @@ class AddReassignedFields extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('b_t_requisitions')) {
-            Schema::table('b_t_requisitions', function (Blueprint $table) {
+        if(Schema::hasTable('b_t_requisitions')){
+            Schema::table('b_t_requisitions', function(Blueprint $table){
                 $table->dropColumn('Reassigned');
                 $table->dropColumn('ReassignedBy');
                 $table->dropColumn('ReassignedPosition');

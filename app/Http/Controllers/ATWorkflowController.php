@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ATEmailTokens;
 use App\ATRequisition;
+use App\ATEmailTokens;
 use App\BTApproverSetup;
 use App\BTRequisition;
 use App\Jobs\SyncActivityTrackerJob;
@@ -31,11 +31,11 @@ class ATWorkflowController extends Controller
 
         $this->approvalFields = [
             'ApprovedBy1', 'ApprovedStatus1', 'ApprovedDate1', 'ApprovedComments1',
-            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE', 'Status',
+            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE','Status'
         ];
 
         $this->approvalDates = [
-            'ApprovedDate1', 'ApprovedDateTE',
+            'ApprovedDate1', 'ApprovedDateTE'
         ];
     }
 
@@ -44,7 +44,6 @@ class ATWorkflowController extends Controller
         $this->canAccess();
         $user = auth()->user();
         $workflowUser = BTApproverSetup::where('Approver', $user->uid)->firstOrFail();
-
         return view('workflow.atIndex', compact('user', 'workflowUser'));
     }
 
@@ -52,16 +51,16 @@ class ATWorkflowController extends Controller
     {
         $this->canAccess();
         SyncActivityTrackerJob::dispatchNow();
-
         return response()->json(['success']);
     }
+
 
     public function requisitionsByApprover($username = null)
     {
         $this->canAccess();
         $username = $username ?? strtolower(auth()->user()->uid);
 
-        $activeRequisitions = ATRequisition::whereNotIn('Status', ['Approved', 'Rejected'])
+        $activeRequisitions =  ATRequisition::whereNotIn('Status', ['Approved', 'Rejected'])
             ->get();
 
         $requisitionsForThisApprover = $this->filterRequisitionsByApprover($activeRequisitions, $username);
@@ -85,9 +84,7 @@ class ATWorkflowController extends Controller
 
         $requisition = ATRequisition::findOrFail($id);
 
-        if ($this->isRejected($requisition)) {
-            return response()->json(['error']);
-        }
+        if($this->isRejected($requisition)) return response()->json(['error']);
 
         //get passed in user or assign to current logged in user
         $username = $username ?? strtolower(auth()->user()->uid);
@@ -100,37 +97,35 @@ class ATWorkflowController extends Controller
         //set to current logged in user
         //$username = strtolower(auth()->user()->uid);
 
-        if ($this->currentPositionMatchesUser($requisition, $username)) {
+        if($this->currentPositionMatchesUser($requisition, $username)){
             $this->setRequisitionStatus($requisition, $status, $username);
         }
 
-        if ($requisition->Status === 'Approved' || $requisition->Status === 'Rejected') {
+
+        if($requisition->Status === 'Approved' || $requisition->Status === 'Rejected'){
             Mail::to($requisition->SubmitterEmail)->send(new ATFinal($requisition));
         } else {
             $nextApproverEmail = $this->getNextApproverEmail($requisition);
-            if ($this->approverWantsEmail($nextApproverEmail)) {
-                Mail::to($nextApproverEmail)->send(new ATNextApprover($requisition));
-            }
+            if($this->approverWantsEmail($nextApproverEmail)) Mail::to($nextApproverEmail)->send(new ATNextApprover($requisition));
         }
 
         $this->sendStatusToFM($requisition);
-
         return response()->json(['success']);
     }
 
     public function approveFromEmail($token = null, $status = null)
     {
+
         $tokenRecord = ATEmailTokens::where('token', $token)->firstOrFail();
 
         //return response()->json($tokenRecord);
 
-        if ($tokenRecord->is_valid) {
+        if($tokenRecord->is_valid){
             $requisition = ATRequisition::findOrFail($tokenRecord->requisition_id);
             $ponum = $requisition->PONumber;
             $this->requisitionAction($tokenRecord->requisition_id, $status, $tokenRecord->username, true);
             $tokenRecord->is_valid = false;
             $tokenRecord->save();
-
             return view('workflow.emailApproval')->with(['message'=>"PO #${ponum} requisition has been successfully ${status}.", 'valid'=>1, 'status' =>$status, 'ponum'=>$ponum]);
         } else {
             return view('workflow.emailApproval')->with(['message'=>'This link is no longer valid.', 'valid'=>0]);
@@ -142,28 +137,28 @@ class ATWorkflowController extends Controller
         $requisition = ATRequisition::findOrFail($id);
         $username = $request->get('username') ?? strtolower(auth()->user()->uid);
         $comment = $request->get('comment');
-        if ($requisition->Status === $username) {
-            if ($username === $requisition->ApproverUsername || ($requisition->Reassigned && $requisition->ReassignedPosition === 'Approver1')) {
+        if($requisition->Status === $username)
+        {
+            if($username === $requisition->ApproverUsername || ($requisition->Reassigned && $requisition->ReassignedPosition === "Approver1")){
                 $requisition->ApprovedComments1 .= $comment;
-            } elseif ($username === $this->teApprover || ($requisition->Reassigned && $requisition->ReassignedPosition === 'ApproverTE')) {
+            } else if($username === $this->teApprover || ($requisition->Reassigned && $requisition->ReassignedPosition === "ApproverTE")){
                 $requisition->ApprovedCommentsTE = $comment;
             } else {
-                $requisition->ApprovedCommentsTE .= 'Unknown approver position comments added to TE approver comments field ... '.$comment;
+                $requisition->ApprovedCommentsTE .= 'Unknown approver position comments added to TE approver comments field ... ' . $comment;
             }
             $requisition->save();
         }
-
         return response()->json(['success']);
     }
 
     public function viewPDF($id)
     {
+
         ini_set('max_execution_time', 60);
         $po = ATRequisition::findOrFail($id);
 
         //return response()->json($po);
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.atpdf', compact('po'));
-
         return $pdf->stream();
     }
 
@@ -171,10 +166,9 @@ class ATWorkflowController extends Controller
     {
         $po = ATRequisition::findOrFail($request->get('id'));
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('workflow.atpdf', compact('po'));
-        $path = \Storage::path('/pdfs/'.$po->PONumber.'.pdf');
+        $path = \Storage::path('/pdfs/'. $po->PONumber . '.pdf');
         $pdf->save($path);
-        Mail::to($request->get('recipientEmail'))->send(new ATForward($po, $path, $request->get('custMessage'), $po->Status.'@putnamcityschools.org'));
-
+        Mail::to($request->get('recipientEmail'))->send(new ATForward($po, $path, $request->get('custMessage'), $po->Status . '@putnamcityschools.org'));
         return response()->json('ok');
     }
 
@@ -183,7 +177,7 @@ class ATWorkflowController extends Controller
         $requisition = $this->setApproverFields($requisition, $status, $username);
 
         //Call self to handle situation where the next approver has already approved this requisition in another position (mainly for Cory).
-        if ($this->nextApproverHasAlreadyApproved($requisition)) {
+        if($this->nextApproverHasAlreadyApproved($requisition)) {
             $requisition = $this->setApproverFields($requisition, $status, $requisition->Status);
         }
 
@@ -192,15 +186,14 @@ class ATWorkflowController extends Controller
 
     private function setApproverFields($requisition, $status, $username)
     {
-        if ($status === 'Rejected') {
+        if($status === 'Rejected'){
             $requisition->Status = 'Rejected';
         }
-        if ($requisition->ApprovedBy1 === '' && $requisition->ApproverUsername === $username) {
+        if($requisition->ApprovedBy1 === "" && $requisition->ApproverUsername === $username) {
             return $this->setApprover1($requisition, $status, $username);
-        } elseif ($requisition->ApprovedByTE === '' && $requisition->Technology === 'TE') {
+        }else if($requisition->ApprovedByTE === "" && $requisition->Technology === 'TE') {
             return $this->setApproverTE($requisition, $status, $username);
         }
-
         return $requisition;
     }
 
@@ -209,15 +202,14 @@ class ATWorkflowController extends Controller
         $requisition->ApprovedBy1 = $username;
         $requisition->ApprovedStatus1 = $status;
         $requisition->ApprovedDate1 = now()->format('m/d/Y');
-        if ($status === 'Rejected') {
-            $requisition->Status = 'Rejected';
-        } elseif ($requisition->Technology === 'TE') {
+        if ($status === "Rejected") {
+            $requisition->Status = "Rejected";
+        } else if($requisition->Technology === "TE"){
             $requisition->Status = $this->teApprover;
         } else {
             $requisition->Status = 'Approved';
         }
         $requisition->save();
-
         return $requisition;
     }
 
@@ -228,7 +220,6 @@ class ATWorkflowController extends Controller
         $requisition->ApprovedDateTE = now()->format('m/d/Y');
         $requisition->Status = $status === 'Rejected' ? 'Rejected' : 'Approved';
         $requisition->save();
-
         return $requisition;
     }
 
@@ -240,23 +231,20 @@ class ATWorkflowController extends Controller
 
     private function getNextApproverEmail($requisition)
     {
-        if ($requisition->ApprovedBy1 === '') {
+        if($requisition->ApprovedBy1 === "") {
             return $requisition->ApproverEmail;
-        } elseif ($requisition->Technology === 'TE') {
+        }else if($requisition->Technology === "TE") {
             return $this->teApproverEmail;
         }
     }
 
     private function canAccess($bypass = false)
     {
-        if ($bypass) {
-            return $this;
-        }
+        if($bypass) return $this;
         $groups = json_decode(auth()->user()->groups);
-        if (! in_array('workflow_users', $groups) && ! in_array('DOTPCAdmin', $groups)) {
-            return abort(403, 'You are not authorized to view purchase orders.');
+        if(!in_array('workflow_users', $groups) && !in_array('DOTPCAdmin', $groups)) {
+            return abort(403, "You are not authorized to view purchase orders.");
         }
-
         return $this;
     }
 
@@ -271,43 +259,31 @@ class ATWorkflowController extends Controller
     {
         $BaseFilter = $this->checkApprover($requisition, $username) ||
             $this->checkTEApprover($requisition, $username);
-
         return $BaseFilter && $username === $requisition->Status;
     }
 
     private function checkApprover($requisition, $username)
     {
-        if ($this->isRejected($requisition)) {
-            return false;
-        }
-
-        return  $requisition->ApprovedBy1 === '' &&
-            $requisition->ApprovedStatus1 === '' &&
+        if($this->isRejected($requisition)) return false;
+        return  $requisition->ApprovedBy1 === "" &&
+            $requisition->ApprovedStatus1 === "" &&
             $requisition->ApproverUsername === $requisition->Status &&
             $requisition->Status === $username;
     }
 
     private function checkTEApprover($requisition, $username)
     {
-        if ($this->isRejected($requisition)) {
-            return false;
-        }
-
-        return  $requisition->Technology === 'TE' &&
-            $requisition->ApprovedByTE === '' &&
-            $requisition->ApprovedStatusTE === '' &&
+        if($this->isRejected($requisition)) return false;
+        return  $requisition->Technology === "TE" &&
+            $requisition->ApprovedByTE === "" &&
+            $requisition->ApprovedStatusTE === "" &&
             $requisition->Status === $username;
     }
 
     private function isRejected($requisition)
     {
-        if ($requisition->ApprovedStatus1 === 'Rejected') {
-            return true;
-        }
-        if ($requisition->ApprovedStatusTE === 'Rejected') {
-            return true;
-        }
-
+        if($requisition->ApprovedStatus1 === "Rejected") return true;
+        if($requisition->ApprovedStatusTE === "Rejected") return true;
         return false;
     }
 
@@ -317,7 +293,7 @@ class ATWorkflowController extends Controller
         $record = [];
         foreach ($re as $key => $item) {
             if (in_array($key, $this->approvalFields)) {
-                if (in_array($key, $this->approvalDates)) {
+                if(in_array($key, $this->approvalDates)){
                     //dd($item);
                     $record[$key] = ($item != null) ? \Carbon\Carbon::parse($item)->format('m/d/Y') : null;
                 } else {
@@ -333,10 +309,7 @@ class ATWorkflowController extends Controller
     private function approverWantsEmail($email)
     {
         $approver = BTApproverSetup::where('ApproverEmail', $email)->first();
-        if ($approver !== null && $approver->ReceiveEmails === 'Yes') {
-            return true;
-        }
-
+        if($approver !== null && $approver->ReceiveEmails === "Yes") return true;
         return false;
     }
 }

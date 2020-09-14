@@ -94,7 +94,7 @@ class StoreExtendedCareRegistration extends FormRequest
             'EC2_Relationship.required'=>'Please tell us how the second emergency contact is related to the child.',
             'EC2Checkbox.required'=>'Please tell us if emergency contact two is authorized to pickup this child.',
             'Authorized_Pickup1.required'=>'Please tell us the first person authorized to pickup this child.',
-            'Authorized_Pickup2.required'=>'Please tell us the second person authorized to pickup this child.',
+            'Authorized_Pickup2.required'=>'Please tell us the second person authorized to pickup this child.'
         ];
     }
 }
