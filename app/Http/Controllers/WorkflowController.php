@@ -416,7 +416,7 @@ class WorkflowController extends Controller
             return $this->setApprover5($requisition, $status, $username);
         }else if($requisition->ApprovedByTE === "" && $requisition->approvers->ApproverTE === $username && $requisition->Technology === 'TE') {
             return $this->setApproverTE($requisition, $status, $username);
-        }else if($requisition->FinalApprovedBy === "" && $requisition->approvers->ApproverFinal === $username) {
+        }else if($requisition->FinalApprovedBy === "" && $requisition->approvers->ApproverFinal === $username && $requisition->Status === $username) {
             return $this->setApproverFinal($requisition, $status, $username);
         }
 
