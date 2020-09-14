@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class ModifyApprover3StatusColumnName extends Migration
 {
@@ -13,8 +13,8 @@ class ModifyApprover3StatusColumnName extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('b_t_requisitions')) {
-            Schema::table('b_t_requisitions', function (Blueprint $table) {
+        if(Schema::hasTable('b_t_requisitions')){
+            Schema::table('b_t_requisitions', function(Blueprint $table){
                 $table->renameColumn('Approvedstatus3', 'ApprovedStatus3');
             });
         }
