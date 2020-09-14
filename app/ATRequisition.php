@@ -12,6 +12,6 @@ class ATRequisition extends Model
 
     public function requisitionItems()
     {
-        return $this->hasMany('App\ATRequisitionItem', 'RequisitionNo', 'RequisitionNo');
+        return $this->hasMany(\App\ATRequisitionItem::class, 'RequisitionNo', 'RequisitionNo');
     }
 }
