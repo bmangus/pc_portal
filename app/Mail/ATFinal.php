@@ -4,9 +4,9 @@ namespace App\Mail;
 
 use App\ATRequisition;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ATFinal extends Mailable
 {
@@ -31,7 +31,7 @@ class ATFinal extends Mailable
      */
     public function build()
     {
-        return $this->subject('AT Purchase Order #' . $this->requisition->PONumber . ' - ' . $this->requisition->Status)
+        return $this->subject('AT Purchase Order #'.$this->requisition->PONumber.' - '.$this->requisition->Status)
             ->from('workflow21@putnamcityschools.org')
             ->view('workflow.mail.final');
     }

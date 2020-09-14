@@ -4,9 +4,9 @@ namespace App\Mail;
 
 use App\BTRequisition;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class BTForward extends Mailable
 {

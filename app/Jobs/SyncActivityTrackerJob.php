@@ -7,10 +7,10 @@ use App\ATRequisitionItem;
 use App\Mail\ATNextApprover;
 use App\Services\ATWorkflowService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
 class SyncActivityTrackerJob implements ShouldQueue
@@ -27,19 +27,18 @@ class SyncActivityTrackerJob implements ShouldQueue
     protected $teApprover;
     protected $teApproverEmail;
 
-
     public function __construct()
     {
         $this->createExclusions = [
             'Web_Status_New', 'Requisition | Setup::SubmitterEmail', 'Requisition | Setup::Approver',
-            'Requisition | Setup::ApproverEmail', 'Requisition | Setup::ApproverUsername'
+            'Requisition | Setup::ApproverEmail', 'Requisition | Setup::ApproverUsername',
         ];
 
         $this->updateExclusions = [
             'ApprovedBy1', 'ApprovedStatus1', 'ApprovedDate1', 'ApprovedComments1',
             'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
             'Web_Status_New', 'Requisition | Setup::SubmitterEmail', 'Requisition | Setup::Approver',
-            'Requisition | Setup::ApproverEmail', 'Requisition | Setup::ApproverUsername'
+            'Requisition | Setup::ApproverEmail', 'Requisition | Setup::ApproverUsername',
         ];
 
         $this->approvalFields = [
@@ -49,9 +48,10 @@ class SyncActivityTrackerJob implements ShouldQueue
 
         $this->recItemExclusions = [
             'gTotalPages', 'MockPO', 'zd_Constant', 'zd_CreatedBy', 'zd_CreatedDate', 'zd_FoundCount', 'PO', 'TotalChargeTo', 'zd_ModifiedBy',
-            'zd_ModifiedDate', 'zd_RecordCount', 'VendorID', 'zd_RecordStatus', 'TableName', 'id'
+            'zd_ModifiedDate', 'zd_RecordCount', 'VendorID', 'zd_RecordStatus', 'TableName', 'id',
         ];
     }
+
     /**
      * Execute the job.
      *
@@ -70,7 +70,7 @@ class SyncActivityTrackerJob implements ShouldQueue
 
     private function findActiveFMRequisitions()
     {
-        try{
+        try {
             $this->requisitions = $this->at
                 ->find('Web_Requisition')
                 ->where('Web_Status_New', 1)
@@ -91,47 +91,50 @@ class SyncActivityTrackerJob implements ShouldQueue
             if ($exisitngRec !== null) {
                 $syncTimestamp = \Carbon\Carbon::parse($exisitngRec->lvl_lastSyncDateTime);
                 $modTimestamp = \Carbon\Carbon::parse($requisition['zd_ModifiedDateTime']);
-                if ($modTimestamp > $syncTimestamp) $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
+                if ($modTimestamp > $syncTimestamp) {
+                    $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
+                }
             } else {
                 //New requisition is created here...
                 $requisition = $this->requisitionBuilder($requisition, new ATRequisition(), $this->createExclusions);
 
                 //... then send initial email to first approver when new requisition is imported.
-                if(isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected'){
+                if (isset($requisition->Status) && $requisition->Status !== 'Completed' && $requisition->Status !== 'Approved' && $requisition->Status !== 'Rejected') {
                     Mail::to($this->getNextApproverEmail($requisition))->send(new ATNextApprover($requisition));
                 }
             }
-
         }
+
         return $this;
     }
 
     private function getNextApproverEmail($requisition)
     {
-        if($requisition->ApprovedBy1 === ""){
-            return $requisition["ApproverEmail"];
-        } else if($requisition["Technology"] === "TE" && $requisition["ApprovedStatusTE"] === "") {
+        if ($requisition->ApprovedBy1 === '') {
+            return $requisition['ApproverEmail'];
+        } elseif ($requisition['Technology'] === 'TE' && $requisition['ApprovedStatusTE'] === '') {
             return $this->teApproverEmail;
         }
+
         return null;
     }
 
     private function requisitionBuilder($requisition, $rec, $exclusions)
     {
         foreach ($requisition as $key => $item) {
-            if (!in_array($key, $exclusions)) {
-                if($key === 'Project'){
+            if (! in_array($key, $exclusions)) {
+                if ($key === 'Project') {
                     $rec->Project = (int) $item;
                 } else {
                     $rec->{$key} = $item;
                 }
-            } elseif ($key === "Requisition | Setup::SubmitterEmail") {
+            } elseif ($key === 'Requisition | Setup::SubmitterEmail') {
                 $rec->SubmitterEmail = $item;
-            } elseif ($key === "Requisition | Setup::Approver") {
+            } elseif ($key === 'Requisition | Setup::Approver') {
                 $rec->Approver = $item;
-            } elseif ($key === "Requisition | Setup::ApproverEmail") {
+            } elseif ($key === 'Requisition | Setup::ApproverEmail') {
                 $rec->ApproverEmail = $item;
-            } elseif ($key === "Requisition | Setup::ApproverUsername") {
+            } elseif ($key === 'Requisition | Setup::ApproverUsername') {
                 $rec->ApproverUsername = $item;
             }
         }
@@ -139,12 +142,14 @@ class SyncActivityTrackerJob implements ShouldQueue
 
         $this->deleteExistingReqItems($requisition)->constructRequisitionItems($requisition);
         $rec->save();
+
         return $rec;
     }
 
     private function deleteExistingReqItems($requisition)
     {
         ATRequisitionItem::where('RequisitionNo', $requisition['RequisitionNo'])->delete();
+
         return $this;
     }
 
@@ -152,13 +157,13 @@ class SyncActivityTrackerJob implements ShouldQueue
     {
         $items = $this->at
             ->find('Web_ReqItems')
-            ->where('RequisitionNo', (int)$requisition['RequisitionNo'])
+            ->where('RequisitionNo', (int) $requisition['RequisitionNo'])
             ->limit(500)
             ->get();
-        foreach($items as $recordId => $recItem) {
-            $recId = (string)$recItem['RequisitionNo'];
+        foreach ($items as $recordId => $recItem) {
+            $recId = (string) $recItem['RequisitionNo'];
             $requisitionItem = ATRequisitionItem::where(['RequisitionNo'=> $recId, 'fmId' => $recItem['id']])->first();
-            if($requisitionItem !== null) {
+            if ($requisitionItem !== null) {
                 $this->requisitionItemBuilder($requisitionItem, $recItem);
             } else {
                 $this->requisitionItemBuilder(new ATRequisitionItem(), $recItem);
@@ -169,10 +174,10 @@ class SyncActivityTrackerJob implements ShouldQueue
 
     private function requisitionItemBuilder($localRec, $fmRec)
     {
-        foreach($fmRec as $fname => $fvalue) {
-            if(!in_array($fname, $this->recItemExclusions)){
-                if($fname === 'unitPrice' || $fname === 'Total') {
-                    $localRec->{$fname} = (float)$fvalue;
+        foreach ($fmRec as $fname => $fvalue) {
+            if (! in_array($fname, $this->recItemExclusions)) {
+                if ($fname === 'unitPrice' || $fname === 'Total') {
+                    $localRec->{$fname} = (float) $fvalue;
                 } elseif ($fname === 'Access' || $fname === 'AccountDesc' || $fname === 'CatalogNo' || $fname === 'Description') {
                     $localRec->{$fname} = $fvalue;
                 } elseif ($fname === 'id') {
@@ -182,13 +187,13 @@ class SyncActivityTrackerJob implements ShouldQueue
                 }
             }
             $localRec->save();
-        };
+        }
     }
 
     private function updateApprovals()
     {
         SendActivityTrackerApprovalsJob::dispatchNow();
+
         return $this;
     }
-
 }

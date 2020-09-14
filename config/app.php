@@ -123,7 +123,6 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -213,6 +212,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'Http' => Illuminate\Support\Facades\Http::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
@@ -253,7 +253,7 @@ return [
     'at_te_approver' => env('AT_TE_APPROVER'),
     'at_te_approver_email'=> env('AT_TE_APPROVER_EMAIL'),
 
-    /**
+    /*
      * Extended Care configs
      */
     'ec_username' => env('EC_FM_USERNAME'),

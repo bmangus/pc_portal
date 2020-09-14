@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Jobs\SyncBudgetTrackerJob;
-use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
