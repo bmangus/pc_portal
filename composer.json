@@ -19,7 +19,8 @@
         "laravel/tinker": "^2.0",
         "niklasravnsborg/laravel-pdf": "^3.1",
         "predis/predis": "^1.1",
-        "thyyppa/laravel-fluent-fm": "^1.1.4"
+        "thyyppa/laravel-fluent-fm": "^1.1.4",
+        "laravel/ui": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",
