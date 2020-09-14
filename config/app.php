@@ -123,7 +123,6 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -253,7 +252,7 @@ return [
     'at_te_approver' => env('AT_TE_APPROVER'),
     'at_te_approver_email'=> env('AT_TE_APPROVER_EMAIL'),
 
-    /**
+    /*
      * Extended Care configs
      */
     'ec_username' => env('EC_FM_USERNAME'),

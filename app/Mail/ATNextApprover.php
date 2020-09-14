@@ -2,12 +2,12 @@
 
 namespace App\Mail;
 
-use App\ATRequisition;
 use App\ATEmailTokens;
+use App\ATRequisition;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Str;
 
 class ATNextApprover extends Mailable
@@ -37,29 +37,33 @@ class ATNextApprover extends Mailable
         $this->generateEmailToken();
         $approvalLink = $this->buildApprovalLink();
         $rejectionLink = $this->buildRejectionLink();
+
         return $this->subject('Activity Tracker Request for Approval')
             ->from('workflow21@putnamcityschools.org')
             ->view('workflow.mail.atNextApprover')
             ->with([
                 'approvalLink'=>$approvalLink,
                 'rejectionLink'=>$rejectionLink,
-                'btLink'=>config('app.url'). '/staff/ATworkflow'
+                'btLink'=>config('app.url').'/staff/ATworkflow',
             ]);
     }
 
     private function buildApprovalLink()
     {
         $token = $this->emailToken->token;
+
         return config('app.url')
-            . "/atWorkflowApproval/". $token . "/Approved";
+            .'/atWorkflowApproval/'.$token.'/Approved';
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
+
         return config('app.url')
-            . "/atWorkflowApproval/". $token . "/Rejected";
+            .'/atWorkflowApproval/'.$token.'/Rejected';
     }
+
     private function generateEmailToken()
     {
         $this->emailToken = new ATEmailTokens();
@@ -69,5 +73,4 @@ class ATNextApprover extends Mailable
         $this->emailToken->is_valid = true;
         $this->emailToken->save();
     }
-
 }

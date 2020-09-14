@@ -10,7 +10,8 @@ class ATRequisition extends Model
     protected $guarded = ['pk'];
     protected $with = ['requisitionItems'];
 
-    public function requisitionItems() {
-        return $this->hasMany('App\ATRequisitionItem', 'RequisitionNo', 'RequisitionNo');
+    public function requisitionItems()
+    {
+        return $this->hasMany(\App\ATRequisitionItem::class, 'RequisitionNo', 'RequisitionNo');
     }
 }
