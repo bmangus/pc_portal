@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class BTRequisition extends Model
 {
-
     protected $primaryKey = 'pk';
     protected $guarded = ['id'];
     protected $with = ['approvers', 'requisitionItems'];

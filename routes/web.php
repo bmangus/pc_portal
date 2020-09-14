@@ -21,14 +21,13 @@ Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');
 
-
 Auth::routes([
     'reset' => false,
     'verify' => false,
     'register' => false,
 ]);
 
-Route::middleware(['auth'])->prefix('/staff')->group(function() {
+Route::middleware(['auth'])->prefix('/staff')->group(function () {
     Route::get('/workflowBackendCounts/{username}', 'WorkflowController@getCounts');
     Route::get('/workflowBackendCounts', 'WorkflowController@getCounts');
     Route::get('/workflow', 'WorkflowController@index');
@@ -55,7 +54,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/ATworkflow', 'ATWorkflowController@index');
     Route::get('/workflowATBackendSync', 'ATWorkflowController@manualSync');
     Route::get('/atWorkflowBackend', 'ATWorkflowController@requisitionsByApprover');
-    Route::get('/atWorkflowBackend/user/{username}','ATWorkflowController@requisitionsByApprover');
+    Route::get('/atWorkflowBackend/user/{username}', 'ATWorkflowController@requisitionsByApprover');
     Route::get('/atWorkflowBackend/status/{status}', 'ATWorkflowController@requisitionsByStatus');
     Route::get('/atWorkflowBackend/{id}/{status}', 'ATWorkflowController@requisitionAction');
     Route::get('/atWorkflowBackend/{id}/{status}/{username}', 'ATWorkflowController@requisitionAction');
@@ -63,8 +62,6 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/atWorkflowPDF/download/{id}', 'ATWorkflowController@viewPDF');
     Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
     Route::post('/atWorkflowApi/addComment/{id}', 'ATWorkflowController@postComment');
-
 });
 
 Route::get('/test', 'WorkflowController@test');
-

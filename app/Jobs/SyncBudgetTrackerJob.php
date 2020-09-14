@@ -10,10 +10,10 @@ use App\BTWebSetup;
 use App\Mail\BTNextApprover;
 use App\Services\BTWorkflowService;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -42,7 +42,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
     public function __construct()
     {
         $this->createExclusions = [
-            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail'
+            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail',
         ];
 
         $this->updateExclustions = [
@@ -52,7 +52,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
             'ApprovedComments1', 'ApprovedComments2', 'ApprovedComments3', 'ApprovedComments4', 'ApprovedComments5',
             'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE',
             'FinalApprovalFonda', 'FinalApprovedBy', 'FinalApprovedDate', 'FinalApprovedStatus', 'FinalApprovedStatus6Rejected',
-            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail', 'Status'
+            'submissionLog', 'Web_Status_New', 'Requisition | Setup::SubmitterEmail', 'Status',
         ];
 
         $this->approvalFields = [
@@ -66,22 +66,21 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
         $this->recItemExclusions = [
           'gTotalPages', 'MockPO', 'zd_Constant', 'zd_CreatedBy', 'zd_CreatedDate', 'zd_FoundCount', 'PO', 'TotalChargeTo', 'zd_ModifiedBy',
-            'zd_ModifiedDate', 'zd_RecordCount', 'VendorID', 'zd_RecordStatus', 'TableName', 'id'
+            'zd_ModifiedDate', 'zd_RecordCount', 'VendorID', 'zd_RecordStatus', 'TableName', 'id',
         ];
 
         $this->includedApproverFields = [
           'ProjectCode', 'SiteNo', 'Approver1', 'Approver1Email', 'Approver1FullName', 'Approver2', 'Approver2Email', 'Approver2FullName',
             'Approver3', 'Approver3Email', 'Approver3FullName', 'Approver4', 'Approver4Email', 'Approver4FullName', 'Approver5', 'Approver5FullName',
-            'Approver5Email', 'ApproverFinal', 'ApproverFinalEmail', 'ApproverFinalName', 'ApproverTE', 'ApproverTEEmail', 'ApproverTEFullName'
+            'Approver5Email', 'ApproverFinal', 'ApproverFinalEmail', 'ApproverFinalName', 'ApproverTE', 'ApproverTEEmail', 'ApproverTEFullName',
         ];
 
         $this->includedApproverSetupFields = [
-            'Approver', 'ApproverEmail', 'ApproverFName', 'ApproverLName', 'ReceiveEmails', 'SuperUser'
+            'Approver', 'ApproverEmail', 'ApproverFName', 'ApproverLName', 'ReceiveEmails', 'SuperUser',
         ];
 
         $this->createdRecIds = [];
         $this->createdRecItemIds = [];
-
     }
 
     /**
@@ -103,7 +102,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
 
     private function findActiveFMRequisitions()
     {
-        try{
+        try {
             $this->requisitions = $this->bt
                 ->find('Web_Requisition')
                 ->where('Web_Status_New', 1)
@@ -124,42 +123,47 @@ class SyncBudgetTrackerJob implements ShouldQueue
             if ($exisitngRec !== null) {
                 $syncTimestamp = \Carbon\Carbon::parse($exisitngRec->lvl_lastSyncDateTime);
                 $modTimestamp = \Carbon\Carbon::parse($requisition['zd_ModifiedDateTime']);
-                if ($modTimestamp > $syncTimestamp) $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
+                if ($modTimestamp > $syncTimestamp) {
+                    $this->requisitionBuilder($requisition, $exisitngRec, $this->updateExclustions);
+                }
             } else {
                 //New requisition is created here...
                 $newRequisition = $this->requisitionBuilder($requisition, new BTRequisition(), $this->createExclusions);
 
                 //... then send initial email to first approver when new requisition is imported.
-                if(isset($newRequisition->Status) && $newRequisition->Status !== 'Completed' && $newRequisition->Status !== 'Approved' && $newRequisition->Status !== 'Rejected'){
+                if (isset($newRequisition->Status) && $newRequisition->Status !== 'Completed' && $newRequisition->Status !== 'Approved' && $newRequisition->Status !== 'Rejected') {
                     $email = $this->getNextApproverEmail($newRequisition);
-                    if($this->approverWantsEmail($email)){
+                    if ($this->approverWantsEmail($email)) {
                         Mail::to($email)->send(new BTNextApprover($newRequisition));
                     }
                 }
             }
-
         }
+
         return $this;
     }
 
     private function approverWantsEmail($email)
     {
         $approver = BTApproverSetup::where('ApproverEmail', $email)->first();
-        if($approver !== null && $approver->ReceiveEmails === "Yes") return true;
+        if ($approver !== null && $approver->ReceiveEmails === 'Yes') {
+            return true;
+        }
+
         return false;
     }
 
     private function requisitionBuilder($requisition, $rec, $exclusions)
     {
-        if(!in_array($requisition['RecID'], $this->createdRecIds)){
+        if (! in_array($requisition['RecID'], $this->createdRecIds)) {
             foreach ($requisition as $key => $item) {
-                if (!in_array($key, $exclusions)) {
-                    if($key === 'Project'){
+                if (! in_array($key, $exclusions)) {
+                    if ($key === 'Project') {
                         $rec->Project = (int) $item;
                     } else {
                         $rec->{$key} = $item;
                     }
-                } elseif ($key === "Requisition | Setup::SubmitterEmail") {
+                } elseif ($key === 'Requisition | Setup::SubmitterEmail') {
                     $rec->SubmitterEmail = $item;
                 }
             }
@@ -169,6 +173,7 @@ class SyncBudgetTrackerJob implements ShouldQueue
             $rec->save();
             $this->createdRecIds[] = $requisition['RecID'];
         }
+
         return $rec;
     }
 
@@ -176,16 +181,17 @@ class SyncBudgetTrackerJob implements ShouldQueue
     {
         $approvers = BTApprovers::where('ProjectCode', $requisition->Project)->first();
 
-        if($approvers->Approver1 === "SITELOOKUP") {
+        if ($approvers->Approver1 === 'SITELOOKUP') {
             try {
                 $site = BTWebSetup::where('SiteNo', $requisition->Site)->first();
             } catch (\Exception $e) {
                 return false;
             }
+
             return $site->ApproverEmail;
         }
 
-        switch($requisition->Status){
+        switch ($requisition->Status) {
             case $approvers->Approver1:
                 return $approvers->Approver1Email;
             case $approvers->Approver2:
@@ -203,21 +209,22 @@ class SyncBudgetTrackerJob implements ShouldQueue
             default:
 
                 $rec = BTApproverSetup::where('Approver', $requisition->Status)->first();
+
                 return $rec->ApproverEmail;
 
         }
     }
 
-
     private function deleteExistingReqItems($requisition)
     {
         BTRequisitionItem::where('zd_RequisRecId', $requisition['RecID'])->delete();
+
         return $this;
     }
 
     private function constructRequisitionItems($requisition)
     {
-        try{
+        try {
             $items = $this->bt
                 ->find('Web_ReqItems')
                 ->where('zd_RequisRecID', $requisition['RecID'])
@@ -227,11 +234,11 @@ class SyncBudgetTrackerJob implements ShouldQueue
             $items = [];
         }
 
-        foreach($items as $recordId => $recItem) {
-            if(!in_array($recordId, $this->createdRecItemIds)){
-                $recId = (string)$recItem['zd_RequisRecID'];
+        foreach ($items as $recordId => $recItem) {
+            if (! in_array($recordId, $this->createdRecItemIds)) {
+                $recId = (string) $recItem['zd_RequisRecID'];
                 $requisitionItem = BTRequisitionItem::where(['zd_RequisRecId'=> $recId, 'fmId' => $recItem['id']])->first();
-                if($requisitionItem !== null) {
+                if ($requisitionItem !== null) {
                     $this->requisitionItemBuilder($requisitionItem, $recItem);
                 } else {
                     $this->requisitionItemBuilder(new BTRequisitionItem(), $recItem);
@@ -246,12 +253,12 @@ class SyncBudgetTrackerJob implements ShouldQueue
     {
         //dd($fmRec);
         //var_dump($fmRec);
-        foreach($fmRec as $fname => $fvalue) {
-            if(!in_array($fname, $this->recItemExclusions)){
-                if($fname === 'UnitPrice' || $fname === 'Total') {
-                    $localRec->{$fname} = (float)$fvalue;
+        foreach ($fmRec as $fname => $fvalue) {
+            if (! in_array($fname, $this->recItemExclusions)) {
+                if ($fname === 'UnitPrice' || $fname === 'Total') {
+                    $localRec->{$fname} = (float) $fvalue;
                 } elseif ($fname === 'Qty' || $fname === 'ReqNo') {
-                    $localRec->{$fname} = (int)$fvalue;
+                    $localRec->{$fname} = (int) $fvalue;
                 } elseif ($fname === 'id') {
                     $localRec->fmId = $fvalue;
                 } else {
@@ -259,28 +266,29 @@ class SyncBudgetTrackerJob implements ShouldQueue
                 }
             }
             $localRec->save();
-        };
+        }
     }
 
     private function syncApprovers()
     {
-        try{
+        try {
             $approvers = $this->bt
                 ->records('Web_Approvers')
                 ->limit(10000)
                 ->get();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $approvers = [];
         }
 
-
-        foreach($approvers as $recId => $approver) {
+        foreach ($approvers as $recId => $approver) {
             $localRec = BTApprovers::where('fmId', $recId)->first();
-            if($localRec === null) $localRec = new BTApprovers();
-            foreach($approver as $key => $value) {
-                if(in_array($key, $this->includedApproverFields)){
-                    if($key === 'SiteNo' || $key === 'ProjectCode') {
-                        $localRec->{$key} = (int)$value;
+            if ($localRec === null) {
+                $localRec = new BTApprovers();
+            }
+            foreach ($approver as $key => $value) {
+                if (in_array($key, $this->includedApproverFields)) {
+                    if ($key === 'SiteNo' || $key === 'ProjectCode') {
+                        $localRec->{$key} = (int) $value;
                     } else {
                         $localRec->{$key} = $value;
                     }
@@ -289,86 +297,88 @@ class SyncBudgetTrackerJob implements ShouldQueue
             $localRec->fmId = $recId;
             $localRec->save();
         }
+
         return $this;
     }
 
     private function syncApproverSetup()
     {
-        try{
+        try {
             $approvers = $this->bt
                 ->records('Web_ApproverSetup')
                 ->limit(10000)
                 ->get();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $approvers = [];
         }
 
-
         foreach ($approvers as $recId => $approver) {
             $localRec = BTApproverSetup::where('fm_id', $recId)->first();
-            if($localRec === null) $localRec = new BTApproverSetup();
+            if ($localRec === null) {
+                $localRec = new BTApproverSetup();
+            }
             foreach ($approver as $key=>$value) {
-                if(in_array($key, $this->includedApproverSetupFields)){
+                if (in_array($key, $this->includedApproverSetupFields)) {
                     $localRec->{$key} = $value;
                 }
             }
             $localRec->fm_id = $recId;
             $localRec->save();
         }
+
         return $this;
     }
 
     private function syncWebSetup()
     {
-        try{
+        try {
             $setup = $this->bt
                 ->records('Web_Setup')
                 ->limit(10000)
                 ->get();
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $setup = [];
         }
 
-
         BTWebSetup::truncate();
-        foreach($setup as $recId => $rec) {
+        foreach ($setup as $recId => $rec) {
             $localRec = new BTWebSetup();
             foreach ($rec as $key=>$value) {
                 $localRec->{$key} = $value;
             }
             $localRec->save();
         }
+
         return $this;
     }
 
     private function updateApprovals()
     {
         SendBudgetTrackerApprovalsJob::dispatchNow();
+
         return $this;
     }
 
-   /* private function deleteDuplicates()
-    {
-        $deletedRequisitions = DB::delete(
-            'delete t1 from b_t_requisitions t1
-                    inner join b_t_requisitions t2
-                    where
-                    t1.pk < t2.pk AND
-                    t1.RecID = t2.RecID'
-        );
+    /* private function deleteDuplicates()
+     {
+         $deletedRequisitions = DB::delete(
+             'delete t1 from b_t_requisitions t1
+                     inner join b_t_requisitions t2
+                     where
+                     t1.pk < t2.pk AND
+                     t1.RecID = t2.RecID'
+         );
 
-        $deletedRequisitionItems = DB::delete(
-            'delete t1 from b_t_requisition_items t1
-                    inner join b_t_requisition_items t2
-                    where
-                    t1.id < t2.id AND
-                    t1.RecID = t2.RecID'
-        );
+         $deletedRequisitionItems = DB::delete(
+             'delete t1 from b_t_requisition_items t1
+                     inner join b_t_requisition_items t2
+                     where
+                     t1.id < t2.id AND
+                     t1.RecID = t2.RecID'
+         );
 
-        if($deletedRequisitions > 0 || $deletedRequisitionItems > 0){
-            return null;
-        }
-    }*/
-
+         if($deletedRequisitions > 0 || $deletedRequisitionItems > 0){
+             return null;
+         }
+     }*/
 }
-
