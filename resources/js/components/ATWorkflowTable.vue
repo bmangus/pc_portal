@@ -29,6 +29,14 @@
         </div>
         <div v-else-if="noRequisitions" class="flex inset-auto">
             <div class="m-auto">
+                <div class="font-bold text-xl mb-2">You're All Caught Up!</div>
+                <p class="text-gray-700 text-base">
+                    There are no more requisitions for you to approve at this time.
+                </p>
+            </div>
+        </div>
+        <div v-else-if="nullSearch" class="flex inset-auto">
+            <div class="m-auto">
                 <div class="font-bold text-xl mb-2">No Results:</div>
                 <p class="text-gray-700 text-base">
                     No requisitions match the current filter criteria.
@@ -284,6 +292,9 @@
                     return [];
                 }
 
+            },
+            nullSearch(){
+                return this.filteredRequisitions.length === 0;
             },
             sortedRequisitions(){
                 if(this.filteredRequisitions.length > 0) {

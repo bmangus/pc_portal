@@ -233,6 +233,11 @@
                 <td class="border">{{$i->Subject}}</td>
             </tr>
         @endforeach
+        <tr>
+            <td colspan="4" class="border"></td>
+            <td colspan="2" class="border" style="font-weight: bold;">Grand Total:</td>
+            <td class="border">${{number_format($po->GrandTotal, 2, '.', ',')}}</td>
+        </tr>
     </table>
 </div>
 </body>
