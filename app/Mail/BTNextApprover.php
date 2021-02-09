@@ -5,9 +5,9 @@ namespace App\Mail;
 use App\BTRequisition;
 use App\EmailTokens;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Str;
 
 class BTNextApprover extends Mailable
@@ -37,33 +37,29 @@ class BTNextApprover extends Mailable
         $this->generateEmailToken();
         $approvalLink = $this->buildApprovalLink();
         $rejectionLink = $this->buildRejectionLink();
-
         return $this->subject('Budget Tracker Request for Approval')
             ->from('workflow21@putnamcityschools.org')
             ->view('workflow.mail.nextApprover')
             ->with([
                 'approvalLink'=>$approvalLink,
                 'rejectionLink'=>$rejectionLink,
-                'btLink'=>config('app.url').'/staff/workflow',
+                'btLink'=>config('app.url'). '/staff/workflow'
             ]);
     }
 
     private function buildApprovalLink()
     {
         $token = $this->emailToken->token;
-
         return config('app.url')
-            .'/workflowApproval/budgetTracker/'.$token.'/Approved';
+            . "/workflowApproval/budgetTracker/". $token . "/Approved";
     }
 
     private function buildRejectionLink()
     {
         $token = $this->emailToken->token;
-
         return config('app.url')
-            .'/workflowApproval/budgetTracker/'.$token.'/Rejected';
+            . "/workflowApproval/budgetTracker/". $token . "/Rejected";
     }
-
     private function generateEmailToken()
     {
         $this->emailToken = new EmailTokens();
@@ -73,4 +69,5 @@ class BTNextApprover extends Mailable
         $this->emailToken->is_valid = true;
         $this->emailToken->save();
     }
+
 }

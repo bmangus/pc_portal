@@ -6,10 +6,10 @@ use App\ATRequisition;
 use App\ATRequisitionItem;
 use App\Services\ATWorkflowService;
 use Illuminate\Bus\Queueable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Queue\SerializesModels;
 
 class SendActivityTrackerApprovalsJob implements ShouldQueue
 {
@@ -20,15 +20,17 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
     protected $approvalDates;
     protected $activeRequisitions;
 
+
     public function __construct()
     {
+
         $this->approvalFields = [
             'ApprovedBy1', 'ApprovedStatus1', 'ApprovedDate1', 'ApprovedComments1',
-            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE', 'Status',
+            'ApprovedByTE', 'ApprovedStatusTE', 'ApprovedDateTE', 'ApprovedCommentsTE', 'Status'
         ];
 
         $this->approvalDates = [
-            'ApprovedDate1', 'ApprovedDateTE',
+            'ApprovedDate1', 'ApprovedDateTE'
         ];
     }
 
@@ -41,7 +43,7 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
 
     public function getActiveRequisitions()
     {
-        try {
+        try{
             $this->activeRequisitions = collect($this->at
                 ->find('Web_Requisition_Approvals')
                 ->where('Web_Status_New', 1)
@@ -56,9 +58,9 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
 
     public function parseAndUpdate()
     {
-        $this->activeRequisitions->each(function ($r) {
+        $this->activeRequisitions->each(function($r){
             $local = ATRequisition::where('RecID', $r['RecID'])->first();
-            if ($local->ApprovedStatus1 !== '') {
+            if($local->ApprovedStatus1 !== ""){
                 $this->sendRecord($local, $r['zg_recid']);
             }
         });
@@ -78,7 +80,7 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
         $record = [];
         foreach ($re as $key => $item) {
             if (in_array($key, $this->approvalFields)) {
-                if (in_array($key, $this->approvalDates)) {
+                if(in_array($key, $this->approvalDates)){
                     //dd($item);
                     $record[$key] = ($item != null) ? \Carbon\Carbon::parse($item)->format('m/d/Y') : null;
                 } else {
@@ -86,7 +88,6 @@ class SendActivityTrackerApprovalsJob implements ShouldQueue
                 }
             }
         }
-
         return $record;
     }
 }

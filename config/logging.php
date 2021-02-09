@@ -1,6 +1,5 @@
 <?php
 
-use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
@@ -37,7 +36,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['daily'],
             'ignore_exceptions' => false,
         ],
 
@@ -49,9 +48,9 @@ return [
 
         'daily' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path('logs/' . php_sapi_name() . '/laravel.log'),
             'level' => 'debug',
-            'days' => 14,
+            'days' => 7,
         ],
 
         'slack' => [
@@ -89,15 +88,6 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => 'debug',
-        ],
-
-        'null' => [
-            'driver' => 'monolog',
-            'handler' => NullHandler::class,
-        ],
-
-        'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
         ],
     ],
 

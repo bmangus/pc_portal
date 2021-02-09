@@ -29,12 +29,10 @@ export default {
     mounted(){
         console.log(this.asset);
         console.log(this.user);
-        axios.get('/staff/workflowBackendCounts')
-            .then((res)=>{
-                this.btCount = res.data.btCount;
-                this.atCount = res.data.atCount;
-            })
-            .catch((err)=>console.log(err));
+        this.interval = setInterval(this.updateCounts, 15000);
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     },
     methods: {
         toggle() {
@@ -51,6 +49,14 @@ export default {
                     console.log(err);
                     window.location.href='/login';
                 })
+        },
+        updateCounts(){
+            axios.get('/staff/workflowBackendCounts')
+                .then((res)=>{
+                    this.btCount = res.data.btCount;
+                    this.atCount = res.data.atCount;
+                })
+                .catch((err)=>console.log(err));
         }
     }
 }
