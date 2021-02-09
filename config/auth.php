@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'ldap',
-            'model' => App\Models\User::class,
+            'model' => App\User::class,
         ],
 
         // 'users' => [
