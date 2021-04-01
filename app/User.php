@@ -2,13 +2,15 @@
 
 namespace App;
 
-use Adldap\Laravel\Traits\HasLdapUser;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Adldap\Laravel\Traits\HasLdapUser;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
+    use HasFactory;
     use Notifiable, HasLdapUser, SoftDeletes;
 
     protected $table = 'users';
@@ -70,7 +72,6 @@ class User extends Authenticatable
     {
         return $this->attributes['didAttend'] = $value;
     }
-
     //Get Entrollment for PD
 
     public function registration()
@@ -90,6 +91,7 @@ class User extends Authenticatable
         return $query
             ->where('email', $email)
             ->orWhere('email2', $email);
+
     }
 
     public function scopeHomeSchool($query, $school)
@@ -103,4 +105,5 @@ class User extends Authenticatable
 
         //return $query->where('groups', 'like', 'staff')
     }
+
 }

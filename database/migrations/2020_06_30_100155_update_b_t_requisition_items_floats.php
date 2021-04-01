@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class UpdateBTRequisitionItemsFloats extends Migration
 {
@@ -13,8 +13,8 @@ class UpdateBTRequisitionItemsFloats extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('b_t_requisition_items')) {
-            Schema::table('b_t_requisition_items', function (Blueprint $table) {
+        if(Schema::hasTable('b_t_requisition_items')){
+            Schema::table('b_t_requisition_items', function(Blueprint $table){
                 $table->float('Total', 20, 2)->change();
                 $table->float('UnitPrice', 20, 2)->change();
             });
