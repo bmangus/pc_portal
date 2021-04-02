@@ -30,13 +30,13 @@ class Kernel extends ConsoleKernel
             ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')
-            ->between('07:00', '23:00')
+            ->between('07:00', '18:00')
             ->withoutOverlapping();
         $schedule->job(new SyncActivityTrackerJob())
             ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')
-            ->between('07:00', '23:00')
+            ->between('07:00', '18:00')
             ->withoutOverlapping();
         $schedule->command('horizon:snapshot')
             ->everyFiveMinutes();
