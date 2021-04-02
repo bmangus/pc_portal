@@ -10,6 +10,9 @@
                 <a href="/staff/ATworkflow">Activity Tracker</a>
                 <span class="flex rounded-full bg-red-700 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
             </li>
+            <li class="flex flex-row bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">
+                <a href="/staff/rehire">HR Rehire</a>
+            </li>
         </ul>
     </div>
 </template>

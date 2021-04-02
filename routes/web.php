@@ -64,6 +64,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
     Route::post('/atWorkflowApi/addComment/{id}', 'ATWorkflowController@postComment');
 
+    Route::get('/rehire', 'RehireController@index');
 });
 
 Route::get('/test', 'WorkflowController@test');

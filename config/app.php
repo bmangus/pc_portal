@@ -260,5 +260,11 @@ return [
     'ec_password' => env('EC_FM_PASSWORD'),
     'ec_file' => env('EC_FM_FILE'),
     'ec_host' => env('EC_FM_HOST'),
+    
+    'hr_rehire_username' => env('HRSTAFFREHIRE_USER'),
+    'hr_rehire_password' => env('HRSTAFFREHIRE_PASS'),
+    'hr_rehire_host' => env('HRSTAFFREHIRE_HOST'),
+    'hr_rehire_file' => env('HRSTAFFREHIRE_FILE'),
+
 
 ];
