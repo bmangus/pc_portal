@@ -27,16 +27,16 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->job(new SyncBudgetTrackerJob())
-            ->everyFifteenMinutes()
+            ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')
-            ->between('07:00', '18:00')
+            ->between('07:00', '23:00')
             ->withoutOverlapping();
         $schedule->job(new SyncActivityTrackerJob())
-            ->everyFifteenMinutes()
+            ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')
-            ->between('07:00', '18:00')
+            ->between('07:00', '23:00')
             ->withoutOverlapping();
         $schedule->command('horizon:snapshot')
             ->everyFiveMinutes();
