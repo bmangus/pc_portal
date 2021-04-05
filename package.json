@@ -30,8 +30,10 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.25",
         "@fortawesome/free-solid-svg-icons": "^5.11.2",
         "@fortawesome/vue-fontawesome": "^0.1.8",
+        "autoprefixer": "^10.2.5",
         "jspdf": "^1.5.3",
-        "tailwindcss": "^1.0.4",
+        "postcss": "^8.2.9",
+        "tailwindcss": "^2.0.4",
         "vue-html2canvas": "^0.0.4",
         "vue-tailwind": "^0.4.1",
         "webpack-livereload-plugin": "^2.2.0"
