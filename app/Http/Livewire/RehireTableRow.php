@@ -10,7 +10,7 @@ class RehireTableRow extends Component
     public $rowId;
     public $name;
     public $subject;
-    public $site;
+    public $location;
     public $rehire;
     public $comments;
     public $ocas = "N/A";
@@ -28,7 +28,7 @@ class RehireTableRow extends Component
     public function save()
     {
         $this->errored = false;
-        
+
         $fm = new FluentFMRepository([
             'file' => config('app.hr_rehire_file'),
             'host' => config('app.hr_rehire_host'),

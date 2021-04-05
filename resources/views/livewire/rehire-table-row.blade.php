@@ -1,6 +1,6 @@
 <x-table.row>
     <x-table.cell>{{$name}}</x-table.cell>
-    <x-table.cell>  Site: {{$site}}<br/>
+    <x-table.cell>  Site: {{$location}}<br/>
                     Subject: {{$subject}}<br/>
                     Category: {{$category}}<br/>
                     OCAS Job: {{$ocas}}<br/>
