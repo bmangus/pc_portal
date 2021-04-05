@@ -7,14 +7,14 @@
                     Type: {{$type}}
     </x-table.cell>
     <x-table.cell>
-        <x-input.select wire:model.defer="rehire" id="rehireStatus" placeholder="Unknown">
+        <x-input.select wire:model="rehire" id="rehireStatus" placeholder="Unknown">
             <option value="Yes">Yes</option>
             <option value="No">No</option>
         </x-input.select>
     </x-table.cell>
     <x-table.cell>
         <div class="flex rounded-md shadow-sm">
-            <textarea wire:model.defer="comments" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{$comments}}</textarea>
+            <textarea wire:model.debounce1000ms="comments" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{$comments}}</textarea>
         </div>
     </x-table.cell>
     <x-table.cell>
