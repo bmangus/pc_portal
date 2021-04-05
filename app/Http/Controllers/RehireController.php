@@ -40,7 +40,8 @@ class RehireController extends Controller
     public function index()
     {
         $this->canAccess();
-        $user = auth()->user();
+        $user = strtolower(auth()->user()->uid);
+        //$user = 'ahoggatt';
         $schoolMap = $this->schoolMap;
         $schoolNames = $this->getSchoolNames();
         return view('rehire-base', compact('user', 'schoolMap', 'schoolNames'));

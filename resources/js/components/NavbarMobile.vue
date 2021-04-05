@@ -16,7 +16,7 @@
                             Activity Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
                         </a>
                         <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
-                            HR Rehire
+                            Staff Rehires
                         </a>
                     </t-dropdown>
                 </div>
