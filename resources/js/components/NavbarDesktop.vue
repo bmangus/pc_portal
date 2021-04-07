@@ -32,6 +32,7 @@ export default {
     mounted(){
         console.log(this.asset);
         console.log(this.user);
+        this.updateCounts();
         this.interval = setInterval(this.updateCounts, 15000);
     },
     beforeDestroy() {
