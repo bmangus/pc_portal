@@ -23,15 +23,18 @@ class RehireGroup extends Component
             'pass' => config('app.hr_rehire_password'),
         ]);
 
+        if($this->user === "bmangus" || $this->user === 'cbarber') {
+            $this->user = 'cboggs';
+            $this->staff = $this->fm->records('Staff')->limit(10)->get();
+        }
+
         try{
             $this->sites = $this->fm->find('Sites')->where('ADGroup', $this->user)->get();
         } catch (\Exception $e){
             $this->sites = null;
         }
 
-        if($this->user === "bmangus" || $this->user === 'cbarber'){
-            $this->staff = $this->fm->records('Staff')->limit(10)->get();
-        } else if($this->sites) {
+        if($this->sites) {
             $this->staff = [];
             foreach($this->sites as $site){
                 try{
