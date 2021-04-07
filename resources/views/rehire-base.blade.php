@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    @livewire('rehire-table',['user'=>$user, 'schoolMap'=>$schoolMap, 'schoolNames'=>$schoolNames])
+    @livewire('rehire-group',['user'=>$user, 'schoolMap'=>$schoolMap, 'schoolNames'=>$schoolNames])
 @endsection

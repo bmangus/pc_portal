@@ -1,10 +1,9 @@
 <x-table.row>
     <x-table.cell>{{$name}}</x-table.cell>
     <x-table.cell>  Site: {{$location}}<br/>
-                    Subject: {{$subject}}<br/>
-                    Category: {{$category}}<br/>
-                    OCAS Job: {{$ocas}}<br/>
-                    Type: {{$type}}
+                    Position: {{$subject}}<br/>
+                    FTE: {{$fte}}<br/>
+                    Hire Date: {{$hireDate}}<br/>
     </x-table.cell>
     <x-table.cell>
         <x-input.select wire:model="rehire" id="rehireStatus" placeholder="Unknown">

@@ -13,9 +13,9 @@ class RehireTableRow extends Component
     public $location;
     public $rehire;
     public $comments;
-    public $ocas = "N/A";
-    public $type = "N/A";
-    public $category = "N/A";
+    public $fte = "N/A";
+    public $hireDate = "N/A";
+    public $type;
     public $saved = true;
     public $errored = false;
     public $errorMsg = '';
@@ -50,6 +50,7 @@ class RehireTableRow extends Component
 
         if(!$this->errored){
             $this->saved = true;
+            $this->emit('decrementCount');
         }
     }
     public function render()
