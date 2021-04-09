@@ -19,6 +19,7 @@
                     :location="$s['Location']"
                     :fte="$s['FTE']"
                     :hireDate="$s['HireDate']"
+                    :type="$s['Type']"
                     :id="$s['id']"/>
             @endforeach
         </x-slot>
