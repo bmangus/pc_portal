@@ -17,6 +17,10 @@ Route::get('/workflowApproval/{app}/{token}/{status}', 'WorkflowController@appro
 
 Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
 
+Route::get('/22/workflowApproval/{app}/{token}/{status}', 'Workflow22Controller@approveFromEmail');
+
+Route::get('/22/atWorkflowApproval/{id}/{status}', 'ATWorkflow22Controller@approveFromEmail');
+
 Route::get('/public/extendedcare', 'ExtendedCare@index');
 
 Route::post('/ExtendedCareRegistration', 'ExtendedCare@submit');
@@ -50,6 +54,29 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
     Route::get('/workflowBackendComments/getCurrentPositionComment/{id}', 'WorkflowController@getCurrentPositionComment');
     Route::get('/workflowBackendComments/getCurrentPositionComment/{id}/{username}', 'WorkflowController@getCurrentPositionComment');
+    
+    //BT 2022
+    Route::get('/22/workflowBackendCounts/{username}', 'Workflow22Controller@getCounts');
+    Route::get('/22/workflowBackendCounts', 'Workflow22Controller@getCounts');
+    Route::get('/22/workflow', 'Workflow22Controller@index');
+    Route::get('/22/workflowBackend/{app}', 'Workflow22Controller@requisitionsByApprover');
+    Route::get('/22/btWorkflowBackend/{status}/{username}', 'Workflow22Controller@requisitionsByUserStatus');
+    Route::get('/22/btWorkflowBackend/{status}', 'Workflow22Controller@requisitionsByUserStatus');
+    Route::get('/22/workflowBackend/{app}/{status}', 'Workflow22Controller@requisitionsByStatus');
+    Route::get('/22/workflowBackend/{app}/user/{username}', 'Workflow22Controller@requisitionsByApprover');
+    Route::get('/22/workflowBackend/{app}/user/{username}/test', 'Workflow22Controller@requisitionsByApprover');
+    Route::get('/22/workflowBackendSync', 'Workflow22Controller@manualSync');
+    Route::get('/22/workflowBackend/{app}/{id}/{status}', 'Workflow22Controller@requisitionAction');
+    Route::get('/22/workflowBackend/{app}/{id}/{status}/{username}', 'Workflow22Controller@requisitionAction');
+    Route::get('/22/workflowApi/getComments/{id}', 'Workflow22Controller@getComments');
+    Route::post('/22/workflowApi/addComment/{id}', 'Workflow22Controller@postComment');
+    Route::get('/22/workflowApproval/{app}/{token}/{status}', 'Workflow22Controller@approveFromEmail');
+    Route::post('/22/workflowPDF/forward', 'Workflow22Controller@forwardPDF');
+    Route::get('/22/workflowPDF/download/{id}', 'Workflow22Controller@viewPDF');
+    Route::get('/22/workflowApprovers', 'Workflow22Controller@getApproverList');
+    Route::post('/22/workflowReassign/{id}', 'Workflow22Controller@reassign');
+    Route::get('/22/workflowBackendComments/getCurrentPositionComment/{id}', 'Workflow22Controller@getCurrentPositionComment');
+    Route::get('/22/workflowBackendComments/getCurrentPositionComment/{id}/{username}', 'Workflow22Controller@getCurrentPositionComment');
 
     //AT
     Route::get('/ATworkflow', 'ATWorkflowController@index');
@@ -63,6 +90,19 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::get('/atWorkflowPDF/download/{id}', 'ATWorkflowController@viewPDF');
     Route::get('/atWorkflowApproval/{id}/{status}', 'ATWorkflowController@approveFromEmail');
     Route::post('/atWorkflowApi/addComment/{id}', 'ATWorkflowController@postComment');
+
+    //AT 2022
+    Route::get('/22/ATworkflow', 'ATWorkflow22Controller@index');
+    Route::get('/22/workflowATBackendSync', 'ATWorkflow22Controller@manualSync');
+    Route::get('/22/atWorkflowBackend', 'ATWorkflow22Controller@requisitionsByApprover');
+    Route::get('/22/atWorkflowBackend/user/{username}','ATWorkflow22Controller@requisitionsByApprover');
+    Route::get('/22/atWorkflowBackend/status/{status}', 'ATWorkflow22Controller@requisitionsByStatus');
+    Route::get('/22/atWorkflowBackend/{id}/{status}', 'ATWorkflow22Controller@requisitionAction');
+    Route::get('/22/atWorkflowBackend/{id}/{status}/{username}', 'ATWorkflow22Controller@requisitionAction');
+    Route::post('/22/atWorkflowPDF/forward', 'ATWorkflow22Controller@forwardPDF');
+    Route::get('/22/atWorkflowPDF/download/{id}', 'ATWorkflow22Controller@viewPDF');
+    Route::get('/22/atWorkflowApproval/{id}/{status}', 'ATWorkflow22Controller@approveFromEmail');
+    Route::post('/22atIndex.blade.php/atWorkflowApi/addComment/{id}', 'ATWorkflow22Controller@postComment');
 
     Route::get('/rehire', 'RehireController@index');
 });

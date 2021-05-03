@@ -47,15 +47,25 @@ Vue.component('navbar-mobile', require('./components/NavbarMobile.vue').default)
 Vue.component('navbar-desktop', require('./components/NavbarDesktop.vue').default);
 Vue.component('workflow-table', require('./components/WorkflowTable.vue').default);
 Vue.component('workflow-requisition-modal', require('./components/WorflowRequisitionModal').default);
+Vue.component('workflow-requisition-modal-22', require('./components/WorflowRequisitionModal22').default);
 Vue.component('workflow-comment', require('./components/WorkflowComment').default);
+Vue.component('workflow-comment-22', require('./components/WorkflowComment22').default);
 Vue.component('workflow-forward-modal', require('./components/WorkflowForwardModal').default);
+Vue.component('workflow-forward-modal-22', require('./components/WorkflowForwardModal22').default);
 Vue.component('workflow-reassign-modal', require('./components/WorkflowReassignModal').default);
+Vue.component('workflow-reassign-modal-22', require('./components/WorkflowReassignModal22').default);
 Vue.component('workflow-rejection-modal', require('./components/WorkflowRejectionModal').default);
+Vue.component('workflow-rejection-modal-22', require('./components/WorkflowRejectionModal22').default);
 Vue.component('workflow-table-2', require('./components/WorkflowTable2').default);
+Vue.component('workflow-table-2-22', require('./components/WorkflowTable222').default);
 Vue.component('at-workflow-table', require('./components/ATWorkflowTable').default);
+Vue.component('at-workflow-table-22', require('./components/ATWorkflowTable22').default);
 Vue.component('at-workflow-requisition-modal', require('./components/ATWorkflowRequisitionModal').default);
+Vue.component('at-workflow-requisition-modal-22', require('./components/ATWorkflowRequisitionModal22').default);
 Vue.component('at-workflow-forward-modal', require('./components/ATWorkflowForwardModal').default);
+Vue.component('at-workflow-forward-modal-22', require('./components/ATWorkflowForwardModal22').default);
 Vue.component('at-workflow-rejection-modal', require('./components/ATWorkflowRejectionModal').default);
+Vue.component('at-workflow-rejection-modal-22', require('./components/ATWorkflowRejectionModal22').default);
 
 
 

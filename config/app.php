@@ -244,6 +244,14 @@ return [
     'bt_file' => env('BT_FM_FILE'),
 
     /*
+     * BT Workflow 2022 configs
+     */
+    'bt_username_22' => env('BT_FM_USERNAME_22'),
+    'bt_password_22' => env('BT_FM_PASSWORD_22'),
+    'bt_host_22' => env('BT_FM_HOST_22'),
+    'bt_file_22' => env('BT_FM_FILE_22'),
+    
+    /*
      * AT Workflow configs
      */
     'at_username' => env('AT_FM_USERNAME'),
@@ -252,6 +260,17 @@ return [
     'at_file' => env('AT_FM_FILE'),
     'at_te_approver' => env('AT_TE_APPROVER'),
     'at_te_approver_email'=> env('AT_TE_APPROVER_EMAIL'),
+    
+    /*
+     * AT Workflow configs
+     */
+    'at_username_22' => env('AT_FM_USERNAME_22'),
+    'at_password_22' => env('AT_FM_PASSWORD_22'),
+    'at_host_22' => env('AT_FM_HOST_22'),
+    'at_file_22' => env('AT_FM_FILE_22'),
+    'at_te_approver_22' => env('AT_TE_APPROVER_22'),
+    'at_te_approver_email_22'=> env('AT_TE_APPROVER_EMAIL_22'),
+
 
     /**
      * Extended Care configs
