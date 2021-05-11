@@ -62,7 +62,7 @@ class BTNextApprover22 extends Mailable
     }
     private function generateEmailToken()
     {
-        $this->emailToken = new EmailTokens();
+        $this->emailToken = new EmailTokens22();
         $this->emailToken->token = (string) Str::uuid();
         $this->emailToken->requisition_id = $this->requisition->pk;
         $this->emailToken->username = $this->requisition->Status;
