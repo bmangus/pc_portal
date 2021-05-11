@@ -13,12 +13,12 @@ class BTRequisition22 extends Model
 
     public function approvers()
     {
-        return $this->hasOne('App\BTApprovers', 'ProjectCode', 'Project');
+        return $this->hasOne('App\BTApprovers22', 'ProjectCode', 'Project');
     }
 
     public function requisitionItems()
     {
-        return $this->hasMany('App\BTRequisitionItem', 'zd_RequisRecID', 'RecID');
+        return $this->hasMany('App\BTRequisitionItem22', 'zd_RequisRecID', 'RecID');
     }
 
     public function scopeWasApprover($query, $username)
