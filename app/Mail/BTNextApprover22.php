@@ -38,7 +38,7 @@ class BTNextApprover22 extends Mailable
         $approvalLink = $this->buildApprovalLink();
         $rejectionLink = $this->buildRejectionLink();
         return $this->subject('Budget Tracker Request for Approval')
-            ->from('workflow21@putnamcityschools.org')
+            ->from('workflow22@putnamcityschools.org')
             ->view('workflow.mail.nextApprover')
             ->with([
                 'approvalLink'=>$approvalLink,
