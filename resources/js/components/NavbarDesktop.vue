@@ -55,7 +55,7 @@ export default {
                 })
         },
         updateCounts(){
-            axios.get('/staff/workflowBackendCounts')
+            axios.get('/staff/22/workflowBackendCounts')
                 .then((res)=>{
                     this.btCount = res.data.btCount;
                     this.atCount = res.data.atCount;
