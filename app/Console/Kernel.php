@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Jobs\SyncActivityTrackerJob;
-use App\Jobs\SyncBudgetTrackerJob;
+use App\Jobs\SyncActivityTracker22Job;
+use App\Jobs\SyncBudgetTracker22Job;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
