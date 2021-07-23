@@ -250,7 +250,7 @@ return [
     'bt_password_22' => env('BT_FM_PASSWORD_22'),
     'bt_host_22' => env('BT_FM_HOST_22'),
     'bt_file_22' => env('BT_FM_FILE_22'),
-    
+
     /*
      * AT Workflow configs
      */
@@ -260,7 +260,7 @@ return [
     'at_file' => env('AT_FM_FILE'),
     'at_te_approver' => env('AT_TE_APPROVER'),
     'at_te_approver_email'=> env('AT_TE_APPROVER_EMAIL'),
-    
+
     /*
      * AT Workflow configs
      */
@@ -279,11 +279,30 @@ return [
     'ec_password' => env('EC_FM_PASSWORD'),
     'ec_file' => env('EC_FM_FILE'),
     'ec_host' => env('EC_FM_HOST'),
-    
+
+    /**
+     * Rehire FM configs
+     */
     'hr_rehire_username' => env('HRSTAFFREHIRE_USER'),
     'hr_rehire_password' => env('HRSTAFFREHIRE_PASS'),
     'hr_rehire_host' => env('HRSTAFFREHIRE_HOST'),
     'hr_rehire_file' => env('HRSTAFFREHIRE_FILE'),
+
+    /**
+     * Facility WO FM configs
+     */
+    'fwo_username' => env('FWO_USER'),
+    'fwo_password' => env('FWO_PASS'),
+    'fwo_host' => env('FWO_HOST'),
+    'fwo_file' => env('FWO_FILE'),
+
+    /**
+     * Tech WO FM Configs
+     */
+    'two_username' => env('TWO_USER'),
+    'two_password' => env('TWO_PASS'),
+    'two_host' => env('TWO_HOST'),
+    'two_file' => env('TWO_FILE'),
 
 
 ];
