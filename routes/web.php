@@ -33,6 +33,9 @@ Auth::routes([
 ]);
 
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
+
+    Route::get('/', 'DashboardController@index');
+
     Route::get('/workflowBackendCounts/{username}', 'WorkflowController@getCounts');
     Route::get('/workflowBackendCounts', 'WorkflowController@getCounts');
     Route::get('/workflow', 'WorkflowController@index');
@@ -54,7 +57,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/workflowReassign/{id}', 'WorkflowController@reassign');
     Route::get('/workflowBackendComments/getCurrentPositionComment/{id}', 'WorkflowController@getCurrentPositionComment');
     Route::get('/workflowBackendComments/getCurrentPositionComment/{id}/{username}', 'WorkflowController@getCurrentPositionComment');
-    
+
     //BT 2022
     Route::get('/22/workflowBackendCounts/{username}', 'Workflow22Controller@getCounts');
     Route::get('/22/workflowBackendCounts', 'Workflow22Controller@getCounts');
@@ -105,6 +108,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/22atIndex.blade.php/atWorkflowApi/addComment/{id}', 'ATWorkflow22Controller@postComment');
 
     Route::get('/rehire', 'RehireController@index');
+    Route::get('/fwo', 'WorkordersController@fwoIndex');
 });
 
 Route::get('/test', 'WorkflowController@test');
