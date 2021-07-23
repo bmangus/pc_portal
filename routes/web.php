@@ -105,7 +105,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/22/atWorkflowPDF/forward', 'ATWorkflow22Controller@forwardPDF');
     Route::get('/22/atWorkflowPDF/download/{id}', 'ATWorkflow22Controller@viewPDF');
     Route::get('/22/atWorkflowApproval/{id}/{status}', 'ATWorkflow22Controller@approveFromEmail');
-    Route::post('/22atIndex.blade.php/atWorkflowApi/addComment/{id}', 'ATWorkflow22Controller@postComment');
+    Route::post('/22/atWorkflowApi/addComment/{id}', 'ATWorkflow22Controller@postComment');
 
     Route::get('/rehire', 'RehireController@index');
     Route::get('/fwo', 'WorkordersController@fwoIndex');

@@ -2,8 +2,8 @@
 
 namespace App\Console;
 
-use App\Jobs\SyncActivityTrackerJob;
-use App\Jobs\SyncBudgetTrackerJob;
+use App\Jobs\SyncActivityTracker22Job;
+use App\Jobs\SyncBudgetTracker22Job;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,13 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new SyncBudgetTrackerJob())
+        $schedule->job(new SyncBudgetTracker22Job())
             ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')
             ->between('07:00', '18:00')
             ->withoutOverlapping();
-        $schedule->job(new SyncActivityTrackerJob())
+        $schedule->job(new SyncActivityTracker22Job())
             ->everyFiveMinutes()
             ->weekdays()
             ->timezone('America/Chicago')

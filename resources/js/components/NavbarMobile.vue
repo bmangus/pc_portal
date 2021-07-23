@@ -9,10 +9,10 @@
                         <a href="#responsive-header" class="ml-2 flex flex-row block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Dashboard
                         </a>
-                        <a href="/staff/workflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
+                        <a href="/staff/22/workflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Budget Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.btCount }}</span>
                         </a>
-                        <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
+                        <a href="/staff/22/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
                             Activity Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
                         </a>
                         <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
@@ -59,7 +59,7 @@
         mounted(){
             console.log(this.asset);
             console.log(this.user);
-            axios.get('/staff/workflowBackendCounts')
+            axios.get('/staff/22/workflowBackendCounts')
                 .then((res)=>{
                     this.btCount = res.data.btCount;
                     this.atCount = res.data.atCount;
