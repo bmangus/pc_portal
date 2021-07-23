@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyApprover3StatusColumnName extends Migration
+class ModifyApprover3StatusColumnName22 extends Migration
 {
     /**
      * Run the migrations.

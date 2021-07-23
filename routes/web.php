@@ -33,6 +33,9 @@ Auth::routes([
 ]);
 
 Route::middleware(['auth'])->prefix('/staff')->group(function() {
+
+    Route::get('/', 'DashboardController@index');
+
     Route::get('/workflowBackendCounts/{username}', 'WorkflowController@getCounts');
     Route::get('/workflowBackendCounts', 'WorkflowController@getCounts');
     Route::get('/workflow', 'WorkflowController@index');
@@ -105,6 +108,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
     Route::post('/22/atWorkflowApi/addComment/{id}', 'ATWorkflow22Controller@postComment');
 
     Route::get('/rehire', 'RehireController@index');
+    Route::get('/fwo', 'WorkordersController@fwoIndex');
 });
 
 Route::get('/test', 'WorkflowController@test');
