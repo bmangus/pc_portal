@@ -14,21 +14,18 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class SyncWorkOrders implements ShouldQueue
+class SyncWorkOrdersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $fwoFMConnection;
-    public $twoFMConnection;
-    public $fwoWorkOrders;
-    public $twoWorkOrders;
+    public $fmWorkOrders;
     public $index;
     public $limit;
 
 
     public function handle()
     {
-        $this->fwoFMConnection = new FluentFMRepository([
+        $fwoFM = new FluentFMRepository([
             'file' => config('app.fwo_file'),
             'host' => config('app.fwo_host'),
             'user' => config('app.fwo_username'),
@@ -38,7 +35,7 @@ class SyncWorkOrders implements ShouldQueue
             ],
         ]);
 
-        $this->twoFMConnection = new FluentFMRepository([
+        $twoFM = new FluentFMRepository([
             'file' => config('app.two_file'),
             'host' => config('app.two_host'),
             'user' => config('app.two_username'),
@@ -52,65 +49,18 @@ class SyncWorkOrders implements ShouldQueue
 
         $this
             ->resetIndex()
-            //->getFacilityWorkOrders()
-            ->getWorkOrders($this->fwoFMConnection, $this->fwoWorkOrders)
-            ->updateWorkOrders($this->fwoWorkOrders)
+            ->getWorkOrders($fwoFM, 'facilities')
+            ->updateWorkOrders()
+            ->resetWorkOrders()
             ->resetIndex()
-            //->getTechnologyWorkOrders()
-            ->getWorkOrders($this->twoFMConnection, $this->twoWorkOrders)
-            ->updateWorkOrders($this->twoWorkOrders)
-            ->parseIntoSQL();
+            ->getWorkOrders($twoFM, 'technology')
+            ->updateWorkOrders()
+            ->resetWorkOrders();
+
+        return response('done');
     }
 
-    public function getFacilityWorkOrders()
-    {
-        $wo = 'something';
-        while(!empty($wo)){
-            try {
-                if($this->index === 0){
-                    $wo = $this->fwoFMConnection->find('Web')->whereEmpty('Completed')->limit($this->limit)->get();
-                } else {
-                    $wo = $this->fwoFMConnection->find('Web')->whereEmpty('Completed')->limit($this->limit)->offset($this->index)->get();
-                }
-
-            } catch(\Exception $e) {
-                $wo = [];
-            }
-            if(!empty($wo)){
-                foreach($wo as $key => $item){
-                    $this->fwoWorkOrders[] = array_merge(['_fmid'=>$key, '_fm_system'=>'facilities'], $item);
-                }
-            }
-            $this->incrementIndex();
-        }
-        return $this;
-    }
-
-    public function getTechnologyWorkOrders()
-    {
-        $wo = 'something';
-        while(!empty($wo)){
-            try {
-                if($this->index === 0){
-                    $wo = $this->twoFMConnection->find('Web')->whereEmpty('Completed')->limit($this->limit)->get();
-                } else {
-                    $wo = $this->twoFMConnection->find('Web')->whereEmpty('Completed')->limit($this->limit)->offset($this->index)->get();
-                }
-
-            } catch(\Exception $e) {
-                $wo = [];
-            }
-            if(!empty($wo)){
-                foreach($wo as $key => $item){
-                    $this->twoWorkOrders[] = array_merge(['_fmid'=>$key, '_fm_system'=>'technology'], $item);
-                }
-            }
-            $this->incrementIndex();
-        }
-        return $this;
-    }
-
-    public function getWorkOrders($connection, $workOrders)
+    public function getWorkOrders($connection, $system)
     {
         $wo = 'something';
         while(!empty($wo)) {
@@ -120,13 +70,13 @@ class SyncWorkOrders implements ShouldQueue
                 } else {
                     $wo = $connection->find('Web')->whereEmpty('Completed')->limit($this->limit)->offset($this->index)->get();
                 }
-
             } catch (\Exception $e) {
                 $wo = [];
             }
+
             if (!empty($wo)) {
                 foreach ($wo as $key => $item) {
-                    $workOrders[] = array_merge(['_fmid' => $key, '_fm_system' => 'technology'], $item);
+                    $this->fmWorkOrders[] = array_merge(['_fmid' => $key, '_fm_system' => $system], $item);
                 }
             }
             $this->incrementIndex();
@@ -134,9 +84,9 @@ class SyncWorkOrders implements ShouldQueue
         return $this;
     }
 
-    public function updateWorkOrders($orders)
+    public function updateWorkOrders()
     {
-        foreach($orders as $wo) {
+        foreach($this->fmWorkOrders as $wo) {
             $this->updateTable($wo['_fmid'], $wo['_fm_system'], $wo);
         }
         return $this;
@@ -160,6 +110,12 @@ class SyncWorkOrders implements ShouldQueue
         return $this;
     }
 
+    private function resetWorkOrders()
+    {
+        $this->fmWorkOrders = [];
+        return $this;
+    }
+
     private function incrementIndex()
     {
         if($this->index === 0){
@@ -169,6 +125,7 @@ class SyncWorkOrders implements ShouldQueue
         }
         return $this;
     }
+
 
 }
 

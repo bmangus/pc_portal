@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Jobs\SyncActivityTracker22Job;
 use App\Jobs\SyncBudgetTracker22Job;
+use App\Jobs\SyncWorkOrdersJob;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -37,6 +38,11 @@ class Kernel extends ConsoleKernel
             ->weekdays()
             ->timezone('America/Chicago')
             ->between('07:00', '18:00')
+            ->withoutOverlapping();
+        $schedule->job(new SyncWorkOrdersJob())
+            ->everyFiveMinutes()
+            ->timezone('America/Chicago')
+            //->between('05:00', '23:00')
             ->withoutOverlapping();
         $schedule->command('horizon:snapshot')
             ->everyFiveMinutes();
