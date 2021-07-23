@@ -40,9 +40,9 @@ class Kernel extends ConsoleKernel
             ->between('07:00', '18:00')
             ->withoutOverlapping();
         $schedule->job(new SyncWorkOrdersJob())
-            ->everyFifteenMinutes()
+            ->everyFiveMinutes()
             ->timezone('America/Chicago')
-            ->between('05:00', '23:00')
+            //->between('05:00', '23:00')
             ->withoutOverlapping();
         $schedule->command('horizon:snapshot')
             ->everyFiveMinutes();
