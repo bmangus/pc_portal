@@ -15,5 +15,13 @@ class WorkOrders extends Model
         'AssignedDate', 'SiteNo', 'HistoryListFA', 'AssignTo', 'zd_Dept',
         'Email', 'AutoSiteNumber', 'Equipment', 'FixedAsset', 'SerialNo',
         'Model', 'New', 'Product', 'RequestType', 'zd_CreatedByLogin',
-        'zd_OrderNo', 'OrderNo', 'OrderType', 'HistoryListB_G', 'Feedback'];
+        'zd_OrderNo', 'OrderNo', 'OrderType', 'HistoryListB_G', 'Feedback',
+        'Status'];
+
+    const STATUSES = [
+        'submitted' => 'Submitted',
+        'assigned' => 'Assigned',
+        'parts pending' => 'Parts Pending',
+        'completed' => 'Completed',
+    ];
 }

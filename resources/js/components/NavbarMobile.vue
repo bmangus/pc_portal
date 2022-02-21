@@ -21,7 +21,7 @@
                     </t-dropdown>
                 </div>
                 <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <img class="object-center ml-6 mt-3 h-2 sm:h-4 md:h-6 lg:h-8" :src="asset"/>
+                    <img class="object-center h-12" :src="asset"/>
                 </div>
                     <div v-if="loading">
                         <t-dropdown class="text-blue-500" :text="'Logging Out ...'">

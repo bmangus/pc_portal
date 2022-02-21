@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\WorkOrders;
 
+
 use Egulias\EmailValidator\Exception\AtextAfterCFWS;
 use Hyyppa\FluentFM\Connection\FluentFMRepository;
 use Illuminate\Bus\Queueable;
@@ -11,8 +12,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class SyncWorkOrdersJob implements ShouldQueue
 {
@@ -87,6 +90,7 @@ class SyncWorkOrdersJob implements ShouldQueue
     public function updateWorkOrders()
     {
         foreach($this->fmWorkOrders as $wo) {
+            $wo['SubmitDate'] = Carbon::parse($wo['SubmitDate']);
             $this->updateTable($wo['_fmid'], $wo['_fm_system'], $wo);
         }
         return $this;
@@ -98,7 +102,7 @@ class SyncWorkOrdersJob implements ShouldQueue
             WorkOrders::updateOrCreate([
                 '_fmid'=>$id,
                 '_fm_system'=>$system
-            ], $record);
+            ],$record);
         } catch(\Exception $e){
             Log::debug($e->getMessage());
         }

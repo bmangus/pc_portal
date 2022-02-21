@@ -37,7 +37,7 @@
         })
     </script>
     <div id="app">
-        <navbar-mobile asset="{{asset('img/PC_Type_1Line_2C.png')}}" user="{{$user}}"></navbar-mobile>
+        <navbar-mobile asset="{{asset('img/PCS_PrimaryLogo_svg.svg')}}" user="{{$user}}"></navbar-mobile>
         <div class="flex w-100 h-screen mx-auto">
             <navbar-desktop user="{{$user}}"></navbar-desktop>
             <div class="flex w-full lg:w-5/6 h-full shadow-inner bg-gray-300">

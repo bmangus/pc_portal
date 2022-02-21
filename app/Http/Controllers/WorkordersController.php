@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Hyyppa\FluentFM\Connection\FluentFMRepository;
 use App\WorkOrders;
+use App\Jobs\SyncWorkOrdersJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
 
 class WorkordersController extends Controller
 {
@@ -32,6 +34,12 @@ class WorkordersController extends Controller
             return abort(403, "You are not authorized to view the workorders site.");
         }
         return $this;
+    }
+
+    public function sync()
+    {
+        Queue::push(new SyncWorkOrdersJob());
+        return response('done');
     }
 
 }

@@ -109,6 +109,7 @@ Route::middleware(['auth'])->prefix('/staff')->group(function() {
 
     Route::get('/rehire', 'RehireController@index');
     Route::get('/fwo', 'WorkordersController@fwoIndex');
+    Route::get('/fwo/manualSync', 'WorkordersController@sync');
 });
 
 Route::get('/test', 'WorkflowController@test');

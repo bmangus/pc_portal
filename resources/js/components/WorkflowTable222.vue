@@ -2,7 +2,7 @@
     <div class="w-full m-3">
         <div class="text-xl font-bold mb-2">Budget Tracker 2022</div>
         <hr/>
-        <div class="flex">
+        <div class="flex mt-2">
             <t-dropdown :text="selectedStatus" class="pb-2">
                 <ul>
                     <li>
@@ -25,8 +25,8 @@
             <div class="mt-3 ml-auto mr-2">
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" v-model="searchStr" placeholder="Search.."/>
             </div>
-            <div v-show="authUser.SuperUser === 'Yes'">
-                <span class="btn-primary mb-2 p-3 mr-2 ml-2" @click="manualSync"><span v-if="loadingSync"><font-awesome-icon icon="spinner" spin/></span>Sync</span>
+            <div v-show="authUser.SuperUser === 'Yes'" class="mb-2 mr-2 ml-2">
+                <button class="btn-primary rounded p-3" @click="manualSync"><span v-if="loadingSync"><font-awesome-icon icon="spinner" spin/></span>Sync</button>
             </div>
         </div>
         <div v-if="loading" class="flex inset-auto">
