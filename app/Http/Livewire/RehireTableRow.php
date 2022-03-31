@@ -19,6 +19,7 @@ class RehireTableRow extends Component
     public $saved = true;
     public $errored = false;
     public $errorMsg = '';
+    public $rehireChangeAllowed = true;
 
     public function updated()
     {
@@ -55,6 +56,7 @@ class RehireTableRow extends Component
     }
     public function render()
     {
+        if ($this->rehire === 'Yes' || $this->rehire === 'No') $this->rehireChangeAllowed = false;
         return view('livewire.rehire-table-row');
     }
 }
