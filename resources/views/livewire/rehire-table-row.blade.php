@@ -22,7 +22,7 @@
     </x-table.cell>
     <x-table.cell>
         @if($type=== 'Not Eligible')
-            <div class="text-gray-900">N/A</div>
+            <div class="text-gray-900">{{$comments}}</div>
         @else
             <div class="flex rounded-md shadow-sm">
                 <textarea wire:model.debounce1000ms="comments" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{$comments}}</textarea>
