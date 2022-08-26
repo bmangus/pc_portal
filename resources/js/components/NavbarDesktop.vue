@@ -3,11 +3,11 @@
         <ul class="flex-col w-full pt-2">
             <li class="bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">Dashboard</li>
             <li class="flex flex-row bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">
-                <a href="/staff/22/workflow">Budget Tracker</a>
+                <a href="/staff/workflow">Budget Tracker</a>
                 <span class="flex rounded-lg bg-red-700 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.btCount }}</span>
             </li>
             <li class="flex flex-row bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">
-                <a href="/staff/22/ATworkflow">Activity Tracker</a>
+                <a href="/staff/ATworkflow">Activity Tracker</a>
                 <span class="flex rounded-lg bg-red-700 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
             </li>
             <li class="flex flex-row bg-gray-800 w-full mx-auto py-2 px-auto text-center justify-center hover:bg-gray-700 focus:bg-gray-900 text-white">
@@ -55,7 +55,7 @@ export default {
                 })
         },
         updateCounts(){
-            axios.get('/staff/22/workflowBackendCounts')
+            axios.get('/staff/workflowBackendCounts')
                 .then((res)=>{
                     this.btCount = res.data.btCount;
                     this.atCount = res.data.atCount;

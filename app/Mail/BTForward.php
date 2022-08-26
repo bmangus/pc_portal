@@ -40,7 +40,7 @@ class BTForward extends Mailable
     {
         //return response()->json($this->message);
         return $this->subject('Budget Tracker PO Forward')
-            ->from('workflow21@putnamcityschools.org')
+            ->from('workflow23@putnamcityschools.org')
             ->replyTo($this->senderEmail)
             ->view('workflow.mail.forward')
             //->with(['message'=>$this->message])

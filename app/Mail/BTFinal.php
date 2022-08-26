@@ -32,7 +32,7 @@ class BTFinal extends Mailable
     public function build()
     {
         return $this->subject('BT Purchase Order #' . $this->requisition->PONumber . ' - ' . $this->requisition->Status)
-            ->from('workflow21@putnamcityschools.org')
+            ->from('workflow23@putnamcityschools.org')
             ->view('workflow.mail.final');
     }
 }

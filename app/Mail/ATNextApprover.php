@@ -38,7 +38,7 @@ class ATNextApprover extends Mailable
         $approvalLink = $this->buildApprovalLink();
         $rejectionLink = $this->buildRejectionLink();
         return $this->subject('Activity Tracker Request for Approval')
-            ->from('workflow21@putnamcityschools.org')
+            ->from('workflow23@putnamcityschools.org')
             ->view('workflow.mail.atNextApprover')
             ->with([
                 'approvalLink'=>$approvalLink,
