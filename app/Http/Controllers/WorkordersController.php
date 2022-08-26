@@ -30,7 +30,12 @@ class WorkordersController extends Controller
     {
         if($bypass) return $this;
         $groups = json_decode(auth()->user()->groups);
-        if(!in_array('workflow_users', $groups) && !in_array('DOTPCAdmin', $groups)) {
+        if(
+            !in_array('workflow_users', $groups) &&
+            !in_array('DOTPCAdmin', $groups) &&
+            !in_array('TechWOSubmit', $groups) &&
+            !in_array('BGWOSubmit', $groups)
+        ) {
             return abort(403, "You are not authorized to view the workorders site.");
         }
         return $this;

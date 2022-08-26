@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Hyyppa\FluentFM\Connection\FluentFMRepository;
 use Livewire\Component;
 use App\WorkOrders;
 use Illuminate\Support\Carbon;
@@ -19,6 +20,9 @@ class FWOMainView extends Component
     public $showNewTechModal = false;
     public $showNewFacModal = false;
     public $showFilters = false;
+    public $showOnlyMine = false;
+    public $canEdit = false;
+    public $canCreate = false;
     public $filters = [
         'type' => '',
         'fixed-asset'=>'',
@@ -28,20 +32,57 @@ class FWOMainView extends Component
         'status' => '',
         'date-min' => null,
         'date-max' => null,
+        'submitter-email' => '',
     ];
     public WorkOrders $editing;
+
+    public $access = 'none';
 
     protected $queryString = ['sorts'];
 
     protected $listeners = ['refreshTransactions' => '$refresh'];
 
     public function rules() { return [
+        'editing.OrderNo' => 'sometimes',
+        'editing.Status' => 'sometimes',
+        'editing.Room' => 'sometimes',
+        'editing.SubmittedBy' => 'sometimes',
+        'editing.Contact' => 'sometimes',
+        'editing.RequestType' => 'sometimes',
+        'editing.SubRequestType' => 'sometimes',
         'editing.Equipment'=> 'sometimes',
         'editing.Location' => 'required|min:3',
         'editing.Problem' => 'required',
     ]; }
 
-    public function mount() { $this->editing = $this->makeBlankTransaction(); }
+    public function mount() {
+        $this->editing = $this->makeBlankTransaction();
+
+        $this->getSystemAccess();
+
+        return $this;
+    }
+
+    public function getSystemAccess() {
+        $groups = json_decode(auth()->user()->groups);
+        if (in_array('DOTPCAdmin', $groups)) {
+            $this->access = 'both';
+        } elseif (in_array('TechWOSubmit', $groups) && in_array('BGWOSubmit', $groups)) {
+            $this->access = 'both';
+            $this->canCreate = 'both';
+        } elseif (in_array('TechWOSubmit', $groups)) {
+            $this->access = 'technology';
+            $this->filters['type'] = 'technology';
+        } elseif (in_array('BGWOSubmit', $groups)) {
+            $this->access = 'facilities';
+            $this->filters['type'] = 'facilities';
+        }
+    }
+
+    public function setFilterType($type) {
+        $this->filters['type'] = $type;
+    }
+
     public function updatedFilters() { $this->resetPage(); }
 
     public function exportSelected()
@@ -85,21 +126,28 @@ class FWOMainView extends Component
 
     public function edit(WorkOrders $transaction)
     {
-        //$this->useCachedRows();
+        $this->useCachedRows();
 
-        //if ($this->editing->isNot($transaction)) $this->editing = $transaction;
+        if ($this->editing->isNot($transaction)) $this->editing = $transaction;
 
-        //$this->showEditModal = true;
+        $this->canEdit = (strtolower($transaction->SubmitterEmail) === auth()->user()->email && $transaction->status !== 'Completed');
+
+        $this->showEditModal = true;
+    }
+
+    public function canCreateWorkOrders()
+    {
+
     }
 
     public function showNewTech()
     {
-        //$this->showNewTechModal = true;
+        $this->showNewTechModal = true;
     }
 
     public function showNewFac()
     {
-        //$this->showNewFacModal = true;
+        $this->showNewFacModal = true;
     }
 
     public function newTech(WorkOrders $wo)
@@ -118,7 +166,36 @@ class FWOMainView extends Component
         $this->showEditModal = false;
     }
 
-    public function resetFilters() { $this->reset('filters'); }
+    public function saveToFileMaker()
+    {
+        if($this->editing->_fm_system === 'technology') {
+            $connection = new FluentFMRepository([
+                'file' => config('app.two_file'),
+                'host' => config('app.two_host'),
+                'user' => config('app.two_username'),
+                'pass' => config('app.two_password'),
+                'client' => [
+                    'verify'=>false
+                ],
+            ]);
+        } else {
+            $connection = new FluentFMRepository([
+                'file' => config('app.two_file'),
+                'host' => config('app.two_host'),
+                'user' => config('app.two_username'),
+                'pass' => config('app.two_password'),
+                'client' => [
+                    'verify'=>false
+                ],
+            ]);
+        }
+
+    }
+
+    public function resetFilters() {
+        $this->reset('filters');
+        $this->getSystemAccess();
+    }
 
     public function getRowsQueryProperty()
     {
@@ -128,9 +205,10 @@ class FWOMainView extends Component
             ->when($this->filters['fixed-asset'], fn($query, $asset) => $query->where('FixedAsset', 'like', '%'.$asset.'%'))
             ->when($this->filters['room-number'], fn($query, $room) => $query->where('Room', $room))
             ->when($this->filters['status'], fn($query, $status) => $query->where('status', $status))
-            ->when($this->filters['date-min'], fn($query, $date) => $query->where('date', '>=', Carbon::parse($date)))
-            ->when($this->filters['date-max'], fn($query, $date) => $query->where('date', '<=', Carbon::parse($date)))
-            ->when($this->filters['search'], fn($query, $search) => $query->where('Problem', 'like', '%'.$search.'%'));
+            ->when($this->filters['date-min'], fn($query, $date) => $query->where('SubmitDate', '>=', Carbon::parse($date)))
+            ->when($this->filters['date-max'], fn($query, $date) => $query->where('SubmitDate', '<=', Carbon::parse($date)))
+            ->when($this->filters['search'], fn($query, $search) => $query->where('Problem', 'like', '%'.$search.'%'))
+            ->when($this->showOnlyMine, fn($query, $search) => $query->where('SubmitterEmail', auth()->user()->email));
 
         return $this->applySorting($query);
     }

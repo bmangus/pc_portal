@@ -14,7 +14,7 @@ class WorkOrders extends Model
         'Problem', 'SubmitDate', 'Completed', 'EmailManager', 'Resolution',
         'AssignedDate', 'SiteNo', 'HistoryListFA', 'AssignTo', 'zd_Dept',
         'Email', 'AutoSiteNumber', 'Equipment', 'FixedAsset', 'SerialNo',
-        'Model', 'New', 'Product', 'RequestType', 'zd_CreatedByLogin',
+        'Model', 'New', 'Product', 'RequestType', 'SubRequestType', 'zd_CreatedByLogin',
         'zd_OrderNo', 'OrderNo', 'OrderType', 'HistoryListB_G', 'Feedback',
         'Status'];
 
