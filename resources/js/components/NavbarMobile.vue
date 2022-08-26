@@ -9,10 +9,10 @@
                         <a href="#responsive-header" class="ml-2 flex flex-row block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Dashboard
                         </a>
-                        <a href="/staff/22/workflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
+                        <a href="/staff/workflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mr-4 lg:hidden">
                             Budget Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.btCount }}</span>
                         </a>
-                        <a href="/staff/22/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
+                        <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
                             Activity Tracker <span class="flex rounded-full bg-red-500 px-2 py-1 text-white text-xs font-bold ml-3">{{ this.atCount }}</span>
                         </a>
                         <a href="/staff/ATworkflow" class="ml-2 flex flex-row mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 lg:hidden">
@@ -21,7 +21,7 @@
                     </t-dropdown>
                 </div>
                 <div class="flex items-center flex-shrink-0 text-white mr-6">
-                    <img class="object-center ml-6 mt-3 h-2 sm:h-4 md:h-6 lg:h-8" :src="asset"/>
+                    <img class="object-center h-12" :src="asset"/>
                 </div>
                     <div v-if="loading">
                         <t-dropdown class="text-blue-500" :text="'Logging Out ...'">

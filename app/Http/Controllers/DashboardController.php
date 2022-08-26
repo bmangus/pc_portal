@@ -10,7 +10,7 @@ class DashboardController extends Controller
     {
         $this->canAccess();
         $user = strtolower(auth()->user()->uid);
-        dd(auth()->user());
+        //dd(auth()->user());
         //$user = 'ahoggatt';
 
         return view('dashboard-base', compact('user'));

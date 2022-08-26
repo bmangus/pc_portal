@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Hyyppa\FluentFM\Connection\FluentFMRepository;
 use App\WorkOrders;
+use App\Jobs\SyncWorkOrdersJob;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Queue;
 
 class WorkordersController extends Controller
 {
@@ -28,10 +30,21 @@ class WorkordersController extends Controller
     {
         if($bypass) return $this;
         $groups = json_decode(auth()->user()->groups);
-        if(!in_array('workflow_users', $groups) && !in_array('DOTPCAdmin', $groups)) {
+        if(
+            !in_array('workflow_users', $groups) &&
+            !in_array('DOTPCAdmin', $groups) &&
+            !in_array('TechWOSubmit', $groups) &&
+            !in_array('BGWOSubmit', $groups)
+        ) {
             return abort(403, "You are not authorized to view the workorders site.");
         }
         return $this;
+    }
+
+    public function sync()
+    {
+        Queue::push(new SyncWorkOrdersJob());
+        return response('done');
     }
 
 }

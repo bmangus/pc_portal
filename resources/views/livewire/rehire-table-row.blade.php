@@ -8,8 +8,13 @@
     <x-table.cell>
         @if($type === 'Not Eligible')
             <div class="text-gray-900">N/A</div>
-        @else
+        @elseif($rehireChangeAllowed)
             <x-input.select wire:model="rehire" id="rehireStatus" placeholder="Unknown">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </x-input.select>
+        @else
+            <x-input.select wire:model="rehire" id="rehireStatus" placeholder="Unknown" disabled>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </x-input.select>
@@ -17,7 +22,7 @@
     </x-table.cell>
     <x-table.cell>
         @if($type=== 'Not Eligible')
-            <div class="text-gray-900">N/A</div>
+            <div class="text-gray-900">{{$comments}}</div>
         @else
             <div class="flex rounded-md shadow-sm">
                 <textarea wire:model.debounce1000ms="comments" rows="3" class="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5">{{$comments}}</textarea>

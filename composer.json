@@ -11,7 +11,7 @@
         "php": "^7.3|^8.0",
         "ext-json": "^1.7",
         "adldap2/adldap2-laravel": "^6.1",
-        "barryvdh/laravel-dompdf": "^0.8.5",
+        "barryvdh/laravel-dompdf": "^0.9.0",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
@@ -20,7 +20,7 @@
         "laravel/horizon": "^5.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
-        "livewire/livewire": "^2.4",
+        "livewire/livewire": "^2.9",
         "niklasravnsborg/laravel-pdf": "^3.1",
         "predis/predis": "^1.1",
         "thyyppa/laravel-fluent-fm": "^1.1.4"
